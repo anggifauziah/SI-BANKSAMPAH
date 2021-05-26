@@ -51,7 +51,7 @@ if(empty($_SESSION)){
       <!-- DataTables Petugas-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Petugas BANK-SAMPAH</div>
+          <i class="fa fa-table"></i> Data Petugas</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
