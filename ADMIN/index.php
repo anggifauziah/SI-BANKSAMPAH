@@ -1,3 +1,14 @@
+<!-- Alert Login -->
+<?php
+session_start();
+if(empty($_SESSION)){
+  echo "<script>alert('Anda Harus Login Terlebih Dahulu');
+  document.location='login.php';
+  </script>";
+}
+?>
+<!-- Alert Login -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>Admin - SI Bank Sampah</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->

@@ -1,3 +1,14 @@
+<!-- Alert Login -->
+<?php
+session_start();
+if(empty($_SESSION)){
+  echo "<script>alert('Anda Harus Login Terlebih Dahulu');
+  document.location='login.php';
+  </script>";
+}
+?>
+<!-- Alert Login -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>Admin - SI Bank Sampah</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -29,63 +40,80 @@
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Tables</li>
+        <li class="breadcrumb-item active">Petugas</li>
       </ol>
-      <!-- Example DataTables Card-->
+
+      <!-- Button tambah-->
+      <div class="form-group">
+        <a href="form-tambah-petugas.php" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+      </div>
+
+      <!-- DataTables Petugas-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
+          <i class="fa fa-table"></i> Data Surat Izin Keramaian</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                  <th>No</th>
+                  <th>ID Petugas</th>
+                  <th>Nama Petugas</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Alamat</th>
+                  <th>Nomor Telpon</th>
+                  <th>Jabatan</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-                <tr>
-                  <td>Jonas Alexander</td>
-                  <td>Developer</td>
-                  <td>San Francisco</td>
-                  <td>30</td>
-                  <td>2010/07/14</td>
-                  <td>$86,500</td>
-                </tr>
-                <tr>
-                  <td>Shad Decker</td>
-                  <td>Regional Director</td>
-                  <td>Edinburgh</td>
-                  <td>51</td>
-                  <td>2008/11/13</td>
-                  <td>$183,000</td>
-                </tr>
-                <tr>
-                  <td>Michael Bruce</td>
-                  <td>Javascript Developer</td>
-                  <td>Singapore</td>
-                  <td>29</td>
-                  <td>2011/06/27</td>
-                  <td>$183,000</td>
-                </tr>
-                <tr>
-                  <td>Donna Snider</td>
-                  <td>Customer Support</td>
-                  <td>New York</td>
-                  <td>27</td>
-                  <td>2011/01/25</td>
-                  <td>$112,000</td>
-                </tr>
+              <tbody>
+                <!-- Menampilkan data dari database ke Tabel -->
+                <?php
+                include('koneksi_db.php');
+                $result = mysqli_query($koneksi,"SELECT * FROM tb_petugas");
+                $nomor = 1;
+                ?>
+                <?php
+                  while($data = mysqli_fetch_array($result)) {
+                    echo "<tr>";
+                    echo "<td>".$nomor++."</td>";
+                    echo "<td>".$data['id_petugas']."</td>";
+                    echo "<td>".$data['nama_petugas']."</td>";
+                    echo "<td>".$data['jk_petugas']."</td>";
+                    echo "<td>".$data['alamat_petugas']."</td>";
+                    echo "<td>".$data['telp_petugas']."</td>";
+                    echo "<td>".$data['jabatan']."</td>";
+                    echo "<td>
+                          <a data-href='proses-hapus-petugas.php?id=".$data['id_petugas']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash'></i> Hapus</a>
+                          </td>";
+                    echo "</tr>";
+                  }
+                 ?>
+                 <!-- Sampai sini -->
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      <!-- DataTables Petugas-->
+
     </div>
+
+    <!-- Hapus Petugas-->
+    <div class="modal fade" id="konfirmasi_hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <b>Anda yakin ingin menghapus data ini ?</b><br><br>
+                    <a class="btn btn-danger btn-ok"> Hapus</a>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-close"></i> Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hapus Petugas-->
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <?php include 'footer.php'; ?>
@@ -93,24 +121,10 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.php">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+    <!-- Logout-->
+    <?php include('logout-modal.php'); ?>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -124,6 +138,19 @@
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
   </div>
+
+  <!-- Hapus Petugas-->
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $('#konfirmasi_hapus').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    });
+
+  </script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- Hapus Petugas-->
+
 </body>
 
 </html>

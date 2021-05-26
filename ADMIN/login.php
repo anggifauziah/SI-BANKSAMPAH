@@ -1,3 +1,24 @@
+<?php 
+session_start();
+include 'koneksi_db.php'; 
+$pesan = "";
+  if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $query_login = "SELECT * FROM tb_login WHERE username = '$username' AND password = '$password'"; 
+    $cek = mysqli_num_rows($sql = mysqli_query($koneksi, $query_login));
+    $data = mysqli_fetch_assoc($sql);
+    if ($cek > 0) {
+      $_SESSION['id_login'] = $data['id_login'];
+      $_SESSION['username'] = $data['username'];
+      $_SESSION['password'] = $data['password'];
+      header("location: index.php");
+    }else{
+      $pesan = "<script>alert('Username or Password incorrect !!')</script>";
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +27,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <meta name="author" content="">\
+  <title>Admin - SI Bank Sampah</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -21,27 +42,20 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form>
+        <form method="post" action="">
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="exampleInputEmail1">Username</label>
+            <input class="form-control" id="exampleInputEmail1" type="username" name="username" placeholder="Username">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+            <input class="form-control" id="exampleInputPassword1" type="password" name="password" placeholder="Password">
           </div>
-          <div class="form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox"> Remember Password</label>
-            </div>
-          </div>
-          <a class="btn btn-primary btn-block" href="index.php">Login</a>
+          <input type="submit" name="submit" class="btn btn-primary btn-block" value="LOGIN">
+          <?php 
+            echo $pesan;
+          ?>
         </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="register.php">Register an Account</a>
-          <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
-        </div>
       </div>
     </div>
   </div>
@@ -51,5 +65,4 @@
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
-
 </html>
