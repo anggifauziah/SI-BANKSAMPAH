@@ -42,56 +42,55 @@ if(empty($_SESSION)){
         </li>
         <li class="breadcrumb-item active">Tables</li>
       </ol>
-      <!-- Example DataTables Card-->
+
+        <!-- Button tambah-->
+      <div class="form-group">
+        <a href="form-tambah-jenis.php" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+      </div>
+
+      <!-- DATA JENIS SAMPAH-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
+          <i class="fa fa-table"></i> Data Jenis Sampah</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                  <th>No.</th>
+                   <th>ID Jenis</th>
+                  <th>Nama Jenis</th>
+                  <th>Harga Beli</th>
+                  <th>Harga Harga Jual</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-                <tr>
-                  <td>Jonas Alexander</td>
-                  <td>Developer</td>
-                  <td>San Francisco</td>
-                  <td>30</td>
-                  <td>2010/07/14</td>
-                  <td>$86,500</td>
-                </tr>
-                <tr>
-                  <td>Shad Decker</td>
-                  <td>Regional Director</td>
-                  <td>Edinburgh</td>
-                  <td>51</td>
-                  <td>2008/11/13</td>
-                  <td>$183,000</td>
-                </tr>
-                <tr>
-                  <td>Michael Bruce</td>
-                  <td>Javascript Developer</td>
-                  <td>Singapore</td>
-                  <td>29</td>
-                  <td>2011/06/27</td>
-                  <td>$183,000</td>
-                </tr>
-                <tr>
-                  <td>Donna Snider</td>
-                  <td>Customer Support</td>
-                  <td>New York</td>
-                  <td>27</td>
-                  <td>2011/01/25</td>
-                  <td>$112,000</td>
-                </tr>
+
+              <tbody>
+                <!-- Menampilkan data dari database ke Tabel -->
+                <?php
+                include('koneksi_db.php');
+                $result = mysqli_query($koneksi,"SELECT * FROM tb_jenis_sampah");
+                $nomor = 1;
+                ?>
+                <?php
+                  while($data = mysqli_fetch_array($result)) {
+                    echo "<tr>";
+                    echo "<td>".$nomor++."</td>";
+                    echo "<td>".$data['id_jenis']."</td>";
+                    echo "<td>".$data['nama_jenis']."</td>";
+                    echo "<td>".$data['harga_beli']."</td>";
+                    echo "<td>".$data['harga_jual']."</td>";
+                    echo "<td>
+                          <a data-href='proses-hapus-petugas.php?id=".$data['id_jenis']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash'></i> Hapus</a>
+                          </td>";
+                    echo "</tr>";
+                  }
+                 ?>
+                 <!-- Sampai sini -->
               </tbody>
+               
+                
             </table>
           </div>
         </div>
