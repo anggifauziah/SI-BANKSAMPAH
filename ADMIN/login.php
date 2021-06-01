@@ -8,11 +8,12 @@ $pesan = "";
     $query_login = "SELECT * FROM tb_login WHERE username = '$username' AND password = '$password'"; 
     $cek = mysqli_num_rows($sql = mysqli_query($koneksi, $query_login));
     $data = mysqli_fetch_assoc($sql);
-    if ($cek > 0) {
-      $_SESSION['id_login'] = $data['id_login'];
-      $_SESSION['username'] = $data['username'];
-      $_SESSION['password'] = $data['password'];
-      header("location: index.php");
+    if ($cek > 0 AND $data['level_user']==1) {
+      $_SESSION['id_login']   = $data['id_login'];
+      $_SESSION['username']   = $data['username'];
+      $_SESSION['password']   = $data['password'];
+      $_SESSION['level_user'] = $data['level_user'];
+      header("location: index.php"); 
     }else{
       $pesan = "<script>alert('Username or Password incorrect !!')</script>";
     }
@@ -21,8 +22,6 @@ $pesan = "";
 
 <!DOCTYPE html>
 <html lang="en">
-
-<!--iim netes masuk a nggi?-->
 
 <head>
   <meta charset="utf-8">

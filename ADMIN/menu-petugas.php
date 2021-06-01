@@ -51,7 +51,7 @@ if(empty($_SESSION)){
       <!-- DataTables Petugas-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Surat Izin Keramaian</div>
+          <i class="fa fa-table"></i> Data Petugas</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -85,7 +85,8 @@ if(empty($_SESSION)){
                     echo "<td>".$data['telp_petugas']."</td>";
                     echo "<td>".$data['jabatan']."</td>";
                     echo "<td>
-                          <a data-href='proses-hapus-petugas.php?id=".$data['id_petugas']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash'></i> Hapus</a>
+                          <a href='form-edit-petugas.php?id=".$data['id_petugas']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
+                          <a data-href='proses-hapus-petugas.php?id=".$data['id_petugas']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
                           </td>";
                     echo "</tr>";
                   }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2021 at 08:06 AM
+-- Generation Time: Jun 01, 2021 at 03:33 AM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.1.29
 
@@ -60,8 +60,18 @@ CREATE TABLE `tb_jenis_sampah` (
 CREATE TABLE `tb_login` (
   `id_login` int(11) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL
+  `password` varchar(20) NOT NULL,
+  `level_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_login`
+--
+
+INSERT INTO `tb_login` (`id_login`, `username`, `password`, `level_user`) VALUES
+(1, 'admin', '123', 1),
+(2, 'aku', 'aku', 2),
+(3, '171146265223001', '171146265223001', 2);
 
 -- --------------------------------------------------------
 
@@ -77,11 +87,16 @@ CREATE TABLE `tb_nasabah` (
   `telp_nasabah` varchar(15) NOT NULL,
   `pekerjaan_nasabah` varchar(15) NOT NULL,
   `norek_nasabah` varchar(20) NOT NULL,
-  `username_nasabah` varchar(20) NOT NULL,
-  `password_nasabah` varchar(20) NOT NULL,
   `saldo_nasabah` int(11) NOT NULL,
   `pinjaman_nasabah` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_nasabah`
+--
+
+INSERT INTO `tb_nasabah` (`id_nasabah`, `nama_nasabah`, `jk_nasabah`, `alamat_nasabah`, `telp_nasabah`, `pekerjaan_nasabah`, `norek_nasabah`, `saldo_nasabah`, `pinjaman_nasabah`) VALUES
+('0123', 'Anisa', 'Perempuan', 'Jl. Nangka', '085178235601', 'Karyawan', '171146265223001', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -127,6 +142,13 @@ CREATE TABLE `tb_petugas` (
   `telp_petugas` varchar(15) NOT NULL,
   `jabatan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_petugas`
+--
+
+INSERT INTO `tb_petugas` (`id_petugas`, `nama_petugas`, `jk_petugas`, `alamat_petugas`, `telp_petugas`, `jabatan`) VALUES
+('PT001', 'Anggi', 'Perempuan', 'Jl. Mawar', '087125932671', 'Kasir');
 
 -- --------------------------------------------------------
 
@@ -238,6 +260,16 @@ ALTER TABLE `tb_tabungan`
 ALTER TABLE `tb_tarik_tabungan`
   ADD PRIMARY KEY (`id_tarik`),
   ADD UNIQUE KEY `id_tarik` (`id_tarik`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tb_login`
+--
+ALTER TABLE `tb_login`
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
