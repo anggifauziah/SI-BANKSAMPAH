@@ -28,7 +28,6 @@ if(empty($_SESSION)){
   <link href="css/sb-admin.css" rel="stylesheet">
   <!-- Navigation-->
   <?php include 'navbar.php'; ?>
-   
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -40,39 +39,39 @@ if(empty($_SESSION)){
           <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="menu-pinjaman.php">Pinjaman</a>
+          <a href="menu-angsuran.php">Angsuram</a>
         </li>
-        <li class="breadcrumb-item active">Form Tambah Peminjaman</li>
+        <li class="breadcrumb-item active">Form Tambah Angsuran</li>
       </ol>
       <!-- Breadcrumbs -->
 
       <?php
       include('koneksi_db.php');
       //mengambil data surat dengan id paling besar
-      $query    = mysqli_query($koneksi, "SELECT MAX(id_petugas) as idTerbesar FROM tb_pinjaman");
+      $query    = mysqli_query($koneksi, "SELECT MAX(id_angsur) as idTerbesar FROM tb_angsuran");
       $data     = mysqli_fetch_array($query);
-      $idPinjam = $data['idTerbesar'];
+      $idAngsur = $data['idTerbesar'];
 
       //mengambil angka dari id surat terbesar, menggunakan fungsi substr
       //dan diubah ke int
-      $urutan = (int) substr($idPinjam, 3, 3);
+      $urutan = (int) substr($idAngsur, 3, 3);
       //bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
       $id = $urutan+1;
 
       //membentuk id surat baru
-      $huruf = "PJ";
+      $huruf = "AS";
       $kode  = $huruf.sprintf("%03s", $id);
       ?>
 
-      <!-- Form Pinjaman -->
-      <form method="POST" action="proses-tambah-pinjaman.php">
+      <!-- Form Angsuran -->
+      <form method="POST" action="proses-tambah-angsuran.php">
         <div class="card border-dark mb-3" style="max-width: 100rem;">
           <div class="card-header">Data Bank</div>
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Pinjam</label>
-                <input type="text" class="form-control" name="idPinjam" id="InputIdPinjam" value="<?php echo($kode) ?>" readonly required>
+                <label for="InputId">ID Angsur</label>
+                <input type="text" class="form-control" name="idAngsur" id="InputIdAngsur" value="<?php echo($kode) ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">ID Petugas</label>
@@ -82,8 +81,8 @@ if(empty($_SESSION)){
           </div>
         </div>
 
-        <!-- Load file proses-searchnasabah-pinjaman.js -->
-        <script type="text/javascript" src="proses-searchnasabah-pinjaman.js"></script>
+        <!-- Load file proses-searchnasabah-angsuran.js -->
+        <script type="text/javascript" src="proses-searchnasabah-angsuran.js"></script>
         <!-- Load library jquery -->
         <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
 
@@ -146,18 +145,46 @@ if(empty($_SESSION)){
           </div>
         </div>
 
+        <?php
+        include('koneksi_db.php');
+        $query = "SELECT * FROM tb_jenis_sampah"; //query untuk menampilkan data
+        $sql = mysqli_query($koneksi, $query); //Eksekusi query dari var $query
+        ?>
+
         <div class="card border-dark mb-3" style="max-width: 100rem;">
-          <div class="card-header">Peminjaman</div>
+          <div class="card-header">Angsuran</div>
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputJumPinjam">Jumlah Pinjam</label>
-                <input type="number" class="form-control" name="jumpinjam" id="InputJumPinjam" placeholder="Jumlah Pinjam" required>
+                <label for="InputJenis">Jenis Sampah</label>
+                <select name="id_jenis" id="id_jenis" class="form-control" required>
+                  <option value="" selected disabled>::. Pilih Jenis Sampah .::</option>
+                <?php
+                foreach ($sql as $key) { //menampilkan array dari $sql dialiaskan ke $key
+                echo '<option value="'.$key['id_jenis'].'">'.$key['nama_jenis'].'</option>'; // $key['kolom dari database']
+                }
+                ?>
+              </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputTglPinjam">Tanggal Pinjam</label>
+                <label for="InputHarga">Harga Beli</label>
+                <input type="text" class="form-control" name="harga" id="harga" placeholder="Harga" readonly>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="InputBerat">Berat Sampah</label>
+                <input type="text" class="form-control" name="berat" id="berat" placeholder="Berat" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="InputTotal">Total</label>
+                <input type="text" class="form-control" name="total" id="total" placeholder="Total" readonly required>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="InputTglAngsur">Tanggal Angsur</label>
                 <?php $now = date('d-m-Y');?>
-                <input type="text" class="form-control" name="tglpinjam" id="InputTglPinjam" value="<?php echo $now;?>" readonly required>
+                <input type="text" class="form-control" name="tglangsur" id="InputTglAngsur" value="<?php echo $now;?>" readonly required>
               </div>
             </div>
           </div>
@@ -168,9 +195,44 @@ if(empty($_SESSION)){
           <input type="button" value="Cancel" class="btn btn-warning" onclick="history.back(-1)" />
         </div>
       </form>
-      <!-- Form Pinjaman -->
+      <!-- Form Angsuran -->
 
     </div>
+
+    <!-- Harga Jenis Sampah -->
+    <script src="js/jquery-3.2.1.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        
+      $(document).ready(function() { // ketika halaman sudah selesai terload, maka fungsi dijalankan
+      $('#berat').on('change input', function () { //ketika id berat berubah valuenya maka
+      getHarga(); //memanggil fungsi getHarga
+      });
+      });
+
+      var harga = 0; // deklarasi variabel harga
+      $('#id_jenis').change(function(){ // ketika mengklik id id_jenis / merubah valuenya maka fungsi dijalankan
+      getHarga(); //memanggil fungsi getHarga
+      console.log(harga); //menampilkan hasil dari variabel data (menampilkan harga)
+      });
+
+      function getHarga(){ // membuat fungsi getHarga
+      var id = $('#id_jenis').val(); // mendapatkan value dari id_jenis dan dimasukkan ke variabel id
+      $.post("getHargaJenis.php", {id:id}).done(function(data){ // mengirimkan data ke url getHargaJenis
+      $('#harga').val(data); // mengisi id harga dengan variabel data
+      if (($("#berat").val() != "")) { // pengecekan ketika id berat tidak kosong
+      var berat = document.getElementById("berat").value; //maka ambil value dalam id berat
+      var total = berat*data; // membuat variabel total, mengalikan variabel berat dan data
+      $('#total').val(total); // mengisi id total_bayar dengan value dari variabel total_bayar
+      }
+      });
+      }
+
+      function setHarga(){ //membuat fungsi setHarga
+      harga = $('#harga').val(); //set variabel harga dari id harga
+      }
+    </script>
+    <!-- Harga Jenis Sampah -->
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <?php include 'footer.php'; ?>
@@ -184,7 +246,6 @@ if(empty($_SESSION)){
     <?php include('logout-modal.php'); ?>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->

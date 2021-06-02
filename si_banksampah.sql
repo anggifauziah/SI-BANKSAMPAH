@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2021 at 03:33 AM
+-- Generation Time: Jun 02, 2021 at 11:36 AM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.1.29
 
@@ -35,8 +35,19 @@ CREATE TABLE `tb_angsuran` (
   `id_jenis` varchar(10) NOT NULL,
   `berat_angsur` int(11) NOT NULL,
   `total_angsur` int(11) NOT NULL,
-  `tanggal_angsur` date NOT NULL
+  `tanggal_angsur` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_angsuran`
+--
+
+INSERT INTO `tb_angsuran` (`id_angsur`, `id_petugas`, `id_nasabah`, `id_jenis`, `berat_angsur`, `total_angsur`, `tanggal_angsur`) VALUES
+('AS001', 'PT001', '0123', 'JS001', 10, 5000, '01-06-2021'),
+('AS002', 'PT001', '0123', 'JS001', 30, 15000, '01-06-2021'),
+('AS003', 'PT001', '0123', 'JS001', 3, 1500, '02-06-2021'),
+('AS004', 'PT001', '0123', 'JS001', 5, 2500, '02-06-2021'),
+('AS005', 'PT001', '0123', 'JS001', 5, 2500, '02-06-2021');
 
 -- --------------------------------------------------------
 
@@ -50,6 +61,13 @@ CREATE TABLE `tb_jenis_sampah` (
   `harga_beli` int(11) NOT NULL,
   `harga_jual` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_jenis_sampah`
+--
+
+INSERT INTO `tb_jenis_sampah` (`id_jenis`, `nama_jenis`, `harga_beli`, `harga_jual`) VALUES
+('JS001', 'Plastik', 500, 800);
 
 -- --------------------------------------------------------
 
@@ -96,7 +114,7 @@ CREATE TABLE `tb_nasabah` (
 --
 
 INSERT INTO `tb_nasabah` (`id_nasabah`, `nama_nasabah`, `jk_nasabah`, `alamat_nasabah`, `telp_nasabah`, `pekerjaan_nasabah`, `norek_nasabah`, `saldo_nasabah`, `pinjaman_nasabah`) VALUES
-('0123', 'Anisa', 'Perempuan', 'Jl. Nangka', '085178235601', 'Karyawan', '171146265223001', 0, 0);
+('0123', 'Ani', 'Perempuan', 'Jl. Nangka', '085178235601', 'Karyawan', '171146265223001', 0, 58500);
 
 -- --------------------------------------------------------
 
@@ -161,8 +179,16 @@ CREATE TABLE `tb_pinjaman` (
   `id_petugas` varchar(10) NOT NULL,
   `id_nasabah` varchar(20) NOT NULL,
   `jumlah_pinjam` int(11) NOT NULL,
-  `tanggal_pinjam` date NOT NULL
+  `tanggal_pinjam` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pinjaman`
+--
+
+INSERT INTO `tb_pinjaman` (`id_pinjam`, `id_petugas`, `id_nasabah`, `jumlah_pinjam`, `tanggal_pinjam`) VALUES
+('PJ001', 'PT001', '0123', 50000, '01-06-2021'),
+('PJ002', 'PT001', '0123', 50000, '02-06-2021');
 
 -- --------------------------------------------------------
 
@@ -269,7 +295,7 @@ ALTER TABLE `tb_tarik_tabungan`
 -- AUTO_INCREMENT for table `tb_login`
 --
 ALTER TABLE `tb_login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

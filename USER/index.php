@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Anyar Bootstrap Template - Index</title>
+  <title>SI Bank Sampah</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -40,7 +40,7 @@
 <body>
 
   <!-- ======= Top Bar ======= -->
-  <?php include 'nav.php'; ?>
+  <?php include 'navbar.php'; ?>
   <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->

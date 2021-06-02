@@ -38,7 +38,7 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tabungan">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
+            <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">Tabungan</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Blog - Anyar Bootstrap Template</title>
+  <title>SI Bank Sampah</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 

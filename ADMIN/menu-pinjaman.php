@@ -85,8 +85,7 @@ if(empty($_SESSION)){
                     echo "<td>Rp".$data['jumlah_pinjam']."</td>";
                     echo "<td>".$data['tanggal_pinjam']."</td>";
                     echo "<td>
-                          <a href='print-nota-pinjaman.php?id=".$data['id_pinjam']."' class='btn btn-secondary btn-sm'><i class='fa fa-print'></i> Print</a>
-                          <a data-href='proses-hapus-pinjaman.php?id=".$data['id_pinjam']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
+                          <a href='print-struk-pinjaman.php?id=".$data['id_pinjam']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>
                           </td>";
                     echo "</tr>";
                   }
@@ -98,6 +97,7 @@ if(empty($_SESSION)){
         </div>
       </div>
     </div>
+    
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <?php include 'footer.php'; ?>

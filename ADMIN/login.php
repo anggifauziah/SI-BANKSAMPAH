@@ -1,19 +1,26 @@
-<?php 
+<?php
 session_start();
-include 'koneksi_db.php'; 
+include 'koneksi_db.php';
 $pesan = "";
   if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $query_login = "SELECT * FROM tb_login WHERE username = '$username' AND password = '$password'"; 
+    $query_login = "SELECT * FROM tb_login WHERE username = '$username' AND password = '$password'";
     $cek = mysqli_num_rows($sql = mysqli_query($koneksi, $query_login));
     $data = mysqli_fetch_assoc($sql);
-    if ($cek > 0 AND $data['level_user']==1) {
-      $_SESSION['id_login']   = $data['id_login'];
-      $_SESSION['username']   = $data['username'];
-      $_SESSION['password']   = $data['password'];
-      $_SESSION['level_user'] = $data['level_user'];
-      header("location: index.php"); 
+    if ($cek > 0) {
+        $_SESSION['id_login']   = $data['id_login'];
+        $_SESSION['username']   = $data['username'];
+        $_SESSION['password']   = $data['password'];
+        $_SESSION['level_user'] = $data['level_user'];
+      
+      if ($data['level_user']==1) {
+        header("location: ../ADMIN/index.php");
+
+      }elseif ($data['level_user']==2) {
+        header("location: ../USER/index.php");
+      }
+
     }else{
       $pesan = "<script>alert('Username or Password incorrect !!')</script>";
     }
@@ -29,7 +36,7 @@ $pesan = "";
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">\
-  <title>Admin - SI Bank Sampah</title>
+  <title>LOGIN - SI Bank Sampah</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -53,7 +60,7 @@ $pesan = "";
             <input class="form-control" id="exampleInputPassword1" type="password" name="password" placeholder="Password">
           </div>
           <input type="submit" name="submit" class="btn btn-primary btn-block" value="LOGIN">
-          <?php 
+          <?php
             echo $pesan;
           ?>
         </form>

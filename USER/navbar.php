@@ -1,3 +1,6 @@
+<?php
+session_start();
+ ?>
 <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top topbar-inner-pages">
     <div class="container d-flex align-items-center">
@@ -9,7 +12,8 @@
         </ul>
       </div>
       <div class="cta">
-        <a href="login.php" class="scrollto">Sign in</a>
+        <a href="../ADMIN/login.php" class="scrollto" <?php if (!empty($_SESSION)) { echo "style='display:none'"; } ?>>Login</a>
+        <a href="logout-proses.php" class="scrollto" <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>>Logout</a>
       </div>
     </div>
   </div>
@@ -18,7 +22,7 @@
   <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html#header" class="scrollto">Anyar</a></h1>
+      <h1 class="logo mr-auto"><a href="index.html#header" class="scrollto">BANK SAMPAH</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html#header" class="logo mr-auto scrollto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -26,9 +30,9 @@
         <ul>
           <li><a href="index.php">Home</a></li>
           <li><a href="informasi.php">Informasi</a></li>
-          <li><a href="profil.php">Profil</a></li>
-          <li><a href="tabungan.php">Tabungan</a></li>
-          <li><a href="pinjaman.php">Pinjaman</a></li>
+          <li <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="profil.php">Profil</a></li>
+          <li <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="tabungan.php">Tabungan</a></li>
+          <li <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="pinjaman.php">Pinjaman</a></li>
           <li><a href="contact.php">Contact</a></li>
         </ul>
       </nav><!-- .nav-menu -->
