@@ -9,6 +9,8 @@ $idNasabah   	= $_POST['idNasabah'];
 $jumpinjam		= $_POST['jumpinjam'];
 $tglpinjam 		= $_POST['tglpinjam'];
 
+$tglpinjam 		= date("Y-m-d");
+
 //mengambil value kolom pinjaman_nasabah
 $data     = mysqli_query($koneksi, "SELECT * FROM tb_nasabah WHERE id_nasabah=$idNasabah");
 $row      = mysqli_fetch_array($data);

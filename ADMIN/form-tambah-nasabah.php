@@ -61,6 +61,13 @@ if(empty($_SESSION)){
       //membentuk id surat baru
       $angka  = "17";
       $norek  = $angka.rand().sprintf("%03s", $id);
+
+      //ubah format bulan
+      function formatBulan($tgl){
+        $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        $pecah = explode('-', $tgl);
+        return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
+      }
       ?>
 
       <!-- Form Nasabah -->
@@ -105,6 +112,10 @@ if(empty($_SESSION)){
           <div class="card-header">Informasi Rekening</div>
           <div class="card-body text-dark">
             <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="InputTglDaftar">Tanggal Daftar</label>
+                <input type="text" class="form-control" name="tgldaftar" id="tgldaftar" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
+              </div>
               <div class="form-group col-md-6">
                 <label for="InputId">Nomor Rekening</label>
                 <input type="text" class="form-control" name="norek" id="InputId" value="<?php echo($norek) ?>" readonly required>

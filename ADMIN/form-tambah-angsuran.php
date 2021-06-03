@@ -61,6 +61,13 @@ if(empty($_SESSION)){
       //membentuk id surat baru
       $huruf = "AS";
       $kode  = $huruf.sprintf("%03s", $id);
+
+      //ubah format bulan
+      function formatBulan($tgl){
+        $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        $pecah = explode('-', $tgl);
+        return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
+      }
       ?>
 
       <!-- Form Angsuran -->
@@ -183,8 +190,7 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-4">
                 <label for="InputTglAngsur">Tanggal Angsur</label>
-                <?php $now = date('d-m-Y');?>
-                <input type="text" class="form-control" name="tglangsur" id="InputTglAngsur" value="<?php echo $now;?>" readonly required>
+                <input type="text" class="form-control" name="tglangsur" id="InputTglAngsur" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
               </div>
             </div>
           </div>

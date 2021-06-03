@@ -7,6 +7,7 @@ $jenisKelamin   = $_POST['jenisKelamin'];
 $alamat			= $_POST['alamat'];
 $telp 			= $_POST['telp'];
 $pekerjaan		= $_POST['pekerjaan'];
+$tgldaftar		= $_POST['tgldaftar'];
 $norek			= $_POST['norek'];
 
 $saldo			= $_POST['saldo'];
@@ -17,9 +18,10 @@ $username		= $_POST['username'];
 $password		= $_POST['password'];
 $level			= $_POST['level'];
 
+$tgldaftar	 	= date("Y-m-d");
 
 // query SQL untuk insert data
-$nasabah = "INSERT INTO tb_nasabah VALUES ('".$idNasabah."', '".$nama."', '".$jenisKelamin."', '".$alamat."', '".$telp."', '".$pekerjaan."', '".$norek."', '".$saldo."', '".$pinjam."')";
+$nasabah = "INSERT INTO tb_nasabah VALUES ('".$idNasabah."', '".$nama."', '".$jenisKelamin."', '".$alamat."', '".$telp."', '".$pekerjaan."', '".$tgldaftar."', '".$norek."', '".$saldo."', '".$pinjam."')";
 
 $login	 = "INSERT INTO tb_login VALUES ('".$id."','".$username."', '".$password."', '".$level."')";
 

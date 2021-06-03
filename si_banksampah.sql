@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2021 at 11:36 AM
+-- Generation Time: Jun 03, 2021 at 04:47 AM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.1.29
 
@@ -35,7 +35,7 @@ CREATE TABLE `tb_angsuran` (
   `id_jenis` varchar(10) NOT NULL,
   `berat_angsur` int(11) NOT NULL,
   `total_angsur` int(11) NOT NULL,
-  `tanggal_angsur` varchar(10) NOT NULL
+  `tanggal_angsur` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -43,11 +43,12 @@ CREATE TABLE `tb_angsuran` (
 --
 
 INSERT INTO `tb_angsuran` (`id_angsur`, `id_petugas`, `id_nasabah`, `id_jenis`, `berat_angsur`, `total_angsur`, `tanggal_angsur`) VALUES
-('AS001', 'PT001', '0123', 'JS001', 10, 5000, '01-06-2021'),
-('AS002', 'PT001', '0123', 'JS001', 30, 15000, '01-06-2021'),
-('AS003', 'PT001', '0123', 'JS001', 3, 1500, '02-06-2021'),
-('AS004', 'PT001', '0123', 'JS001', 5, 2500, '02-06-2021'),
-('AS005', 'PT001', '0123', 'JS001', 5, 2500, '02-06-2021');
+('AS001', 'PT001', '0123', 'JS001', 10, 5000, '2021-06-01'),
+('AS002', 'PT001', '0123', 'JS001', 30, 15000, '2021-06-01'),
+('AS003', 'PT001', '0123', 'JS001', 3, 1500, '2021-06-02'),
+('AS004', 'PT001', '0123', 'JS001', 5, 2500, '2021-06-02'),
+('AS005', 'PT001', '0123', 'JS001', 5, 2500, '2021-06-02'),
+('AS006', 'PT001', '321', 'JS001', 10, 5000, '2021-06-03');
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,10 @@ CREATE TABLE `tb_login` (
 INSERT INTO `tb_login` (`id_login`, `username`, `password`, `level_user`) VALUES
 (1, 'admin', '123', 1),
 (2, 'aku', 'aku', 2),
-(3, '171146265223001', '171146265223001', 2);
+(3, '171146265223001', '171146265223001', 2),
+(4, '171031553225231', '171031553225231', 2),
+(6, '17893582826231', '17893582826231', 2),
+(7, '17617884616624', '17617884616624', 2);
 
 -- --------------------------------------------------------
 
@@ -104,6 +108,7 @@ CREATE TABLE `tb_nasabah` (
   `alamat_nasabah` varchar(50) NOT NULL,
   `telp_nasabah` varchar(15) NOT NULL,
   `pekerjaan_nasabah` varchar(15) NOT NULL,
+  `tgl_daftar` date NOT NULL,
   `norek_nasabah` varchar(20) NOT NULL,
   `saldo_nasabah` int(11) NOT NULL,
   `pinjaman_nasabah` int(11) NOT NULL
@@ -113,8 +118,11 @@ CREATE TABLE `tb_nasabah` (
 -- Dumping data for table `tb_nasabah`
 --
 
-INSERT INTO `tb_nasabah` (`id_nasabah`, `nama_nasabah`, `jk_nasabah`, `alamat_nasabah`, `telp_nasabah`, `pekerjaan_nasabah`, `norek_nasabah`, `saldo_nasabah`, `pinjaman_nasabah`) VALUES
-('0123', 'Ani', 'Perempuan', 'Jl. Nangka', '085178235601', 'Karyawan', '171146265223001', 0, 58500);
+INSERT INTO `tb_nasabah` (`id_nasabah`, `nama_nasabah`, `jk_nasabah`, `alamat_nasabah`, `telp_nasabah`, `pekerjaan_nasabah`, `tgl_daftar`, `norek_nasabah`, `saldo_nasabah`, `pinjaman_nasabah`) VALUES
+('0123', 'Ani', 'Perempuan', 'Jl. Nangka', '085178235601', 'Karyawan', '2019-06-01', '171146265223001', 0, 58500),
+('321', 'Didi', 'Laki-laki', 'Jl. Kencana', '085167823764', 'Belum Bekerja', '2020-06-02', '171031553225231', 0, 45000),
+('456', 'Seno', 'Laki-laki', 'Jl. Melati', '085198624356', 'Swasta', '2021-06-03', '17893582826231', 0, 0),
+('789', 'Anisa', 'Perempuan', 'Jl. Flores', '085124836257', 'Belum Bekerja', '2021-06-03', '17617884616624', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -179,7 +187,7 @@ CREATE TABLE `tb_pinjaman` (
   `id_petugas` varchar(10) NOT NULL,
   `id_nasabah` varchar(20) NOT NULL,
   `jumlah_pinjam` int(11) NOT NULL,
-  `tanggal_pinjam` varchar(10) NOT NULL
+  `tanggal_pinjam` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -187,8 +195,9 @@ CREATE TABLE `tb_pinjaman` (
 --
 
 INSERT INTO `tb_pinjaman` (`id_pinjam`, `id_petugas`, `id_nasabah`, `jumlah_pinjam`, `tanggal_pinjam`) VALUES
-('PJ001', 'PT001', '0123', 50000, '01-06-2021'),
-('PJ002', 'PT001', '0123', 50000, '02-06-2021');
+('PJ001', 'PT001', '0123', 50000, '2021-06-02'),
+('PJ002', 'PT001', '0123', 50000, '2021-06-02'),
+('PJ003', 'PT001', '321', 50000, '2021-06-03');
 
 -- --------------------------------------------------------
 
@@ -295,7 +304,7 @@ ALTER TABLE `tb_tarik_tabungan`
 -- AUTO_INCREMENT for table `tb_login`
 --
 ALTER TABLE `tb_login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

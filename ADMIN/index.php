@@ -32,6 +32,21 @@ if(empty($_SESSION)){
 </head>
 
 <body class="fixed-nav sticky-footer bg-light" id="page-top">
+
+  <?php
+    include 'koneksi_db.php';
+    $tabungan          = mysqli_query($koneksi, "SELECT * FROM tb_tabungan");
+    $jumlah_tabungan   = mysqli_num_rows($tabungan);
+
+    $tarik             = mysqli_query($koneksi, "SELECT * FROM tb_tarik_tabungan");
+    $jumlah_tarik      = mysqli_num_rows($tarik);
+
+    $pinjam            = mysqli_query($koneksi, "SELECT * FROM tb_pinjaman");
+    $jumlah_pinjam     = mysqli_num_rows($pinjam);
+
+    $angsuran          = mysqli_query($koneksi, "SELECT * FROM tb_angsuran");
+    $jumlah_angsuran   = mysqli_num_rows($angsuran);       
+  ?>
   
   <div class="content-wrapper">
     <div class="container-fluid">
@@ -48,11 +63,13 @@ if(empty($_SESSION)){
           <div class="card text-white bg-primary o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-comments"></i>
+                <i class="fa fa-fw fa-book"></i>
               </div>
-              <div class="mr-5">26 New Messages!</div>
+              <div class="mr-5">
+                <?php echo $jumlah_tabungan; ?> Data Tabungan
+              </div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="menu-tabung.php">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -66,9 +83,11 @@ if(empty($_SESSION)){
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-list"></i>
               </div>
-              <div class="mr-5">11 New Tasks!</div>
+              <div class="mr-5">
+                <?php echo $jumlah_tarik; ?> Data Tarik Tabungan
+              </div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="menu-tarik.php">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -80,11 +99,13 @@ if(empty($_SESSION)){
           <div class="card text-white bg-success o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-shopping-cart"></i>
+                <i class="fa fa-fw fa-file"></i>
               </div>
-              <div class="mr-5">123 New Orders!</div>
+              <div class="mr-5">
+                <?php echo $jumlah_pinjam; ?> Data Pinjaman
+              </div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="menu-pinjaman.php">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -96,16 +117,25 @@ if(empty($_SESSION)){
           <div class="card text-white bg-danger o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
-                <i class="fa fa-fw fa-support"></i>
+                <i class="fa fa-fw fa-clipboard"></i>
               </div>
-              <div class="mr-5">13 New Tickets!</div>
+              <div class="mr-5">
+                <?php echo $jumlah_angsuran; ?> Data Angsuran
+              </div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="menu-angsuran.php">
               <span class="float-left">View Details</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
             </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div id="grafik">
           </div>
         </div>
       </div>
@@ -137,6 +167,82 @@ if(empty($_SESSION)){
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
+
+    <script src="js/highcharts/highcharts.js"></script>
+    <script src="js/highcharts/exporting.js"></script>
+    <script src="js/highcharts/export-data.js"></script>
+    <script src="js/highcharts/accessibility.js"></script>
+
+<script type="text/javascript">
+  Highcharts.chart('grafik', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: 'Grafik Jumlah Nasabah'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: [
+        <?php
+          include('koneksi_db.php');
+          $data = mysqli_query($koneksi, "SELECT YEAR(tgl_daftar) AS tahun_daftar, COUNT(*) AS jumlah FROM tb_nasabah GROUP BY YEAR(tgl_daftar) ORDER BY YEAR(tgl_daftar)");
+          while ($row = mysqli_fetch_array($data)) {
+            $th = $row['tahun_daftar'];
+            $jm = $row['jumlah'];
+            echo "'$th',";
+          }
+        ?>
+        ],
+        tickmarkPlacement: 'on',
+        title: {
+            enabled: false
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Jumlah Data'
+        },
+        labels: {
+            formatter: function () {
+                return this.value;
+            }
+        }
+    },
+    tooltip: {
+        split: true,
+        valueSuffix: ' Nasabah'
+    },
+    plotOptions: {
+        area: {
+            stacking: 'normal',
+            lineColor: '#666666',
+            lineWidth: 1,
+            marker: {
+                lineWidth: 1,
+                lineColor: '#666666'
+            }
+        }
+    },
+    series: [{
+        name: 'Tahun Daftar',
+        data: [
+        <?php
+          include('koneksi_db.php');
+          $data = mysqli_query($koneksi, "SELECT YEAR(tgl_daftar) AS tahun_daftar, COUNT(*) AS jumlah FROM tb_nasabah GROUP BY YEAR(tgl_daftar) ORDER BY YEAR(tgl_daftar)");
+          while ($row = mysqli_fetch_array($data)) {
+            $th = $row['tahun_daftar'];
+            $jm = $row['jumlah'];
+            echo "$jm,";
+          }
+        ?>
+        ]
+    }]
+});
+</script>
+
   </div>
 </body>
 

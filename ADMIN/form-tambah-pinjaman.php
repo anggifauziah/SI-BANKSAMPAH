@@ -49,7 +49,7 @@ if(empty($_SESSION)){
       <?php
       include('koneksi_db.php');
       //mengambil data surat dengan id paling besar
-      $query    = mysqli_query($koneksi, "SELECT MAX(id_petugas) as idTerbesar FROM tb_pinjaman");
+      $query    = mysqli_query($koneksi, "SELECT MAX(id_pinjam) as idTerbesar FROM tb_pinjaman");
       $data     = mysqli_fetch_array($query);
       $idPinjam = $data['idTerbesar'];
 
@@ -62,6 +62,13 @@ if(empty($_SESSION)){
       //membentuk id surat baru
       $huruf = "PJ";
       $kode  = $huruf.sprintf("%03s", $id);
+
+      //ubah format bulan
+      function formatBulan($tgl){
+        $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        $pecah = explode('-', $tgl);
+        return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
+      }
       ?>
 
       <!-- Form Pinjaman -->
@@ -156,8 +163,7 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTglPinjam">Tanggal Pinjam</label>
-                <?php $now = date('d-m-Y');?>
-                <input type="text" class="form-control" name="tglpinjam" id="InputTglPinjam" value="<?php echo $now;?>" readonly required>
+                <input type="text" class="form-control" name="tglpinjam" id="InputTglPinjam" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
               </div>
             </div>
           </div>

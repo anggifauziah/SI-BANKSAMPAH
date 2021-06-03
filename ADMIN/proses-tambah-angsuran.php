@@ -11,6 +11,8 @@ $berat 			= $_POST['berat'];
 $total			= $_POST['total'];
 $tglangsur		= $_POST['tglangsur'];
 
+$tglangsur 		= date("Y-m-d");
+
 //mengambil value kolom pinjaman_nasabah
 $data     = mysqli_query($koneksi, "SELECT * FROM tb_nasabah WHERE id_nasabah=$idNasabah");
 $row      = mysqli_fetch_array($data);

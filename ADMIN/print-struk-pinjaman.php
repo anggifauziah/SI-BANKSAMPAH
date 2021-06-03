@@ -12,6 +12,13 @@ $nama       = $data['nama_nasabah'];
 $jumlah     = $data['jumlah_pinjam'];
 $tgl        = $data['tanggal_pinjam'];
 }
+
+//ubah format bulan
+      function formatBulan($tgl){
+        $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        $pecah = explode('-', $tgl);
+        return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
+      }
 ?>
 <html>
   <head>
@@ -53,7 +60,7 @@ $tgl        = $data['tanggal_pinjam'];
         <tr>
           <th align="left">Tanggal Pinjam</th>
           <td>:</td>
-          <td><?php echo $tgl; ?></td>
+          <td><?php echo formatBulan($tgl); ?></td>
         </tr>
         <tr>
           <th align="left">Jumlah</th>
