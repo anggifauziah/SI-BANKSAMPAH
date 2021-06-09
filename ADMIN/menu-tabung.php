@@ -40,66 +40,70 @@ if(empty($_SESSION)){
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Tables</li>
+        <li class="breadcrumb-item active">Tabungan</li>
       </ol>
+
+      <!-- Button tambah-->
+      <div class="form-group">
+        <a href="form-tambah-tabungan.php" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+      </div>
+
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
+          <i class="fa fa-table"></i> Data Tabungan</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                  <th>No</th>
+                  <th>ID Petugas</th>
+                  <th>ID Nasabah</th>
+                  <th>Nama Nasabah</th>
+                  <th>Total Tabung</th>
+                  <th>Tanggal Tabung</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-                <tr>
-                  <td>Jonas Alexander</td>
-                  <td>Developer</td>
-                  <td>San Francisco</td>
-                  <td>30</td>
-                  <td>2010/07/14</td>
-                  <td>$86,500</td>
-                </tr>
-                <tr>
-                  <td>Shad Decker</td>
-                  <td>Regional Director</td>
-                  <td>Edinburgh</td>
-                  <td>51</td>
-                  <td>2008/11/13</td>
-                  <td>$183,000</td>
-                </tr>
-                <tr>
-                  <td>Michael Bruce</td>
-                  <td>Javascript Developer</td>
-                  <td>Singapore</td>
-                  <td>29</td>
-                  <td>2011/06/27</td>
-                  <td>$183,000</td>
-                </tr>
-                <tr>
-                  <td>Donna Snider</td>
-                  <td>Customer Support</td>
-                  <td>New York</td>
-                  <td>27</td>
-                  <td>2011/01/25</td>
-                  <td>$112,000</td>
-                </tr>
+              <tbody>
+              <!-- Menampilkan data dari database ke Tabel -->
+                <?php
+                include('koneksi_db.php');
+                $result = mysqli_query($koneksi,"SELECT t.id_tabung, t.id_petugas, t.id_nasabah, n.nama_nasabah, t.total_tabung, t.tanggal_tabung 
+                  FROM tb_tabungan t INNER JOIN tb_nasabah n
+                  WHERE t.id_nasabah = n.id_nasabah");
+                $nomor = 1;
+                ?>
+                <?php
+                  while($data = mysqli_fetch_array($result)) {
+                    echo "<tr>";
+                    echo "<td>".$nomor++."</td>";
+                    echo "<td>".$data['id_petugas']."</td>";
+                    echo "<td>".$data['id_nasabah']."</td>";
+                    echo "<td>".$data['nama_nasabah']."</td>";
+                    echo "<td>Rp".$data['total_tabung']."</td>";
+                    echo "<td>".$data['tanggal_tabung']."</td>";
+                    echo "<td>
+                          <a href='print-struk-tabungan.php?id=".$data['id_tabung']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>
+                          </td>";
+                    echo "</tr>";
+                  }
+                 ?>
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <?php include 'footer.php'; ?>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
     
     <!-- Logout-->
     <?php include('logout-modal.php'); ?>

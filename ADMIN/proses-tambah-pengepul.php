@@ -8,7 +8,7 @@ $alamat			= $_POST['alamat'];
 $telp 			= $_POST['telp'];
 
 // query SQL untuk insert data
-$query = "INSERT INTO tb_pengepul VALUES ('".$idPengepul."', '".$nama_Pengepul."', '".$jenisKelamin."', '".$alamat."', '".$telp."')";
+$query = "INSERT INTO tb_pengepul VALUES ('".$idPengepul."','".$namaPengepul."','".$jenisKelamin."','".$alamat."','".$telp."')";
 $result = mysqli_query($koneksi, $query);
 
 if ($result) {

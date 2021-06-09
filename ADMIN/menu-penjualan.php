@@ -40,63 +40,64 @@ if(empty($_SESSION)){
         <li class="breadcrumb-item">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Tables</li>
+        <li class="breadcrumb-item active">Penjualan</li>
       </ol>
+
+      <!-- Button tambah-->
+      <div class="form-group">
+        <a href="form-tambah-jual.php" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+      </div>
+
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Example</div>
+          <i class="fa fa-table"></i> Data Penjualan</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                  <th>No</th>
+                  <th>ID Petugas</th>
+                  <th>ID Pengepul</th>
+                  <th>Nama Nasabah</th>
+                  <th>Jumlah Jual</th>
+                  <th>Tanggal Jual</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-                <tr>
-                  <td>Jonas Alexander</td>
-                  <td>Developer</td>
-                  <td>San Francisco</td>
-                  <td>30</td>
-                  <td>2010/07/14</td>
-                  <td>$86,500</td>
-                </tr>
-                <tr>
-                  <td>Shad Decker</td>
-                  <td>Regional Director</td>
-                  <td>Edinburgh</td>
-                  <td>51</td>
-                  <td>2008/11/13</td>
-                  <td>$183,000</td>
-                </tr>
-                <tr>
-                  <td>Michael Bruce</td>
-                  <td>Javascript Developer</td>
-                  <td>Singapore</td>
-                  <td>29</td>
-                  <td>2011/06/27</td>
-                  <td>$183,000</td>
-                </tr>
-                <tr>
-                  <td>Donna Snider</td>
-                  <td>Customer Support</td>
-                  <td>New York</td>
-                  <td>27</td>
-                  <td>2011/01/25</td>
-                  <td>$112,000</td>
-                </tr>
+              <tbody>
+                <!-- Menampilkan data dari database ke Tabel -->
+                <?php
+                include('koneksi_db.php');
+                $result = mysqli_query($koneksi,"SELECT pj.id_jual, pj.id_petugas, pj.id_pengepul, pl.nama_pengepul, pj.total_jual, pj.tanggal_jual 
+                  FROM tb_penjualan pj INNER JOIN tb_pengepul pl
+                  WHERE pj.id_pengepul = pl.id_pengepul");
+                $nomor = 1;
+                ?>
+                <?php
+                  while($data = mysqli_fetch_array($result)) {
+                    echo "<tr>";
+                    echo "<td>".$nomor++."</td>";
+                    echo "<td>".$data['id_petugas']."</td>";
+                    echo "<td>".$data['id_pangepul']."</td>";
+                    echo "<td>".$data['nama_pengepul']."</td>";
+                    echo "<td>Rp".$data['total_jual']."</td>";
+                    echo "<td>".$data['tanggal_jual']."</td>";
+                    echo "<td>
+                          <a href='print-struk-jual.php?id=".$data['id_jual']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>
+                          </td>";
+                    echo "</tr>";
+                  }
+                 ?>
+                 <!-- Sampai sini -->
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
+    
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <?php include 'footer.php'; ?>
