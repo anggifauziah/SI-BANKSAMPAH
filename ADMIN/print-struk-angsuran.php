@@ -1,9 +1,7 @@
 <?php
 include "koneksi_db.php";
 $id = $_GET['id'];
-$result = ("SELECT a.id_nasabah, n.norek_nasabah, n.nama_nasabah, a.total_angsur, a.tanggal_angsur
-            FROM tb_angsuran a INNER JOIN tb_nasabah n
-            WHERE a.id_angsur LIKE '%$id%'");
+$result = ("SELECT a.id_nasabah, n.norek_nasabah, n.nama_nasabah, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a INNER JOIN tb_nasabah n WHERE a.id_nasabah=n.id_nasabah AND a.id_angsur LIKE '%$id%'");
 $hasil = mysqli_query($koneksi,$result);
 while($data = mysqli_fetch_array($hasil)) {
 $idNasabah  = $data['id_nasabah'];
@@ -12,13 +10,12 @@ $nama       = $data['nama_nasabah'];
 $jumlah     = $data['total_angsur'];
 $tgl        = $data['tanggal_angsur'];
 }
-
 //ubah format bulan
-      function formatBulan($tgl){
-        $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-        $pecah = explode('-', $tgl);
-        return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
-      }
+function formatBulan($tgl){
+  $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+  $pecah = explode('-', $tgl);
+  return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
+}
 ?>
 <html>
   <head>
@@ -37,7 +34,6 @@ $tgl        = $data['tanggal_angsur'];
         <td>--------------------------------------------------------</td>
       </tr>
     </table>
-
     <table class="table-list" width="330" border="0" cellspacing="1" cellpadding="2">
       <thead>
       </thead>
