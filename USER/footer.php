@@ -10,9 +10,9 @@
             <ul>
               <li><a href="index.php">Home</a></li>
               <li><a href="informasi.php">Informasi</a></li>
-              <li><a href="profil.php">Profil</a></li>
-              <li><a href="tabungan.php">Tabungan</a></li>
-              <li><a href="pinjaman.php">Pinjaman</a></li>
+              <li <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="profil.php">Profil</a></li>
+              <li <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="tabungan.php">Tabungan</a></li>
+              <li <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="pinjaman.php">Pinjaman</a></li>
               <li><a href="contact.php">Contact</a></li>
             </ul>
           </div>

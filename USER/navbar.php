@@ -1,6 +1,6 @@
 <?php
 session_start();
- ?>
+?>
 <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top topbar-inner-pages">
     <div class="container d-flex align-items-center">

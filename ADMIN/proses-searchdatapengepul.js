@@ -15,7 +15,7 @@ function searchpengepul(){
         $("#loading").hide(); // Sembunyikan loadingnya
 
         if(response.status == "success"){ // Jika isi dari array status adalah success
-            $("#namaPengepul").val(response.namaPengepul); // set textbox dengan id namaNasabah
+            $("#namaPengepul").val(response.nama_pengepul); // set textbox dengan id namaNasabah
             $("#jk").val(response.jk); // set textbox dengan id jk
             $("#alamat").val(response.alamat); // set textbox dengan id alamat
             $("#telp").val(response.telp); // set textbox dengan id telp

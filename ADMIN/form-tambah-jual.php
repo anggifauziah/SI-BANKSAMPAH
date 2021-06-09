@@ -77,7 +77,7 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Juak</label>
+                <label for="InputId">ID Jual</label>
                 <input type="text" class="form-control" name="idJual" id="InputIdTabung" value="<?php echo($kode) ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
