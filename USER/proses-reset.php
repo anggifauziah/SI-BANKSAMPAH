@@ -19,8 +19,7 @@ $password1 = $_POST['password1'];
 
 if($result){
         // mengalihkan ke halaman index.php
-    echo"<script>alert('Password berhasil disimpan')</script>";
-    echo "<br><a href='form-reset-password.php'>Kembali ke form</a>";
+    echo"<script>alert('Password berhasil disimpan'); document.location='profil.php';</script>";
     }else{
         echo "Maaf, terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
         echo "<br><a href='form-reset-password.php'>Kembali ke form</a>";
