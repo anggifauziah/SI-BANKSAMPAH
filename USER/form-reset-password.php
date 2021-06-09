@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,88 +51,44 @@
       <div class="container">
 
         <ol>
-          <li><a href="index.html">Home</a></li>
-          <li>Profil</li>
+          <li><a href="profil.php">Profil</a></li>
+          <li>Reset Password</li>
         </ol>
-        <h2>Profil Nasabah</h2>
+        <h2>Reset Password</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
 
-      <!-- ======= Blog Section ======= -->
-
-
+    <!-- ======= Blog Section ======= -->
         <section id="blog" class="blog">
           <div class="container">
-             <a href="form-reset-password.php" class="btn btn-primary"><i class="fa fa-plus"></i>Reset Password</a>
-             <br>
-             <br>
             <div class="row">
               <div class="card border-dark mb-5" style="max-width: 100rem;">
-                <div class="card-header">Informasi Identitas Nasabah</div>
+                <div class="card-header">Form Reset Password</div>
                 <div class="card-body text-dark">
                   
                   <!-- DataTables Petugas-->
                     <div class="card-body">
                       <div class="table table-responsive-xl">
-                        <table class="table table-bordered" id="dataTable" max-width="100%" cellspacing="0" style="width: 100%">
-                        
-                          <tbody>
-                            <!-- Menampilkan data dari database ke Tabel -->
-                            <?php
-                            include('koneksi_db.php');
-                            $result = mysqli_query($koneksi,"SELECT * FROM tb_nasabah");
-                            $data   = mysqli_fetch_array($result);
-                            ?>
-                            <tr>
-                              <td>ID Nasabah</td>
-                              <td>:</td>
-                              <td><?php echo $data['id_nasabah'] ?></td>
-                            </tr>
-                            <tr>
-                              <td>No. Rekening</td>
-                              <td>:</td>
-                              <td><?php echo $data['norek_nasabah'] ?></td>
-                            </tr>
-                            
-                            <tr>
-                              <td>Nama Nasabah</td>
-                              <td>:</td>
-                              <td><?php echo $data['nama_nasabah'] ?></td>
-                            </tr>
-                            <tr>
-                              <td>Jenis Kelamin</td>
-                              <td>:</td>
-                              <td><?php echo $data['jk_nasabah'] ?></td>
-                            </tr>
-                            <tr>
-                              <td>Alamat</td>
-                              <td>:</td>
-                              <td><?php echo $data['alamat_nasabah'] ?></td>
-                            </tr>
-                            <tr>
-                              <td>Telepon</td>
-                              <td>:</td>
-                              <td><?php echo $data['telp_nasabah'] ?></td>
-                            </tr>
-                            <tr>
-                              <td>Pekerjaan</td>
-                              <td>:</td>
-                              <td><?php echo $data['pekerjaan_nasabah'] ?></td>
-                            </tr>
-                            <tr>
-                              <td>Tanggal Daftar</td>
-                              <td>:</td>
-                              <td><?php echo $data['tgl_daftar'] ?></td>
-                            </tr>
-                            <!-- Sampai sini -->
-                          </tbody>
-                        </table>
+                        <form method="post" action="proses-reset.php">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Username</label>
+                          <input class="form-control" id="exampleInputEmail1" type="username" name="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password Baru</label>
+                          <input class="form-control" id="exampleInputPassword1" type="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Ulang Password Baru</label>
+                          <input class="form-control" id="exampleInputPassword1" type="password" name="password1" placeholder="Ulang Password">
+                        </div>
+                        <input type="submit" name="submit" class="btn btn-primary btn-block" value="Reset">
+                        </form>
                       </div>
                     </div>
+
                   </div>
-                  <!-- DataTables Petugas-->
-                  
                 </div>
               </div>
             </div>

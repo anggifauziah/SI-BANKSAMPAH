@@ -75,8 +75,8 @@
             </div>
           </div>
 
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" >
-            <div class="icon-box">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
+            <div class="icon-box" >
               <div class="icon"><i class="bx bx-photo-album"></i></div>
               <h4 class="title"><a href="profil.php">Profil</a></h4>
               <p class="description">Informasi Identitas Pengguna</p>
