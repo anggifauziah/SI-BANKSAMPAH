@@ -68,8 +68,8 @@
                   
                   <!-- DataTables Petugas-->
                     <div class="card-body">
-                      <div class="table table-responsive-xl">
-                        <table class="table table-bordered" id="dataTable" max-width="100%" cellspacing="0" style="width: 100%">
+                      <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
                               <th>ID Nasabah</th>

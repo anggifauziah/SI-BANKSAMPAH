@@ -12,36 +12,33 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Jenis Sampah">
-          <a class="nav-link" href="menu-jenis-sampah.php">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Laporan">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseData" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Jenis Sampah</span>
+            <span class="nav-link-text">Data Master</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapseData">
+            <li>
+              <a href="menu-jenis-sampah.php">Data Jenis Sampah</a>
+            </li>
+            <li>
+              <a href="menu-petugas.php">Data Petugas</a>
+            </li>
+            <li>
+              <a href="menu-pengepul.php">Data Pengepul</a>
+            </li>
+            <li>
+              <a href="menu-nasabah.php">Data Nasabah</a>
+            </li>
+          </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Petugas">
-          <a class="nav-link" href="menu-petugas.php">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Petugas</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Pengepul">
-          <a class="nav-link" href="menu-pengepul.php">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Pengepul</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nasabah">
-          <a class="nav-link" href="menu-nasabah.php">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Nasabah</span>
-          </a>
-        </li>
+      
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tabungan">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseTabungan" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">Tabungan</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
+          <ul class="sidenav-second-level collapse" id="collapseTabungan">
             <li>
               <a href="menu-tabung.php">Tabung</a>
             </li>
@@ -51,11 +48,11 @@
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Peminjaman">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePeminjaman" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">Peminjaman</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+          <ul class="sidenav-second-level collapse" id="collapsePeminjaman">
             <li>
               <a href="menu-pinjaman.php">Pinjaman</a>
             </li>
@@ -69,6 +66,23 @@
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Penjualan</span>
           </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Laporan">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseLaporan" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-copy"></i>
+            <span class="nav-link-text">Laporan</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseLaporan">
+            <li>
+              <a href="laporan-nasabah.php">Laporan Nasabah</a>
+            </li>
+            <li>
+              <a href="laporan-pinjaman.php">Laporan Pinjaman</a>
+            </li>
+            <li>
+              <a href="laporan-angsuran.php">Laporan Angsuran</a>
+            </li>
+          </ul>
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
