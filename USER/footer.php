@@ -20,11 +20,11 @@
           <div class="col-lg-3 col-md-6 footer-contact">
             <h4>Contact Us</h4>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              Jl. Masjid<br>
+              No.13<br>
+              Sroyo <br><br>
+              <strong>Phone:</strong> 081357780664<br>
+              <strong>Email:</strong> banksampahsroyo@gmail.com<br>
             </p>
 
           </div>

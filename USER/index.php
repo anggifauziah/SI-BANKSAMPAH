@@ -70,23 +70,15 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-<<<<<<< HEAD
               <h4 class="title">Informasi</h4>
-=======
-              <h4 class="title"><a href="Informasi.php">Informasi</a></h4>
->>>>>>> 80b8dfc9ecf04be56596d0ee0cec43b07ec65460
-              <p class="description">Informasi Bank Sampah</p>
+              <p class="description">Informasi mengenai Bank Sampah</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" >
             <div class="icon-box">
               <div class="icon"><i class="bx bx-photo-album"></i></div>
-<<<<<<< HEAD
               <h4 class="title">Profil</h4>
-=======
-              <h4 class="title"><a href="profil.php">Profil</a></h4>
->>>>>>> 80b8dfc9ecf04be56596d0ee0cec43b07ec65460
               <p class="description">Informasi Identitas Pengguna</p>
             </div>
           </div>
@@ -94,24 +86,16 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
-<<<<<<< HEAD
               <h4 class="title">Tabungan</h4>
-=======
-              <h4 class="title"><a href="tabungan.php">Tabungan</a></h4>
->>>>>>> 80b8dfc9ecf04be56596d0ee0cec43b07ec65460
-              <p class="description">Catatan Tabungan Pengguna</p>
+              <p class="description">Catatan Tabungan dan Informasi Saldo Pengguna</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
-<<<<<<< HEAD
               <h4 class="title">Pinjaman</h4>
-=======
-              <h4 class="title"><a href="pinjaman.php">Pinjaman</a></h4>
->>>>>>> 80b8dfc9ecf04be56596d0ee0cec43b07ec65460
-              <p class="description">Catatan Pinjaman Pengguna</p>
+              <p class="description">Catatan Pinjaman dan Informasi Hutang Pengguna</p>
             </div>
           </div>
 
@@ -130,63 +114,32 @@
           <h2>Contact Us</h2>
         </div>
 
-        <div class="row mt-1 d-flex justify-content-end" data-aos="fade-right" data-aos-delay="100">
-
+         <div class="section-title" margin-left:100px>
           <div class="col-lg-5">
             <div class="info">
               <div class="address">
                 <i class="icofont-google-map"></i>
                 <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <p>Jl. Masjid No.013 Sroyo</p>
               </div>
 
               <div class="email">
                 <i class="icofont-envelope"></i>
                 <h4>Email:</h4>
-                <p>info@example.com</p>
+                <p>banksampahsroyo@gmail.com</p>
               </div>
 
               <div class="phone">
                 <i class="icofont-phone"></i>
                 <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
+                <p>081357780664</p>
               </div>
 
             </div>
 
           </div>
 
-          <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
-
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="form-row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validate"></div>
-                </div>
-                <div class="col-md-6 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validate"></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                <div class="validate"></div>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                <div class="validate"></div>
-              </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-
-          </div>
-
+         
         </div>
 
       </div>

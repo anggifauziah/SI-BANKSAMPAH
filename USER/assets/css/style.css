@@ -1471,11 +1471,13 @@ section {
 
 .contact .container {
   position: relative;
+
 }
 
 .contact .info {
   width: 100%;
 }
+
 
 .contact .info i {
   font-size: 20px;
@@ -1507,7 +1509,7 @@ section {
 }
 
 .contact .info .email, .contact .info .phone {
-  margin-top: 40px;
+  margin-top: 40px; margin-right: 75px;
 }
 
 .contact .php-email-form {

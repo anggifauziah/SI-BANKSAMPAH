@@ -6,8 +6,8 @@ session_start();
     <div class="container d-flex align-items-center">
       <div class="contact-info mr-auto">
         <ul>
-          <li><i class="icofont-envelope"></i><a href="mailto:contact@example.com">contact@example.com</a></li>
-          <li><i class="icofont-phone"></i> +1 5589 55488 55</li>
+          <li><i class="icofont-envelope"></i><a href="mailto:contact@example.com">banksampahsroyo@gmail.com</a></li>
+          <li><i class="icofont-phone"></i>081357780664</li>
           <li><i class="icofont-clock-time icofont-flip-horizontal"></i> Mon-Fri 9am - 5pm</li>
         </ul>
       </div>

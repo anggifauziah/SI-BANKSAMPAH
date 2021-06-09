@@ -13,15 +13,15 @@ $password1 = $_POST['password1'];
       $query  = "UPDATE tb_login SET password = '$password' WHERE username = '$username'";
       $result = mysqli_query($koneksi, $query);}
       else{
-        echo"<script>alert('Sesuaikan pengulangan password !!')</script>";
-        echo "<br><a href='form-reset-password.php'>Kembali ke form</a>";
+        echo"<script>alert('Sesuaikan pengulangan password !!');document.location='form-reset-password.php';</script>"; 
       }
 
 if($result){
         // mengalihkan ke halaman index.php
     echo"<script>alert('Password berhasil disimpan'); document.location='profil.php';</script>";
-    }else{
-        echo "Maaf, terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
-        echo "<br><a href='form-reset-password.php'>Kembali ke form</a>";
     }
+    else{
+       echo"<script>alert('Tidak dapat memasukan data ke database !!');document.location='form-reset-password.php';</script>"; 
+      }
+    
 ?>
