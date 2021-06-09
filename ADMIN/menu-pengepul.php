@@ -84,7 +84,8 @@ if(empty($_SESSION)){
                     echo "<td>".$data['alamat_pengepul']."</td>";
                     echo "<td>".$data['telp_pengepul']."</td>";
                     echo "<td>
-                          <a data-href='proses-hapus-petugas.php?id=".$data['id_pengepul']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash'></i> Hapus</a>
+                          <a href='form-edit-pengepul.php?id=".$data['id_pengepul']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
+                          <a data-href='proses-hapus-pengepul.php?id=".$data['id_pengepul']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
                           </td>";
                     echo "</tr>";
                   }
@@ -97,6 +98,21 @@ if(empty($_SESSION)){
         </div>
       </div>
     </div>
+    <!-- Hapus Pengepul-->
+    <div class="modal fade" id="konfirmasi_hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <b>Anda yakin ingin menghapus data ini ?</b><br><br>
+                    <a class="btn btn-danger btn-ok"> Hapus</a>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-close"></i> Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hapus Pengepul-->
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <?php include 'footer.php'; ?>
@@ -121,6 +137,19 @@ if(empty($_SESSION)){
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
   </div>
+
+  <!-- Hapus Pengepul-->
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $('#konfirmasi_hapus').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    });
+
+  </script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- Hapus Pengepul-->
+
 </body>
 
 </html>

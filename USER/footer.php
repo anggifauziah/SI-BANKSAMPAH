@@ -30,8 +30,8 @@
           </div>
 
           <div class="col-lg-3 col-md-6 footer-info">
-            <h3>About Anyar</h3>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <h3>SI-Bank Sampah</h3>
+            <p>Tabungan, Pinjaman dan catatan elektronik Bank Sampah </p>
           </div>
 
         </div>
@@ -40,7 +40,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Anyar</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>SI-Bank Sampah</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
