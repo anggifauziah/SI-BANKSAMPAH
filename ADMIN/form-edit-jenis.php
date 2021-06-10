@@ -69,11 +69,11 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-6">
                 <label for="InputBeli">Harga Beli/kg</label>
-                <input type="number" class="form-control" name="Beli" id="InputBeli" placeholder="Harga Beli" required>
+                <input type="number" class="form-control" name="Beli" id="InputBeli" placeholder="Harga Beli"  value="<?php echo $row['harga_beli']; ?>" required>
               </div>
                 <div class="form-group col-md-6">
                 <label for="InputBeli">Harga Jual/kg</label>
-                <input type="number" class="form-control" name="Jual" id="InputJual" placeholder="Harga Jual" required>
+                <input type="number" class="form-control" name="Jual" id="InputJual" placeholder="Harga Jual"  value="<?php echo $row['harga_jual']; ?>" required>
               </div>
              
             </div>

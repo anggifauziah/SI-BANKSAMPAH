@@ -66,23 +66,19 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="nama_Pengepul" id="InputNama" placeholder="Nama Lengkap" required>
+                <input type="text" class="form-control" name="nama_Pengepul" id="InputNama" placeholder="Nama Lengkap"  value="<?php echo $row['nama_pengepul']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJenisKelamin">Jenis Kelamin</label>
-                <select name="jenisKelamin" id="InputJenisKelamin" class="form-control" required>
-                  <option selected disabled>::. Jenis Kelamin .::</option>
-                  <option>Laki-laki</option>
-                  <option>Perempuan</option>
-                </select>
+               <input type="text" class="form-control" name="nama_Pengepul" id="InputNama" placeholder="Nama Lengkap"  value="<?php echo $row['jk_pengepul']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputAlamat">Alamat</label>
-                <textarea class="form-control" id="InputAlamat" name="alamat" placeholder="Alamat" required rows="2"></textarea>
+                <textarea class="form-control" id="InputAlamat" name="alamat" placeholder="Alamat" required rows="2"><?php echo $row['alamat_pengepul']; ?></textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTelepon">Nomor Telepon/HP</label>
-                <input type="number" class="form-control" name="telp" id="InputTelepon" placeholder="Nomor Telepon/HP" required>
+                <input type="number" class="form-control" name="telp" id="InputTelepon"  value="<?php echo $row['telp_pengepul']; ?>" placeholder="Nomor Telepon/HP" required>
               </div>
              
             </div>
