@@ -182,7 +182,7 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-4">
                 <label for="InputTglAngsur">Tanggal Jual</label>
-                <input type="text" class="form-control" name="tgltbg" id="InputTglAngsur" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
+                <input type="text" class="form-control" name="tglJl" id="InputTglAngsur" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
               </div>
             </div>
           </div>

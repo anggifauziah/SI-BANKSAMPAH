@@ -66,7 +66,7 @@
              <a href="form-reset-password.php" class="btn btn-primary"><i class="fa fa-plus"></i>Reset Password</a>
              <br>
              <br>
-            <div class="row">
+           
               <div class="card border-dark mb-5" style="max-width: 100rem;">
                 <div class="card-header">Informasi Identitas Nasabah</div>
                 <div class="card-body text-dark">
@@ -133,7 +133,7 @@
                   <!-- DataTables Petugas-->
                   
                 </div>
-              </div>
+          
             </div>
           </section>
 

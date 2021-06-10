@@ -51,9 +51,9 @@
 
         <ol>
           <li><a href="index.php">Home</a></li>
-          <li>Pinjaman</li>
+          <li>Tabungan</li>
         </ol>
-        <h2>Total Peminjaman</h2>
+        <h2>Total Tabungan</h2>
 
       </div>
     </section><!-- End Breadcrumbs -->
@@ -61,7 +61,6 @@
     <!-- ======= Blog Section ======= -->
         <section id="blog" class="blog">
           <div class="container">
-            <div class="row">
               <div class="card border-dark mb-5" style="max-width: 100rem;">
                 <div class="card-header">Informasi Tabungan Nasabah</div>
                 <div class="card-body text-dark">
@@ -70,14 +69,7 @@
                     <div class="card-body">
                       <div class="table table-responsive-xl">
                         <table class="table table-bordered" id="dataTable" max-width="100%" cellspacing="0" style="width: 100%">
-                          <thead>
-                            <tr>
-                              <th>ID Nasabah</th>
-                              <th>Nomor Rekening</th>
-                              <th>Nama</th>
-                              <th>Jumlah Saldo</th>
-                            </tr>
-                          </thead>
+                         
                           <tbody>
                             <!-- Menampilkan data dari database ke Tabel -->
                             <?php
@@ -87,9 +79,23 @@
                             ?>
                             
                             <tr class="table-active">
+                              <td>ID Nasabah</td>
+                              <td>:</td>
                               <td><?php echo $data['id_nasabah'] ?></td>
+                            </tr>
+                            <tr class="table-active">
+                              <td>No. Rek. Nasabah</td>
+                              <td>:</td>
                               <td><?php echo $data['norek_nasabah'] ?></td>
+                            </tr >
+                            <tr class="table-active">
+                              <td>Nama Nasabah</td>
+                              <td>:</td>
                               <td><?php echo $data['nama_nasabah'] ?></td>
+                            </tr>
+                            <tr class="table-active">
+                              <td>Saldo Nasabah</td>
+                              <td>:</td>
                               <td><?php echo "Rp",$data['saldo_nasabah'] ?></td>
                             </tr>
                             
@@ -103,9 +109,117 @@
                   
                 </div>
               </div>
+           
+          </section>
+
+                     <!-- ======= Blog Section ======= -->
+       <section id="blog" class="blog">
+          <div class="container">
+           
+                <div class="card-header">Rincian Setor Tabungan Nasabah</div>
+                <div class="card-body text-dark">
+                  
+                  <!-- DataTables Petugas-->
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                          <thead>
+                            <tr>
+                              <th>No.</th>
+                              <th>Jumlah Setor</th>
+                              <th>Tanggal Setor</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- Menampilkan data dari database ke Tabel -->
+                            <?php
+                            include('koneksi_db.php');
+                           $nomor = 2;
+                            $result = mysqli_query($koneksi,"SELECT p.total_tabung,p.tanggal_tabung FROM tb_tabungan p, tb_nasabah n WHERE p.id_nasabah=n.id_nasabah and n.norek_nasabah=$_SESSION[username]");
+                            $data   = mysqli_fetch_array($result);
+                            ?>
+                            <tr>
+                              <td>1</td>
+                              <td><?php echo $data['total_tabung'] ?></td>
+                              <td><?php echo $data['tanggal_tabung'] ?></td>
+                            </tr>
+                            
+                           <?php
+                            while($data = mysqli_fetch_array($result)) {
+                              echo "<tr>";
+                              echo "<td>".$nomor++."</td>";
+                              echo "<td>".$data['total_tabung']."</td>";
+                              echo "<td>".$data['tanggal_tabung']."</td>";
+                              echo "</tr>";
+                            }
+                           ?>
+                            
+                            <!-- Sampai sini -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- DataTables Petugas-->
+                  
+                
             </div>
           </section>
 
+       <section id="blog" class="blog">
+          <div class="container">
+           
+                <div class="card-header">Rincian Tarik Tabungan Nasabah</div>
+                <div class="card-body text-dark">
+                  
+                  <!-- DataTables Petugas-->
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                          <thead>
+                            <tr>
+                              <th>No.</th>
+                              <th>Jumlah Tarik</th>
+                              <th>Tanggal Tarik</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- Menampilkan data dari database ke Tabel -->
+                            <?php
+                            include('koneksi_db.php');
+                           $nomor = 2;
+                            $result = mysqli_query($koneksi,"SELECT p.jumlah_tarik,p.tanggal_tarik FROM tb_tarik_tabungan p, tb_nasabah n WHERE p.id_nasabah=n.id_nasabah and n.norek_nasabah=$_SESSION[username]");
+                            $data   = mysqli_fetch_array($result);
+                            ?>
+                            <tr>
+                              <td>1</td>
+                              <td><?php echo $data['jumlah_tarik'] ?></td>
+                              <td><?php echo $data['tanggal_tarik'] ?></td>
+                            </tr>
+                            
+                           <?php
+                            while($data = mysqli_fetch_array($result)) {
+                              echo "<tr>";
+                              echo "<td>".$nomor++."</td>";
+                              echo "<td>".$data['jumlah_tarik']."</td>";
+                              echo "<td>".$data['tanggal_tarik']."</td>";
+                              echo "</tr>";
+                            }
+                           ?>
+                            
+                            <!-- Sampai sini -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- DataTables Petugas-->
+                  
+                
+            </div>
+          </section>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

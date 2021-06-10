@@ -60,7 +60,7 @@ if(empty($_SESSION)){
                   <th>No</th>
                   <th>ID Petugas</th>
                   <th>ID Pengepul</th>
-                  <th>Nama Nasabah</th>
+                  <th>Nama Pengepul</th>
                   <th>Jumlah Jual</th>
                   <th>Tanggal Jual</th>
                   <th>Action</th>
@@ -80,7 +80,7 @@ if(empty($_SESSION)){
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
                     echo "<td>".$data['id_petugas']."</td>";
-                    echo "<td>".$data['id_pangepul']."</td>";
+                    echo "<td>".$data['id_pengepul']."</td>";
                     echo "<td>".$data['nama_pengepul']."</td>";
                     echo "<td>Rp".$data['total_jual']."</td>";
                     echo "<td>".$data['tanggal_jual']."</td>";
