@@ -3,7 +3,7 @@ include "koneksi_db.php";
 $id = $_GET['id'];
 $result = ("SELECT t.id_nasabah, n.norek_nasabah, n.nama_nasabah, t.jumlah_tarik, t.tanggal_tarik
             FROM tb_tarik_tabungan t INNER JOIN tb_nasabah n
-            WHERE t.id_tarik LIKE '%$id%'");
+            WHERE t.id_nasabah=n.id_nasabah AND t.id_tarik LIKE '%$id%'");
 $hasil = mysqli_query($koneksi,$result);
 while($data = mysqli_fetch_array($hasil)) {
 $idNasabah  = $data['id_nasabah'];
