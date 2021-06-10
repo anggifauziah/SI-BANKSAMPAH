@@ -74,7 +74,7 @@
                   <!-- DataTables Petugas-->
                     <div class="card-body">
                       <div class="table table-responsive-xl">
-                        <table class="table table-bordered" id="dataTable" max-width="100%" cellspacing="0" style="width: 100%">
+                        <table class="table" id="dataTable" max-width="100%" cellspacing="0" style="width: 100%">
                         
                           <tbody>
                             <!-- Menampilkan data dari database ke Tabel -->

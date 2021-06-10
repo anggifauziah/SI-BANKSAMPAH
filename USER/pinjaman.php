@@ -68,7 +68,7 @@
                   <!-- DataTables Petugas-->
                     <div class="card-body">
                       <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table" id="dataTable" width="100%" cellspacing="0">
                          
                           <tbody>
                             <!-- Menampilkan data dari database ke Tabel -->
@@ -78,22 +78,22 @@
                             $data   = mysqli_fetch_array($result);
                             ?>
                             
-                            <tr class="table-active">
+                            <tr>
                               <td>ID Nasabah</td>
                               <td>:</td>
                               <td><?php echo $data['id_nasabah'] ?></td>
                             </tr>
-                            <tr class="table-active">
+                            <tr>
                               <td>No. Rek. Nasabah</td>
                               <td>:</td>
                               <td><?php echo $data['norek_nasabah'] ?></td>
                             </tr >
-                            <tr class="table-active">
+                            <tr>
                               <td>Nama Nasabah</td>
                               <td>:</td>
                               <td><?php echo $data['nama_nasabah'] ?></td>
                             </tr>
-                            <tr class="table-active">
+                            <tr>
                               <td>Pinjaman Nasabah</td>
                               <td>:</td>
                               <td><?php echo "Rp",$data['pinjaman_nasabah'] ?></td>
