@@ -27,7 +27,7 @@ function formatBulan($tgl){
         <td><strong><h3 align="center">BANK SAMPAH</h3></strong></td>
       </tr>
       <tr>
-        <td align="center">Jl. Telang, No 31, Trunojoyo, <br> Bangkalan, Madura <br> Telpon : 07241111111 </td>
+        <td align="center">Jl. Masjid No.013 Sroyo <br> Telepon : 081357780664 </td>
       </tr>
       <tr>
         <td>--------------------------------------------------------</td>

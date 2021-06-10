@@ -1,9 +1,9 @@
 <?php
 include "koneksi_db.php"; // Load file koneksi_db.php
 
-$idPengepul = $_POST['idPengepul']; // Ambil data idNasabah yang dikirim lewat AJAX
+$idpengepul = $_POST['idPengepul']; // Ambil data idNasabah yang dikirim lewat AJAX
 
-$query = mysqli_query($koneksi, "SELECT * FROM tb_pengepul WHERE id_pengepul LIKE '%$idPengepul%'"); // Tampilkan data nasabah dengan idPengepul tersebut
+$query = mysqli_query($koneksi, "SELECT * FROM tb_pengepul WHERE id_pengepul LIKE '%$idpengepul%'"); // Tampilkan data nasabah dengan idPengepul tersebut
 $row   = mysqli_num_rows($query); // Hitung ada berapa data dari hasil eksekusi $query
 
 if ($row > 0) {

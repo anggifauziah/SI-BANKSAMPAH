@@ -48,7 +48,7 @@
         <section id="contact" class="contact">
           <div class="container" data-aos="fade-up">
             <div class="section-title">
-              <h2>Hubungi Kami</h2>
+              <h2>Contact Us</h2>
             </div>
             <div class="row">
               <div class="col-lg-12 d-flex align-items-stretch" data-aos="fade-right" data-aos-delay="100">
@@ -57,19 +57,19 @@
                     <div class="address">
                       <i class="icofont-google-map"></i>
                       <h4>Location:</h4>
-                      <p>A108 Adam Street, New York, NY 535022</p>
+                      <p>Jl. Masjid No.013 Sroyo</p>
                     </div>
                     
                     <div class="email">
                       <i class="icofont-envelope"></i>
                       <h4>Email:</h4>
-                      <p>info@example.com</p>
+                      <p>banksampahsroyo@gmail.com</p>
                     </div>
                     
                     <div class="phone">
                       <i class="icofont-phone"></i>
                       <h4>Call:</h4>
-                      <p>+1 5589 55488 55s</p>
+                      <p>081357780664</p>
                     </div>
                   </div>
                 </div>

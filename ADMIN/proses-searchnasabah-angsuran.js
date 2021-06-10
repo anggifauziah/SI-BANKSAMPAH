@@ -3,7 +3,7 @@ function search(){
   
   $.ajax({
       type: "POST", // Method pengiriman data bisa dengan GET atau POST
-      url: "proses-searchdatanasabah-pinjaman.php", // Isi dengan url/path file php yang dituju
+      url: "proses-searchdatanasabah-angsuran.php", // Isi dengan url/path file php yang dituju
       data: {idNasabah : $("#idNasabah").val()}, // data yang akan dikirim ke file proses
       dataType: "json",
       beforeSend: function(e) {

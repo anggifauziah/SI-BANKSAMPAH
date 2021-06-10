@@ -84,7 +84,7 @@
                               <td><?php echo $data['id_nasabah'] ?></td>
                             </tr>
                             <tr>
-                              <td>No. Rek. Nasabah</td>
+                              <td>Nomor Rekening</td>
                               <td>:</td>
                               <td><?php echo $data['norek_nasabah'] ?></td>
                             </tr >
@@ -134,21 +134,17 @@
                             <!-- Menampilkan data dari database ke Tabel -->
                             <?php
                             include('koneksi_db.php');
-                           $nomor = 2;
+                           $nomor = 1;
                             $result = mysqli_query($koneksi,"SELECT p.jumlah_pinjam,p.tanggal_pinjam FROM tb_pinjaman p, tb_nasabah n WHERE p.id_nasabah=n.id_nasabah and n.norek_nasabah=$_SESSION[username]");
-                            $data   = mysqli_fetch_array($result);
                             ?>
-                          <tr>
-                              <td>1</td>
-                              <td><?php echo $data['jumlah_pinjam'] ?></td>
-                              <td><?php echo $data['tanggal_pinjam'] ?></td>
-                            </tr>
+                          
                            <?php
                             while($data = mysqli_fetch_array($result)) {
                               echo "<tr>";
+                              $tgl = date('d-m-Y', strtotime($data['tanggal_pinjam']));
                               echo "<td>".$nomor++."</td>";
-                              echo "<td>".$data['jumlah_pinjam']."</td>";
-                              echo "<td>".$data['tanggal_pinjam']."</td>";
+                              echo "<td>Rp".$data['jumlah_pinjam']."</td>";
+                              echo "<td>".$tgl."</td>";
                               echo "</tr>";
                             }
                            ?>
@@ -188,22 +184,18 @@
                             <!-- Menampilkan data dari database ke Tabel -->
                             <?php
                             include('koneksi_db.php');
-                           $nomor = 2;
+                           $nomor = 1;
                             $result = mysqli_query($koneksi,"SELECT p.total_angsur,p.tanggal_angsur FROM tb_angsuran p, tb_nasabah n WHERE p.id_nasabah=n.id_nasabah and n.norek_nasabah=$_SESSION[username]");
-                            $data   = mysqli_fetch_array($result);
                             ?>
-                            <tr>
-                              <td>1</td>
-                              <td><?php echo $data['total_angsur'] ?></td>
-                              <td><?php echo $data['tanggal_angsur'] ?></td>
-                            </tr>
+                            
                             
                            <?php
                             while($data = mysqli_fetch_array($result)) {
                               echo "<tr>";
+                              $tgl = date('d-m-Y', strtotime($data['tanggal_angsur']));
                               echo "<td>".$nomor++."</td>";
-                              echo "<td>".$data['total_angsur']."</td>";
-                              echo "<td>".$data['tanggal_angsur']."</td>";
+                              echo "<td>Rp".$data['total_angsur']."</td>";
+                              echo "<td>".$tgl."</td>";
                               echo "</tr>";
                             }
                            ?>

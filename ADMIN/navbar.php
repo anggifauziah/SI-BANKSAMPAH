@@ -74,9 +74,6 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseLaporan">
             <li>
-              <a href="laporan-nasabah.php">Laporan Nasabah</a>
-            </li>
-            <li>
               <a href="laporan-pinjaman.php">Laporan Pinjaman</a>
             </li>
             <li>

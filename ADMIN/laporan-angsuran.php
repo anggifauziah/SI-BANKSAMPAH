@@ -27,12 +27,6 @@ document.location='login.php';
     <link href="css/sb-admin.css" rel="stylesheet">
     <!-- Navigation-->
     <?php include 'navbar.php'; ?>
-    <!-- Include library Bootstrap Datepicker -->
-    <link href="vendor/libraries/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
-    <!-- Include library Font Awesome (Dibutuhkan Datepicker) -->
-    <link href="vendor/libraries/fontawesome/css/all.min.css" rel="stylesheet">
-    <!-- Include File jQuery -->
-    <script src="js/jquery.min.js"></script>
   </head>
   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     
@@ -80,12 +74,12 @@ document.location='login.php';
 
         if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
         // Buat query untuk menampilkan semua data angsuran
-        $query     = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.nama_nasabah, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a INNER JOIN tb_nasabah n WHERE a.id_nasabah = n.id_nasabah";
+        $query     = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.norek_nasabah, n.nama_nasabah, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a INNER JOIN tb_nasabah n WHERE a.id_nasabah = n.id_nasabah";
         $url_cetak = "print-laporan-angsuran.php";
         $label     = "Semua Data Angsuran";
         }else{ // Jika terisi
         // Buat query untuk menampilkan data angsuran sesuai periode tanggal
-        $query     = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.nama_nasabah, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a INNER JOIN tb_nasabah n WHERE a.id_nasabah = n.id_nasabah AND (tanggal_angsur BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+        $query     = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.norek_nasabah, n.nama_nasabah, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a INNER JOIN tb_nasabah n WHERE a.id_nasabah = n.id_nasabah AND (tanggal_angsur BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
         $url_cetak = "print-laporan-angsuran.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
         $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -106,6 +100,7 @@ document.location='login.php';
                 <th>Tanggal Angsur</th>
                 <th>ID Petugas</th>
                 <th>ID Nasabah</th>
+                <th>Nomor Rekening</th>
                 <th>Nama Nasabah</th>
                 <th>Jumlah Angsur</th>
               </tr>
@@ -123,8 +118,9 @@ document.location='login.php';
                 echo "<td>".$tgl."</td>";
                 echo "<td>".$data['id_petugas']."</td>";
                 echo "<td>".$data['id_nasabah']."</td>";
+                echo "<td>".$data['norek_nasabah']."</td>";
                 echo "<td>".$data['nama_nasabah']."</td>";
-                echo "<td>".$data['total_angsur']."</td>";
+                echo "<td>Rp".$data['total_angsur']."</td>";
               echo "</tr>";
               }
               }else{ // Jika data tidak ada

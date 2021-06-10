@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2021 at 04:47 AM
+-- Generation Time: Jun 10, 2021 at 01:29 PM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.1.29
 
@@ -90,7 +90,7 @@ CREATE TABLE `tb_login` (
 INSERT INTO `tb_login` (`id_login`, `username`, `password`, `level_user`) VALUES
 (1, 'admin', '123', 1),
 (2, 'aku', 'aku', 2),
-(3, '171146265223001', '171146265223001', 2),
+(3, '171146265223001', 'hai', 2),
 (4, '171031553225231', '171031553225231', 2),
 (6, '17893582826231', '17893582826231', 2),
 (7, '17617884616624', '17617884616624', 2);
@@ -120,7 +120,7 @@ CREATE TABLE `tb_nasabah` (
 
 INSERT INTO `tb_nasabah` (`id_nasabah`, `nama_nasabah`, `jk_nasabah`, `alamat_nasabah`, `telp_nasabah`, `pekerjaan_nasabah`, `tgl_daftar`, `norek_nasabah`, `saldo_nasabah`, `pinjaman_nasabah`) VALUES
 ('0123', 'Ani', 'Perempuan', 'Jl. Nangka', '085178235601', 'Karyawan', '2019-06-01', '171146265223001', 0, 58500),
-('321', 'Didi', 'Laki-laki', 'Jl. Kencana', '085167823764', 'Belum Bekerja', '2020-06-02', '171031553225231', 0, 45000),
+('321', 'Didi', 'Laki-laki', 'Jl. Kencana', '085167823764', 'Belum Bekerja', '2020-06-02', '171031553225231', 5000, 45000),
 ('456', 'Seno', 'Laki-laki', 'Jl. Melati', '085198624356', 'Swasta', '2021-06-03', '17893582826231', 0, 0),
 ('789', 'Anisa', 'Perempuan', 'Jl. Flores', '085124836257', 'Belum Bekerja', '2021-06-03', '17617884616624', 0, 0);
 
@@ -138,6 +138,14 @@ CREATE TABLE `tb_pengepul` (
   `telp_pengepul` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_pengepul`
+--
+
+INSERT INTO `tb_pengepul` (`id_pengepul`, `nama_pengepul`, `jk_pengepul`, `alamat_pengepul`, `telp_pengepul`) VALUES
+('PP001', 'Mimi', 'Perempuan', 'Jl. SInga', '0921423'),
+('PP002', 'Jeri', 'Laki-laki', 'Jl. Angsa', '0923743');
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +161,14 @@ CREATE TABLE `tb_penjualan` (
   `total_jual` int(11) NOT NULL,
   `tanggal_jual` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_penjualan`
+--
+
+INSERT INTO `tb_penjualan` (`id_jual`, `id_petugas`, `id_pengepul`, `id_jenis`, `berat_jual`, `total_jual`, `tanggal_jual`) VALUES
+('JL001', 'PT001', 'PP001', 'JS001', 10, 8000, '2021-06-10'),
+('JL002', 'PT001', 'PP002', 'JS001', 20, 16000, '2021-06-10');
 
 -- --------------------------------------------------------
 
@@ -215,6 +231,13 @@ CREATE TABLE `tb_tabungan` (
   `tanggal_tabung` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_tabungan`
+--
+
+INSERT INTO `tb_tabungan` (`id_tabung`, `id_petugas`, `id_nasabah`, `id_jenis`, `berat_tabung`, `total_tabung`, `tanggal_tabung`) VALUES
+('TBG001', 'PT001', '321', 'JS001', 10, 5000, '2021-06-09');
+
 -- --------------------------------------------------------
 
 --
@@ -260,6 +283,13 @@ ALTER TABLE `tb_login`
 ALTER TABLE `tb_nasabah`
   ADD PRIMARY KEY (`id_nasabah`),
   ADD UNIQUE KEY `id_nasabah` (`id_nasabah`);
+
+--
+-- Indexes for table `tb_pengepul`
+--
+ALTER TABLE `tb_pengepul`
+  ADD PRIMARY KEY (`id_pengepul`),
+  ADD UNIQUE KEY `id_pengepul` (`id_pengepul`);
 
 --
 -- Indexes for table `tb_penjualan`

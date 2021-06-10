@@ -3,8 +3,8 @@ function searchpengepul(){
   
   $.ajax({
       type: "POST", // Method pengiriman data bisa dengan GET atau POST
-      url: "proses-searchdatapengepul.php", // Isi dengan url/path file php yang dituju
-      data: {idPengepul : $("#idPengepul").text()}, // data yang akan dikirim ke file proses
+      url: "proses-searchdatapengepul-penjualan.php", // Isi dengan url/path file php yang dituju
+      data: {idPengepul : $("#idPengepul").val()}, // data yang akan dikirim ke file proses
       dataType: "json",
       beforeSend: function(e) {
           if(e && e.overrideMimeType) {
@@ -15,7 +15,7 @@ function searchpengepul(){
         $("#loading").hide(); // Sembunyikan loadingnya
 
         if(response.status == "success"){ // Jika isi dari array status adalah success
-            $("#namaPengepul").val(response.nama_pengepul); // set textbox dengan id namaNasabah
+            $("#namaPengepul").val(response.namaPengepul); // set textbox dengan id namaNasabah
             $("#jk").val(response.jk); // set textbox dengan id jk
             $("#alamat").val(response.alamat); // set textbox dengan id alamat
             $("#telp").val(response.telp); // set textbox dengan id telp

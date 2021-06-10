@@ -84,7 +84,7 @@
                               <td><?php echo $data['id_nasabah'] ?></td>
                             </tr>
                             <tr>
-                              <td>No. Rek. Nasabah</td>
+                              <td>Nomor Rekening</td>
                               <td>:</td>
                               <td><?php echo $data['norek_nasabah'] ?></td>
                             </tr >
@@ -137,20 +137,15 @@
                             include('koneksi_db.php');
                            $nomor = 2;
                             $result = mysqli_query($koneksi,"SELECT p.total_tabung,p.tanggal_tabung FROM tb_tabungan p, tb_nasabah n WHERE p.id_nasabah=n.id_nasabah and n.norek_nasabah=$_SESSION[username]");
-                            $data   = mysqli_fetch_array($result);
                             ?>
-                            <tr>
-                              <td>1</td>
-                              <td><?php echo $data['total_tabung'] ?></td>
-                              <td><?php echo $data['tanggal_tabung'] ?></td>
-                            </tr>
                             
                            <?php
                             while($data = mysqli_fetch_array($result)) {
+                              $tgl = date('d-m-Y', strtotime($data['tanggal_tabung']));
                               echo "<tr>";
                               echo "<td>".$nomor++."</td>";
-                              echo "<td>".$data['total_tabung']."</td>";
-                              echo "<td>".$data['tanggal_tabung']."</td>";
+                              echo "<td>Rp".$data['total_tabung']."</td>";
+                              echo "<td>".$tgl."</td>";
                               echo "</tr>";
                             }
                            ?>
@@ -191,20 +186,15 @@
                             include('koneksi_db.php');
                            $nomor = 2;
                             $result = mysqli_query($koneksi,"SELECT p.jumlah_tarik,p.tanggal_tarik FROM tb_tarik_tabungan p, tb_nasabah n WHERE p.id_nasabah=n.id_nasabah and n.norek_nasabah=$_SESSION[username]");
-                            $data   = mysqli_fetch_array($result);
                             ?>
-                            <tr>
-                              <td>1</td>
-                              <td><?php echo $data['jumlah_tarik'] ?></td>
-                              <td><?php echo $data['tanggal_tarik'] ?></td>
-                            </tr>
                             
                            <?php
                             while($data = mysqli_fetch_array($result)) {
+                              $tgl = date('d-m-Y', strtotime($data['tanggal_tarik']));
                               echo "<tr>";
                               echo "<td>".$nomor++."</td>";
-                              echo "<td>".$data['jumlah_tarik']."</td>";
-                              echo "<td>".$data['tanggal_tarik']."</td>";
+                              echo "<td>Rp".$data['jumlah_tarik']."</td>";
+                              echo "<td>".$tgl."</td>";
                               echo "</tr>";
                             }
                            ?>

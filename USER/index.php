@@ -51,7 +51,7 @@
       <div class="carousel-item active">
         <div class="carousel-container">
           <h2 class="animate__animated animate__fadeInDown"><span>Sistem Informasi Bank Sampah</span></h2>
-          <p class="animate__animated animate__fadeInUp">Sistem Informasi Bank Sampah ini merupakan website untuk memperrmudah pengelola dan nasabah Bank Sampah. Sistem Informasi ini akan mempermudah pengguna dalam hal catatan tabungan, maupun pinjaman.</p>
+          <p class="animate__animated animate__fadeInUp">Sistem Informasi Bank Sampah ini merupakan website untuk mempermudah pengelola dan nasabah Bank Sampah. Sistem Informasi ini akan mempermudah pengguna dalam hal catatan tabungan, maupun pinjaman.</p>
         </div>
       </div>
 

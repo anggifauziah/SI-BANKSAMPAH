@@ -47,14 +47,14 @@ if(empty($_SESSION)){
 
       <?php
       include('koneksi_db.php');
-      //mengambil data dengan id paling besar
+      //mengambil data surat dengan id paling besar
       $query  = mysqli_query($koneksi, "SELECT MAX(id_pengepul) as idTerbesar FROM tb_pengepul");
       $data   = mysqli_fetch_array($query);
-      $idPengepul = $data['idTerbesar'];
+      $idPtgs = $data['idTerbesar'];
 
       //mengambil angka dari id surat terbesar, menggunakan fungsi substr
       //dan diubah ke int
-      $urutan = (int) substr($idPengepul, 3, 3);
+      $urutan = (int) substr($idPtgs, 3, 3);
       //bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
       $id = $urutan+1;
 
@@ -71,7 +71,7 @@ if(empty($_SESSION)){
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="InputId">ID Pengepul</label>
-                <input type="text" class="form-control" name="id_Pengepul" id="InputId" placeholder="ID Pengepul" value="<?php echo($kode) ?>" readonly required>
+                <input type="text" class="form-control" name="id_Pengepul" id="InputId" placeholder="NIK KTP" required value="<?php echo($kode) ?>" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>

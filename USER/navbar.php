@@ -8,7 +8,7 @@ session_start();
         <ul>
           <li><i class="icofont-envelope"></i><a href="mailto:contact@example.com">banksampahsroyo@gmail.com</a></li>
           <li><i class="icofont-phone"></i>081357780664</li>
-          <li><i class="icofont-clock-time icofont-flip-horizontal"></i> Mon-Fri 9am - 5pm</li>
+          <li><i class="icofont-clock-time icofont-flip-horizontal"></i> Senin-Sabtu 9.00 - 17.00</li>
         </ul>
       </div>
       <div class="cta">
@@ -22,7 +22,7 @@ session_start();
   <header id="header" class="fixed-top header-inner-pages">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html#header" class="scrollto">BANK SAMPAH</a></h1>
+      <h1 class="logo mr-auto"><a href="index.php" class="scrollto">BANK SAMPAH</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html#header" class="logo mr-auto scrollto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 

@@ -27,12 +27,6 @@ document.location='login.php';
     <link href="css/sb-admin.css" rel="stylesheet">
     <!-- Navigation-->
     <?php include 'navbar.php'; ?>
-    <!-- Include library Bootstrap Datepicker -->
-    <link href="vendor/libraries/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
-    <!-- Include library Font Awesome (Dibutuhkan Datepicker) -->
-    <link href="vendor/libraries/fontawesome/css/all.min.css" rel="stylesheet">
-    <!-- Include File jQuery -->
-    <script src="js/jquery.min.js"></script>
   </head>
   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     
@@ -80,12 +74,12 @@ document.location='login.php';
 
         if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
         // Buat query untuk menampilkan semua data Pinjaman
-        $query     = "SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam FROM tb_pinjaman p INNER JOIN tb_nasabah n WHERE p.id_nasabah = n.id_nasabah";
+        $query     = "SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.norek_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam FROM tb_pinjaman p INNER JOIN tb_nasabah n WHERE p.id_nasabah = n.id_nasabah";
         $url_cetak = "print-laporan-pinjaman.php";
         $label     = "Semua Data Pinjaman";
         }else{ // Jika terisi
         // Buat query untuk menampilkan data Pinjaman sesuai periode tanggal
-        $query     = "SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam FROM tb_pinjaman p INNER JOIN tb_nasabah n WHERE p.id_nasabah = n.id_nasabah AND (tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+        $query     = "SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.norek_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam FROM tb_pinjaman p INNER JOIN tb_nasabah n WHERE p.id_nasabah = n.id_nasabah AND (tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
         $url_cetak = "print-laporan-pinjaman.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
         $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -106,6 +100,7 @@ document.location='login.php';
                 <th>Tanggal Pinjam</th>
                 <th>ID Petugas</th>
                 <th>ID Nasabah</th>
+                <th>Nomor Rekening</th>
                 <th>Nama Nasabah</th>
                 <th>Jumlah Pinjam</th>
               </tr>
@@ -123,8 +118,9 @@ document.location='login.php';
                 echo "<td>".$tgl."</td>";
                 echo "<td>".$data['id_petugas']."</td>";
                 echo "<td>".$data['id_nasabah']."</td>";
+                echo "<td>".$data['norek_nasabah']."</td>";
                 echo "<td>".$data['nama_nasabah']."</td>";
-                echo "<td>".$data['jumlah_pinjam']."</td>";
+                echo "<td>Rp".$data['jumlah_pinjam']."</td>";
               echo "</tr>";
               }
               }else{ // Jika data tidak ada

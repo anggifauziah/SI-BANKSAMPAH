@@ -80,7 +80,7 @@
                             <!-- Menampilkan data dari database ke Tabel -->
                             <?php
                             include('koneksi_db.php');
-                            $result = mysqli_query($koneksi,"SELECT * FROM tb_nasabah");
+                            $result = mysqli_query($koneksi,"SELECT n.id_nasabah, n.norek_nasabah, n.nama_nasabah, n.jk_nasabah, n.alamat_nasabah, n.telp_nasabah, n.pekerjaan_nasabah, n.tgl_daftar, l.username FROM tb_nasabah n, tb_login l WHERE n.norek_nasabah=$_SESSION[username]");
                             $data   = mysqli_fetch_array($result);
                             ?>
                             <tr>
@@ -89,7 +89,7 @@
                               <td><?php echo $data['id_nasabah'] ?></td>
                             </tr>
                             <tr>
-                              <td>No. Rekening</td>
+                              <td>Nomor Rekening</td>
                               <td>:</td>
                               <td><?php echo $data['norek_nasabah'] ?></td>
                             </tr>
@@ -122,7 +122,7 @@
                             <tr>
                               <td>Tanggal Daftar</td>
                               <td>:</td>
-                              <td><?php echo $data['tgl_daftar'] ?></td>
+                              <td><?php echo date('d-m-Y', strtotime($data['tgl_daftar'])); ?></td>
                             </tr>
                             <!-- Sampai sini -->
                           </tbody>

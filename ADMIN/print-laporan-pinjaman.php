@@ -12,7 +12,7 @@
 		}
 		.table td {
 			word-wrap:break-word;
-			width: 19%;
+			width: 16%;
 			padding: 5px;
 		}
 	</style>
@@ -27,12 +27,12 @@
 
 	if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
 		// Buat query untuk menampilkan semua data Pinjaman
-		$query = "SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam FROM tb_pinjaman p INNER JOIN tb_nasabah n WHERE p.id_nasabah = n.id_nasabah";
+		$query = "SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.norek_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam FROM tb_pinjaman p INNER JOIN tb_nasabah n WHERE p.id_nasabah = n.id_nasabah";
 
 		$label = "Semua Data Pinjaman";
 	}else{ // Jika terisi
 		// Buat query untuk menampilkan data Pinjaman sesuai periode tanggal
-		$query = "SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam FROM tb_pinjaman p INNER JOIN tb_nasabah n WHERE p.id_nasabah = n.id_nasabah AND (tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+		$query = "SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.norek_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam FROM tb_pinjaman p INNER JOIN tb_nasabah n WHERE p.id_nasabah = n.id_nasabah AND (tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
 
 		$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
 		$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -49,6 +49,7 @@
             <th>Tanggal Pinjam</th>
             <th>ID Petugas</th>
             <th>ID Nasabah</th>
+            <th>Nomor Rekening</th>
             <th>Nama Nasabah</th>
             <th>Jumlah Pinjam</th>
 		</tr>
@@ -67,8 +68,9 @@
                 echo "<td>".$tgl."</td>";
                 echo "<td>".$data['id_petugas']."</td>";
                 echo "<td>".$data['id_nasabah']."</td>";
+                echo "<td>".$data['norek_nasabah']."</td>";
                 echo "<td>".$data['nama_nasabah']."</td>";
-                echo "<td>".$data['jumlah_pinjam']."</td>";
+                echo "<td>Rp".$data['jumlah_pinjam']."</td>";
 				echo "</tr>";
 			}
 		}else{ // Jika data tidak ada
