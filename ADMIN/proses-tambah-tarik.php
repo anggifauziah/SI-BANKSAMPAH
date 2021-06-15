@@ -16,16 +16,21 @@ $data     = mysqli_query($koneksi, "SELECT * FROM tb_nasabah WHERE id_nasabah=$i
 $row      = mysqli_fetch_array($data);
 $saldo   = $row['saldo_nasabah'];
 
-$totalsaldo = $saldo - $jumtarik;
 
+if ($saldo <= 50000) {
+	echo "<script>alert('Tidak bisa tarik! Saldo tidak mencukupi!');
+	document.location='menu-tarik.php';
+  	</script>";
+} else {
+	$totalsaldo = $saldo - $jumtarik;
+	// query SQL untuk insert data
+	$nasabah = "INSERT INTO tb_tarik_tabungan VALUES ('".$idTarik."', '".$idPetugas."', '".$idNasabah."', '".$jumtarik."', '".$tgltarik."')";
 
-// query SQL untuk insert data
-$nasabah = "INSERT INTO tb_tarik_tabungan VALUES ('".$idTarik."', '".$idPetugas."', '".$idNasabah."', '".$jumtarik."', '".$tgltarik."')";
+	$newsaldo = "UPDATE tb_nasabah SET saldo_nasabah=$totalsaldo WHERE id_nasabah=$idNasabah";
 
-$newsaldo = "UPDATE tb_nasabah SET saldo_nasabah=$totalsaldo WHERE id_nasabah=$idNasabah";
-
-$result = mysqli_query($koneksi, $nasabah);
-$result = mysqli_query($koneksi, $newsaldo);
+	$result = mysqli_query($koneksi, $nasabah);
+	$result = mysqli_query($koneksi, $newsaldo);
+}
 
 if ($result) {
 	//jika sukses, lakukan :

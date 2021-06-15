@@ -37,11 +37,11 @@ document.location='login.php';
           <li class="breadcrumb-item">
             <a href="index.php">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Laporan Angsuran</li>
+          <li class="breadcrumb-item active">Laporan Penjualan</li>
         </ol>
 
         <!-- FORM FILTER -->
-        <form method="GET" action="laporan-angsuran.php">
+        <form method="GET" action="laporan-penjualan.php">
           <div class="row">
             <div class="col-sm-6 col-md-4">
               <div class="form-group">
@@ -60,7 +60,7 @@ document.location='login.php';
 
           <?php
           if(isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
-          echo '<a href="laporan-angsuran.php" class="btn btn-default">RESET</a>';
+          echo '<a href="laporan-penjualan.php" class="btn btn-default">RESET</a>';
           ?>
         </form>
         <!-- FORM FILTER -->
@@ -73,21 +73,21 @@ document.location='login.php';
         $tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
 
         if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-        // Buat query untuk menampilkan semua data angsuran
-        $query     = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.nama_nasabah, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = a.id_nasabah AND j.id_jenis = a.id_jenis ORDER BY a.id_angsur ASC";
-        $url_cetak = "print-laporan-angsuran.php";
-        $label     = "Semua Data Angsuran";
+        // Buat query untuk menampilkan semua data penjualan
+        $query     = "SELECT pj.id_petugas, p.id_pengepul, p.nama_pengepul, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_pengepul p, tb_jenis_sampah j WHERE p.id_pengepul = pj.id_pengepul AND j.id_jenis = pj.id_jenis ORDER BY pj.tanggal_jual ASC";
+        $url_cetak = "print-laporan-penjualan.php";
+        $label     = "Semua Data Penjualan";
         }else{ // Jika terisi
-        // Buat query untuk menampilkan data angsuran sesuai periode tanggal
-        $query     = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.nama_nasabah, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = a.id_nasabah AND j.id_jenis = a.id_jenis AND (tanggal_angsur BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
-        $url_cetak = "print-laporan-angsuran.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
+        // Buat query untuk menampilkan data penjualan sesuai periode tanggal
+        $query     = "SELECT pj.id_petugas, p.id_pengepul, p.nama_pengepul, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_pengepul p, tb_jenis_sampah j WHERE p.id_pengepul = pj.id_pengepul AND j.id_jenis = pj.id_jenis AND (tanggal_jual BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+        $url_cetak = "print-laporan-penjualan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
         $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
         $label     = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
         }
         ?>
         <hr />
-        <h4 style="margin-bottom: 5px;"><b>Data Angsuran</b></h4>
+        <h4 style="margin-bottom: 5px;"><b>Data Penjualan</b></h4>
         <?php echo $label ?><br />
         <div style="margin-top: 5px;">
           <a href="<?php echo $url_cetak ?>">CETAK LAPORAN</a>
@@ -97,13 +97,13 @@ document.location='login.php';
             <thead>
               <tr>
                 <th>No</th>
-                <th>Tanggal Angsur</th>
+                <th>Tanggal Jual</th>
                 <th>ID Petugas</th>
-                <th>ID Nasabah</th>
-                <th>Nama Nasabah</th>
+                <th>ID Pengepul</th>
+                <th>Nama Pengepul</th>
                 <th>Jenis Sampah</th>
                 <th>Berat Sampah</th>
-                <th>Total Angsur</th>
+                <th>Total Jual</th>
               </tr>
             </thead>
             <tbody>
@@ -113,16 +113,16 @@ document.location='login.php';
               $nomor = 1;
               if($row > 0){ // Jika jumlah data lebih dari 0 (Berarti jika data ada)
               while($data = mysqli_fetch_array($sql)){ // Ambil semua data dari hasil eksekusi $sql
-              $tgl = date('d-m-Y', strtotime($data['tanggal_angsur'])); // Ubah format tanggal jadi dd-mm-yyyy
+              $tgl = date('d-m-Y', strtotime($data['tanggal_jual'])); // Ubah format tanggal jadi dd-mm-yyyy
               echo "<tr>";
                 echo "<td>".$nomor++."</td>";
                 echo "<td>".$tgl."</td>";
                 echo "<td>".$data['id_petugas']."</td>";
-                echo "<td>".$data['id_nasabah']."</td>";
-                echo "<td>".$data['nama_nasabah']."</td>";
+                echo "<td>".$data['id_pengepul']."</td>";
+                echo "<td>".$data['nama_pengepul']."</td>";
                 echo "<td>".$data['nama_jenis']."</td>";
-                echo "<td>".$data['berat_angsur']."</td>";
-                echo "<td>Rp".$data['total_angsur']."</td>";
+                echo "<td>".$data['berat_jual']."</td>";
+                echo "<td>Rp".$data['total_jual']."</td>";
               echo "</tr>";
               }
               }else{ // Jika data tidak ada

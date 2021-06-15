@@ -79,6 +79,9 @@
             <li>
               <a href="laporan-angsuran.php">Laporan Angsuran</a>
             </li>
+            <li>
+              <a href="laporan-penjualan.php">Laporan Penjualan</a>
+            </li>
           </ul>
         </li>
       </ul>

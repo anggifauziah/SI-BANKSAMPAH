@@ -158,8 +158,8 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputJumPinjam">Jumlah Tarik</label>
-                <input type="number" class="form-control" name="jumtarik" id="InputJumPinjam" placeholder="Jumlah Pinjam" required>
+                <label for="InputJumTarik">Jumlah Tarik</label>
+                <input type="number" class="form-control" name="jumtarik" id="InputJumPinjam" placeholder="Jumlah Tarik" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTglPinjam">Tanggal Tarik</label>

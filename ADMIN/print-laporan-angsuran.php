@@ -27,12 +27,12 @@
 
 	if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
 		// Buat query untuk menampilkan semua data Angsuran
-		$query = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.norek_nasabah, n.nama_nasabah, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a INNER JOIN tb_nasabah n WHERE a.id_nasabah = n.id_nasabah";
+		$query = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.nama_nasabah, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = a.id_nasabah AND j.id_jenis = a.id_jenis ORDER BY a.id_angsur ASC";
 
 		$label = "Semua Data Angsuran";
 	}else{ // Jika terisi
 		// Buat query untuk menampilkan data Angsuran sesuai periode tanggal
-		$query = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.norek_nasabah, n.nama_nasabah, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a INNER JOIN tb_nasabah n WHERE a.id_nasabah = n.id_nasabah AND (tanggal_angsur BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+		$query = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.nama_nasabah, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = a.id_nasabah AND j.id_jenis = a.id_jenis AND (tanggal_angsur BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
 
 		$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
 		$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -47,11 +47,11 @@
 		<tr>
 			<th>No</th>
             <th>Tanggal Pinjam</th>
-            <th>ID Petugas</th>
             <th>ID Nasabah</th>
-            <th>Nomor Rekening</th>
             <th>Nama Nasabah</th>
-            <th>Jumlah Pinjam</th>
+            <th>Jenis Sampah</th>
+            <th>Berat Sampah</th>
+            <th>Total Angsur</th>
 		</tr>
 
 		<?php
@@ -66,10 +66,10 @@
 				echo "<tr>";
 				echo "<td style='width: 5%;'>".$nomor++."</td>";
                 echo "<td>".$tgl."</td>";
-                echo "<td>".$data['id_petugas']."</td>";
                 echo "<td>".$data['id_nasabah']."</td>";
-                echo "<td>".$data['norek_nasabah']."</td>";
                 echo "<td>".$data['nama_nasabah']."</td>";
+                echo "<td>".$data['nama_jenis']."</td>";
+                echo "<td>".$data['berat_angsur']."</td>";
                 echo "<td>Rp".$data['total_angsur']."</td>";
 				echo "</tr>";
 			}

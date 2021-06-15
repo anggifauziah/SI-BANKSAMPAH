@@ -61,6 +61,8 @@ if(empty($_SESSION)){
                   <th>ID Petugas</th>
                   <th>ID Nasabah</th>
                   <th>Nama Nasabah</th>
+                  <th>Jenis Sampah</th>
+                  <th>Berat Sampah</th>
                   <th>Total Tabung</th>
                   <th>Tanggal Tabung</th>
                   <th>Action</th>
@@ -70,9 +72,7 @@ if(empty($_SESSION)){
               <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi,"SELECT t.id_tabung, t.id_petugas, t.id_nasabah, n.nama_nasabah, t.total_tabung, t.tanggal_tabung 
-                  FROM tb_tabungan t INNER JOIN tb_nasabah n
-                  WHERE t.id_nasabah = n.id_nasabah");
+                $result = mysqli_query($koneksi,"SELECT t.id_tabung, t.id_petugas, t.id_nasabah, n.nama_nasabah, j.nama_jenis, t.berat_tabung, t.total_tabung, t.tanggal_tabung FROM tb_tabungan t, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = t.id_nasabah AND j.id_jenis = t.id_jenis ORDER BY t.id_tabung ASC");
                 $nomor = 1;
                 ?>
                 <?php
@@ -82,6 +82,8 @@ if(empty($_SESSION)){
                     echo "<td>".$data['id_petugas']."</td>";
                     echo "<td>".$data['id_nasabah']."</td>";
                     echo "<td>".$data['nama_nasabah']."</td>";
+                    echo "<td>".$data['nama_jenis']."</td>";
+                    echo "<td>".$data['berat_tabung']."</td>";
                     echo "<td>Rp".$data['total_tabung']."</td>";
                     echo "<td>".$data['tanggal_tabung']."</td>";
                     echo "<td>

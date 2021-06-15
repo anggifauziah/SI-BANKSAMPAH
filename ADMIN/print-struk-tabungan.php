@@ -1,14 +1,14 @@
 <?php
 include "koneksi_db.php";
 $id = $_GET['id'];
-$result = ("SELECT t.id_nasabah, n.norek_nasabah, n.nama_nasabah, t.total_tabung, t.tanggal_tabung
-            FROM tb_tabungan t INNER JOIN tb_nasabah n
-            WHERE t.id_nasabah=n.id_nasabah AND t.id_tabung LIKE '%$id%'");
+$result = ("SELECT t.id_tabung, t.id_petugas, t.id_nasabah, n.nama_nasabah, n.norek_nasabah, j.nama_jenis, t.berat_tabung, t.total_tabung, t.tanggal_tabung FROM tb_tabungan t, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = t.id_nasabah AND j.id_jenis = t.id_jenis AND t.id_tabung LIKE '%$id%'");
 $hasil = mysqli_query($koneksi,$result);
 while($data = mysqli_fetch_array($hasil)) {
 $idNasabah  = $data['id_nasabah'];
 $norek      = $data['norek_nasabah'];
 $nama       = $data['nama_nasabah'];
+$jenis      = $data['nama_jenis'];
+$berat      = $data['berat_tabung'];
 $jumlah     = $data['total_tabung'];
 $tgl        = $data['tanggal_tabung'];
 }
@@ -56,6 +56,16 @@ $tgl        = $data['tanggal_tabung'];
           <th align="left">Nama</th>
           <td>:</td>
           <td><?php echo $nama; ?></td>
+        </tr>
+        <tr>
+          <th align="left">Jenis Sampah</th>
+          <td>:</td>
+          <td><?php echo $jenis; ?></td>
+        </tr>
+        <tr>
+          <th align="left">Berat Sampah</th>
+          <td>:</td>
+          <td><?php echo $berat; ?>kg</td>
         </tr>
         <tr>
           <th align="left">Tanggal Tabung</th>

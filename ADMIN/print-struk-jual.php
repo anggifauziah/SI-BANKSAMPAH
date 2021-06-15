@@ -1,11 +1,13 @@
 <?php
 include "koneksi_db.php";
 $id = $_GET['id'];
-$result = ("SELECT j.id_pengepul, p.nama_pengepul, j.total_jual, j.tanggal_jual FROM tb_penjualan j INNER JOIN tb_pengepul p WHERE j.id_pengepul=p.id_pengepul AND j.id_jual LIKE '%$id%'");
+$result = ("SELECT pj.id_jual, pj.id_petugas, p.id_pengepul, p.nama_pengepul, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_pengepul p, tb_jenis_sampah j WHERE p.id_pengepul = pj.id_pengepul AND j.id_jenis = pj.id_jenis AND pj.id_jual LIKE '%$id%'");
 $hasil = mysqli_query($koneksi,$result);
 while($data = mysqli_fetch_array($hasil)) {
-$idPengepul  = $data['id_pengepul'];
+$idPengepul = $data['id_pengepul'];
 $nama       = $data['nama_pengepul'];
+$jenis      = $data['nama_jenis'];
+$berat      = $data['berat_jual'];
 $jumlah     = $data['total_jual'];
 $tgl        = $data['tanggal_jual'];
 }
@@ -46,6 +48,16 @@ function formatBulan($tgl){
           <th align="left">Nama</th>
           <td>:</td>
           <td><?php echo $nama; ?></td>
+        </tr>
+        <tr>
+          <th align="left">Jenis Sampah</th>
+          <td>:</td>
+          <td><?php echo $jenis; ?></td>
+        </tr>
+        <tr>
+          <th align="left">Berat Sampah</th>
+          <td>:</td>
+          <td><?php echo $berat; ?>kg</td>
         </tr>
         <tr>
           <th align="left">Tanggal Jual</th>
