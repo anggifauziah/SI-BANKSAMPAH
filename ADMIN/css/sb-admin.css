@@ -330,6 +330,9 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   display: flex;
 }
 
+.small {
+  font-size: 20px;
+}
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
   color: #868e96;
 }

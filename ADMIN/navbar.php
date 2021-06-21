@@ -32,7 +32,29 @@
             </li>
           </ul>
         </li>
-      
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Laporan">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseLaporan" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-copy"></i>
+            <span class="nav-link-text">Laporan</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseLaporan">
+            <li>
+              <a href="laporan-tabungan.php">Laporan Tabungan</a>
+            </li>
+            <li>
+              <a href="laporan-penarikan.php">Laporan Penarikan</a>
+            </li>
+            <li>
+              <a href="laporan-pinjaman.php">Laporan Pinjaman</a>
+            </li>
+            <li>
+              <a href="laporan-angsuran.php">Laporan Angsuran</a>
+            </li>
+            <li>
+              <a href="laporan-penjualan.php">Laporan Penjualan</a>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tabungan">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseTabungan" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
@@ -67,29 +89,7 @@
             <span class="nav-link-text">Penjualan</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Laporan">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseLaporan" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-copy"></i>
-            <span class="nav-link-text">Laporan</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseLaporan">
-            <li>
-              <a href="laporan-tabungan.php">Laporan Tabungan</a>
-            </li>
-            <li>
-              <a href="laporan-penarikan.php">Laporan Penarikan</a>
-            </li>
-            <li>
-              <a href="laporan-pinjaman.php">Laporan Pinjaman</a>
-            </li>
-            <li>
-              <a href="laporan-angsuran.php">Laporan Angsuran</a>
-            </li>
-            <li>
-              <a href="laporan-penjualan.php">Laporan Penjualan</a>
-            </li>
-          </ul>
-        </li>
+        
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
