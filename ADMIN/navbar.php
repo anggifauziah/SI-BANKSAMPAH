@@ -74,6 +74,12 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseLaporan">
             <li>
+              <a href="laporan-tabungan.php">Laporan Tabungan</a>
+            </li>
+            <li>
+              <a href="laporan-penarikan.php">Laporan Penarikan</a>
+            </li>
+            <li>
               <a href="laporan-pinjaman.php">Laporan Pinjaman</a>
             </li>
             <li>
