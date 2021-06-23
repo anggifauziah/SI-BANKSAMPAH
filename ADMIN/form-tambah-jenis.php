@@ -41,7 +41,7 @@ if(empty($_SESSION)){
         <li class="breadcrumb-item">
           <a href="menu-pengepul.php">Jenis Sampah</a>
         </li>
-        <li class="breadcrumb-item active">Form Tambah Jenis</li>
+        <li class="breadcrumb-item active">Form Tambah Jenis Sampah</li>
       </ol>
       <!-- Breadcrumbs -->
 

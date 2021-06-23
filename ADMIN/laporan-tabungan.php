@@ -80,7 +80,7 @@ document.location='login.php';
         }else{ // Jika terisi
         // Buat query untuk menampilkan data angsuran sesuai periode tanggal
         $query     = "SELECT t.id_tabung, t.id_petugas, t.id_nasabah, n.nama_nasabah, j.nama_jenis, t.berat_tabung, t.total_tabung, t.tanggal_tabung FROM tb_tabungan t, tb_nasabah n, tb_jenis_sampah j WHERE t.id_nasabah = n.id_nasabah AND j.id_jenis = t.id_jenis AND (tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
-        $url_cetak = "print-laporan-angsuran.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
+        $url_cetak = "print-laporan-tabungan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
         $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
         $label     = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;

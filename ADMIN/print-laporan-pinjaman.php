@@ -65,11 +65,11 @@
 
 				echo "<tr>";
 				echo "<td style='width: 5%;'>".$nomor++."</td>";
-                echo "<td>".$tgl."</td>";
-                echo "<td>".$data['id_petugas']."</td>";
-                echo "<td>".$data['id_nasabah']."</td>";
-                echo "<td>".$data['norek_nasabah']."</td>";
-                echo "<td>".$data['nama_nasabah']."</td>";
+                echo "<td style='width: 5%;'>".$tgl."</td>";
+                echo "<td style='width: 5%;'>".$data['id_petugas']."</td>";
+                echo "<td style='width: 18%;'>".$data['id_nasabah']."</td>";
+                echo "<td style='width: 18%;'>".$data['norek_nasabah']."</td>";
+                echo "<td style='width: 18%;'>".$data['nama_nasabah']."</td>";
                 echo "<td>Rp".$data['jumlah_pinjam']."</td>";
 				echo "</tr>";
 			}

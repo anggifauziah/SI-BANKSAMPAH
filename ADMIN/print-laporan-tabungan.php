@@ -66,10 +66,10 @@
 				echo "<tr>";
 				echo "<td style='width: 5%;'>".$nomor++."</td>";
                 echo "<td>".$tgl."</td>";
-                echo "<td>".$data['id_nasabah']."</td>";
+                echo "<td style='width: 18%;'>".$data['id_nasabah']."</td>";
                 echo "<td>".$data['nama_nasabah']."</td>";
                 echo "<td>".$data['nama_jenis']."</td>";
-                echo "<td>".$data['berat_tabung']."</td>";
+                echo "<td style='width: 5%;'>".$data['berat_tabung']."</td>";
                 echo "<td>Rp".$data['total_tabung']."</td>";
 				echo "</tr>";
 			}

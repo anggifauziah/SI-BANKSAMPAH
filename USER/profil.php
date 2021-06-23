@@ -63,7 +63,7 @@
 
         <section id="blog" class="blog">
           <div class="container">
-             <a href="form-reset-password.php" class="btn btn-primary"><i class="fa fa-plus"></i>Reset Password</a>
+             <a href="form-reset-password.php" class="btn btn-primary">Reset Password</a>
              <br>
              <br>
            

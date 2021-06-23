@@ -26,9 +26,10 @@
   <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 
+  <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
   <!-- =======================================================
   * Template Name: Anyar - v2.2.1
   * Template URL: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/
@@ -124,7 +125,7 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
-                              <th>No.</th>
+                              <th>No</th>
                               <th>Jumlah Pinjam</th>
                               <th>Tanggal Pinjam</th>
                               
@@ -174,7 +175,7 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                             <tr>
-                              <th>No.</th>
+                              <th>No</th>
                               <th>Jumlah Angsur</th>
                               <th>Tanggal Angsur</th>
                               
@@ -234,6 +235,10 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
 </body>
 

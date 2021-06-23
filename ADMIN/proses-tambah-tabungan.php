@@ -9,9 +9,9 @@ $idNasabah   	= $_POST['idNasabah'];
 $id_jenis		= $_POST['id_jenis'];
 $berat 			= $_POST['berat'];
 $total			= $_POST['total'];
-$tgltbg		= $_POST['tgltbg'];
+$tgltbg			= $_POST['tgltbg'];
 
-$tgltbg 		= date("Y-m-d");
+//$tgltbg 		= date("Y-m-d");
 
 //mengambil value kolom pinjaman_nasabah
 $data     = mysqli_query($koneksi, "SELECT * FROM tb_nasabah WHERE id_nasabah=$idNasabah");
