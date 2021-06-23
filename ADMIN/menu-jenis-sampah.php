@@ -61,7 +61,7 @@ if(empty($_SESSION)){
                   <th>ID Jenis</th>
                   <th>Nama Jenis</th>
                   <th>Harga Beli</th>
-                  <th>Harga Harga Jual</th>
+                  <th>Harga Jual</th>
                   <th>Action</th>
                 </tr>
               </thead>
