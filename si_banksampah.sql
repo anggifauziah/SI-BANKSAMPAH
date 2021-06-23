@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2021 at 05:49 AM
+-- Generation Time: Jun 23, 2021 at 11:56 PM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.1.29
 
@@ -47,7 +47,8 @@ INSERT INTO `tb_angsuran` (`id_angsur`, `id_petugas`, `id_nasabah`, `id_jenis`, 
 ('AS002', 'PT002', '3522101632901562', 'JS002', 3, 9600, '2020-10-21'),
 ('AS003', 'PT002', '3522177188291376', 'JS010', 2, 5200, '2021-03-21'),
 ('AS004', 'PT002', '3522191274120003', 'JS001', 3, 8100, '2021-05-21'),
-('AS005', 'PT002', '3522151074162847', 'JS001', 3, 8100, '2021-05-25');
+('AS005', 'PT002', '3522151074162847', 'JS001', 3, 8100, '2021-05-25'),
+('AS006', 'PT002', '3522151903153628', 'JS006', 2, 20000, '2021-06-23');
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,7 @@ CREATE TABLE `tb_login` (
 
 INSERT INTO `tb_login` (`id_login`, `username`, `password`, `level_user`) VALUES
 (1, 'admin', '123', 1),
-(8, '171827609552001', '171827609552001', 2),
+(8, '171827609552001', 'hai', 2),
 (9, '17899164219521', '17899164219521', 2),
 (10, '172126435888953', '172126435888953', 2),
 (11, '171466456954953', '171466456954953', 2),
@@ -114,7 +115,8 @@ INSERT INTO `tb_login` (`id_login`, `username`, `password`, `level_user`) VALUES
 (21, '171084383587953', '171084383587953', 2),
 (22, '172003694249953', '172003694249953', 2),
 (23, '171901326913953', '171901326913953', 2),
-(24, '17536494601953', '17536494601953', 2);
+(24, '17536494601953', '17536494601953', 2),
+(25, '171681702733953', '171681702733953', 2);
 
 -- --------------------------------------------------------
 
@@ -152,8 +154,9 @@ INSERT INTO `tb_nasabah` (`id_nasabah`, `nama_nasabah`, `jk_nasabah`, `alamat_na
 ('3522126910627815', 'Edi Kusuma', 'Laki-laki', 'Jl. Mawar', '089156241893', 'Swasta', '2019-03-22', '17899164219521', 54800, 0),
 ('3522128947120801', 'Yuli', 'Perempuan', 'Jl. Kenanga', '089726342746', 'Belum Bekerja', '2021-03-27', '171623096691953', 13000, 0),
 ('3522151074162847', 'Jono', 'Laki-laki', 'Jl. Melati', '085145672651', 'Swasta', '2019-04-10', '172126435888953', 30800, 141900),
-('3522151903153628', 'Samsul Aji', 'Laki-laki', 'Jl. Melati', '087137256179', 'Swasta', '2019-05-01', '171827609552001', 61200, 0),
+('3522151903153628', 'Samsul Aji', 'Laki-laki', 'Jl. Melati', '087137256179', 'Swasta', '2019-05-01', '171827609552001', 47700, 30000),
 ('3522177188291376', 'Sulaiman', 'Laki-laki', 'Jl. Kenanga', '089198126379', 'Swasta', '2020-03-17', '171305670735953', 55500, 94800),
+('3522181115620001', 'Laila', 'Perempuan', 'Jl. Nangka', '087145261892', 'Belum Bekerja', '2021-06-23', '171681702733953', 0, 0),
 ('3522191274120003', 'Endang', 'Perempuan', 'Jl. Salak', '081627190021', 'Swasta', '2020-11-27', '171393629159953', 44700, 41900),
 ('3522191274321893', 'Saipudin', 'Laki-laki', 'Jl. Markisa', '081783643294', 'Swasta', '2021-03-18', '172020394793953', 13700, 0),
 ('3522198123218900', 'Jatmiko', 'Laki-laki', 'Jl. Markisa', '085167255261', 'Swasta', '2021-04-29', '17735703252953', 17400, 0);
@@ -206,7 +209,8 @@ CREATE TABLE `tb_penjualan` (
 INSERT INTO `tb_penjualan` (`id_jual`, `id_petugas`, `id_pengepul`, `id_jenis`, `berat_jual`, `total_jual`, `tanggal_jual`) VALUES
 ('JL001', 'PT004', 'PP002', 'JS003', 10, 25000, '2021-03-23'),
 ('JL002', 'PT002', 'PP005', 'JS007', 5, 5000, '2021-04-23'),
-('JL003', 'PT002', 'PP003', 'JS001', 5, 12000, '2021-05-23');
+('JL003', 'PT002', 'PP003', 'JS001', 5, 12000, '2021-05-23'),
+('JL004', 'PT002', 'PP001', 'JS004', 5, 7500, '2021-06-23');
 
 -- --------------------------------------------------------
 
@@ -257,7 +261,8 @@ INSERT INTO `tb_pinjaman` (`id_pinjam`, `id_petugas`, `id_nasabah`, `jumlah_pinj
 ('PJ003', 'PT002', '3522151074162847', 150000, '2020-07-21'),
 ('PJ004', 'PT002', '3522177188291376', 100000, '2021-01-18'),
 ('PJ005', 'PT002', '3522121973243002', 100000, '2021-02-18'),
-('PJ006', 'PT004', '3522191274120003', 50000, '2021-04-18');
+('PJ006', 'PT004', '3522191274120003', 50000, '2021-04-18'),
+('PJ007', 'PT004', '3522151903153628', 50000, '2021-06-23');
 
 -- --------------------------------------------------------
 
@@ -372,7 +377,8 @@ INSERT INTO `tb_tabungan` (`id_tabung`, `id_petugas`, `id_nasabah`, `id_jenis`, 
 ('TBG090', 'PT002', '3522116671652890', 'JS002', 3, 9600, '2021-06-15'),
 ('TBG091', 'PT004', '3522101381209384', 'JS009', 3, 2400, '2021-06-19'),
 ('TBG092', 'PT002', '3522110832103823', 'JS006', 1, 10000, '2021-06-21'),
-('TBG093', 'PT002', '3522121983712863', 'JS011', 3, 7500, '2021-06-21');
+('TBG093', 'PT002', '3522121983712863', 'JS011', 3, 7500, '2021-06-21'),
+('TBG094', 'PT002', '3522151903153628', 'JS007', 5, 6500, '2021-06-23');
 
 -- --------------------------------------------------------
 
@@ -389,6 +395,13 @@ CREATE TABLE `tb_tarik_tabungan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `tb_tarik_tabungan`
+--
+
+INSERT INTO `tb_tarik_tabungan` (`id_tarik`, `id_petugas`, `id_nasabah`, `jumlah_tarik`, `tanggal_tarik`) VALUES
+('TR001', 'PT002', '3522151903153628', 20000, '2021-06-23');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -397,7 +410,10 @@ CREATE TABLE `tb_tarik_tabungan` (
 --
 ALTER TABLE `tb_angsuran`
   ADD PRIMARY KEY (`id_angsur`),
-  ADD UNIQUE KEY `id_angsur` (`id_angsur`);
+  ADD UNIQUE KEY `id_angsur` (`id_angsur`),
+  ADD KEY `id_petugas` (`id_petugas`,`id_nasabah`,`id_jenis`),
+  ADD KEY `id_nasabah` (`id_nasabah`),
+  ADD KEY `id_jenis` (`id_jenis`);
 
 --
 -- Indexes for table `tb_jenis_sampah`
@@ -432,7 +448,10 @@ ALTER TABLE `tb_pengepul`
 --
 ALTER TABLE `tb_penjualan`
   ADD PRIMARY KEY (`id_jual`),
-  ADD UNIQUE KEY `id_jual` (`id_jual`);
+  ADD UNIQUE KEY `id_jual` (`id_jual`),
+  ADD KEY `id_petugas` (`id_petugas`,`id_pengepul`,`id_jenis`),
+  ADD KEY `id_jenis` (`id_jenis`),
+  ADD KEY `id_pengepul` (`id_pengepul`);
 
 --
 -- Indexes for table `tb_petugas`
@@ -446,21 +465,28 @@ ALTER TABLE `tb_petugas`
 --
 ALTER TABLE `tb_pinjaman`
   ADD PRIMARY KEY (`id_pinjam`),
-  ADD UNIQUE KEY `id_pinjam` (`id_pinjam`);
+  ADD UNIQUE KEY `id_pinjam` (`id_pinjam`),
+  ADD KEY `id_petugas` (`id_petugas`,`id_nasabah`),
+  ADD KEY `id_nasabah` (`id_nasabah`);
 
 --
 -- Indexes for table `tb_tabungan`
 --
 ALTER TABLE `tb_tabungan`
   ADD PRIMARY KEY (`id_tabung`),
-  ADD UNIQUE KEY `id_tabung` (`id_tabung`);
+  ADD UNIQUE KEY `id_tabung` (`id_tabung`),
+  ADD KEY `id_petugas` (`id_petugas`,`id_nasabah`,`id_jenis`),
+  ADD KEY `id_jenis` (`id_jenis`),
+  ADD KEY `id_nasabah` (`id_nasabah`);
 
 --
 -- Indexes for table `tb_tarik_tabungan`
 --
 ALTER TABLE `tb_tarik_tabungan`
   ADD PRIMARY KEY (`id_tarik`),
-  ADD UNIQUE KEY `id_tarik` (`id_tarik`);
+  ADD UNIQUE KEY `id_tarik` (`id_tarik`),
+  ADD KEY `id_petugas` (`id_petugas`,`id_nasabah`),
+  ADD KEY `id_nasabah` (`id_nasabah`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -470,7 +496,49 @@ ALTER TABLE `tb_tarik_tabungan`
 -- AUTO_INCREMENT for table `tb_login`
 --
 ALTER TABLE `tb_login`
-  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tb_angsuran`
+--
+ALTER TABLE `tb_angsuran`
+  ADD CONSTRAINT `tb_angsuran_ibfk_1` FOREIGN KEY (`id_nasabah`) REFERENCES `tb_nasabah` (`id_nasabah`),
+  ADD CONSTRAINT `tb_angsuran_ibfk_2` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id_petugas`),
+  ADD CONSTRAINT `tb_angsuran_ibfk_3` FOREIGN KEY (`id_jenis`) REFERENCES `tb_jenis_sampah` (`id_jenis`);
+
+--
+-- Constraints for table `tb_penjualan`
+--
+ALTER TABLE `tb_penjualan`
+  ADD CONSTRAINT `tb_penjualan_ibfk_1` FOREIGN KEY (`id_jenis`) REFERENCES `tb_jenis_sampah` (`id_jenis`),
+  ADD CONSTRAINT `tb_penjualan_ibfk_2` FOREIGN KEY (`id_pengepul`) REFERENCES `tb_pengepul` (`id_pengepul`),
+  ADD CONSTRAINT `tb_penjualan_ibfk_3` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id_petugas`);
+
+--
+-- Constraints for table `tb_pinjaman`
+--
+ALTER TABLE `tb_pinjaman`
+  ADD CONSTRAINT `tb_pinjaman_ibfk_1` FOREIGN KEY (`id_nasabah`) REFERENCES `tb_nasabah` (`id_nasabah`),
+  ADD CONSTRAINT `tb_pinjaman_ibfk_2` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id_petugas`);
+
+--
+-- Constraints for table `tb_tabungan`
+--
+ALTER TABLE `tb_tabungan`
+  ADD CONSTRAINT `tb_tabungan_ibfk_1` FOREIGN KEY (`id_jenis`) REFERENCES `tb_jenis_sampah` (`id_jenis`),
+  ADD CONSTRAINT `tb_tabungan_ibfk_2` FOREIGN KEY (`id_nasabah`) REFERENCES `tb_nasabah` (`id_nasabah`),
+  ADD CONSTRAINT `tb_tabungan_ibfk_3` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id_petugas`);
+
+--
+-- Constraints for table `tb_tarik_tabungan`
+--
+ALTER TABLE `tb_tarik_tabungan`
+  ADD CONSTRAINT `tb_tarik_tabungan_ibfk_1` FOREIGN KEY (`id_nasabah`) REFERENCES `tb_nasabah` (`id_nasabah`),
+  ADD CONSTRAINT `tb_tarik_tabungan_ibfk_2` FOREIGN KEY (`id_petugas`) REFERENCES `tb_petugas` (`id_petugas`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
