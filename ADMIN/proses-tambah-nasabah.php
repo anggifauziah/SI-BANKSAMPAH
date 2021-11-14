@@ -1,32 +1,31 @@
 <?php
 include('koneksi_db.php');
 
-$idNasabah 		= $_POST['idNasabah'];
-$nama			= $_POST['namaNasabah'];
+$nama			= $_POST['nama'];
 $jenisKelamin   = $_POST['jenisKelamin'];
 $alamat			= $_POST['alamat'];
 $telp 			= $_POST['telp'];
-$pekerjaan		= $_POST['pekerjaan'];
-$tgldaftar		= $_POST['tgldaftar'];
-$norek			= $_POST['norek'];
-
-$saldo			= $_POST['saldo'];
-$pinjam			= $_POST['pinjam'];
-
-$id 			= $_POST['id'];
 $username		= $_POST['username'];
 $password		= $_POST['password'];
-$level			= $_POST['level'];
+$level			= 2;
 
+$kode_nasabah 	= $_POST['kode_nasabah'];
+$pekerjaan		= $_POST['pekerjaan'];
+$tgldaftar		= $_POST['tgldaftar'];
 $tgldaftar	 	= date("Y-m-d");
+$norek			= $_POST['norek'];
+$saldo			= 0;
+$pinjam			= 0;
 
 // query SQL untuk insert data
-$nasabah = "INSERT INTO tb_nasabah VALUES ('".$idNasabah."', '".$nama."', '".$jenisKelamin."', '".$alamat."', '".$telp."', '".$pekerjaan."', '".$tgldaftar."', '".$norek."', '".$saldo."', '".$pinjam."')";
+$users	= "INSERT INTO tb_users (nama, jenis_kelamin, alamat, telp, username, password, level_user) VALUES ('$nama', '$jenisKelamin', '$alamat', '$telp', '$username', '$password', '$level')";
+$result = mysqli_query($koneksi, $users);
 
-$login	 = "INSERT INTO tb_login VALUES ('".$id."','".$username."', '".$password."', '".$level."')";
-
-$result = mysqli_query($koneksi, $nasabah);
-$result = mysqli_query($koneksi, $login);
+if($users) {
+	$users_id = mysqli_insert_id($koneksi); // mengambil id terakhir yang diinput ke tb_users
+	$nasabah = "INSERT INTO tb_nasabah (kode_nasabah, users_id, pekerjaan, tgl_daftar, nomor_rekening, saldo, pinjaman) VALUES ('$kode_nasabah', '$users_id','$pekerjaan', '$tgldaftar', '$norek', '$saldo', '$pinjam')";
+	$result = mysqli_query($koneksi, $nasabah);
+}
 
 if ($result) {
 	//jika sukses, lakukan :

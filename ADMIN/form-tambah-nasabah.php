@@ -48,7 +48,7 @@ if(empty($_SESSION)){
       <?php
       include('koneksi_db.php');
       //mengambil data surat dengan id paling besar
-      $query  = mysqli_query($koneksi, "SELECT MAX(norek_nasabah) AS idTerbesar FROM tb_nasabah");
+      $query  = mysqli_query($koneksi, "SELECT MAX(nomor_rekening) AS idTerbesar FROM tb_nasabah");
       $data   = mysqli_fetch_array($query);
       $kode   = $data['idTerbesar'];
 
@@ -77,12 +77,12 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Nasabah</label>
-                <input type="number" class="form-control" name="idNasabah" id="InputId" placeholder="NIK KTP" required>
+                <label for="InputKode">Kode Nasabah (NIK)</label>
+                <input type="number" class="form-control" name="kode_nasabah" id="InputKode" placeholder="NIK KTP" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="namaNasabah" id="InputNama" placeholder="Nama Lengkap" required>
+                <input type="text" class="form-control" name="nama" id="InputNama" placeholder="Nama Lengkap" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJenisKelamin">Jenis Kelamin</label>
@@ -117,17 +117,8 @@ if(empty($_SESSION)){
                 <input type="text" class="form-control" name="tgldaftar" id="tgldaftar" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputId">Nomor Rekening</label>
-                <input type="text" class="form-control" name="norek" id="InputId" value="<?php echo($norek) ?>" readonly required>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <input type="hidden" class="form-control" name="saldo" id="InputSaldo" value=0 readonly required>
-              </div>
-              <div class="form-group col-md-6">
-                <input type="hidden" class="form-control" name="pinjam" id="InputPinjam" value=0 readonly required>
+                <label for="InputNorek">Nomor Rekening</label>
+                <input type="text" class="form-control" name="norek" id="InputNorek" value="<?php echo($norek) ?>" readonly required>
               </div>
             </div>
 
@@ -139,9 +130,6 @@ if(empty($_SESSION)){
               <div class="form-group col-md-6">
                 <label for="InputPassword">Password</label>
                 <input type="text" class="form-control" name="password" id="InputPassword" value="<?php echo($norek) ?>" readonly required>
-              </div>
-              <div class="form-group col-md-6">
-                <input type="hidden" class="form-control" name="level" id="InputLevel" value=2 readonly required>
               </div>
             </div>
           </div>

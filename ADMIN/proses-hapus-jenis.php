@@ -1,9 +1,9 @@
 <?php
 include ('koneksi_db.php');
 // menyimpan data id kedalam variabel
-$id     = $_GET['id'];
+$id_jenis_sampah  = $_GET['id'];
 
-$query  = "DELETE FROM tb_jenis_sampah WHERE id_jenis LIKE '%$id%'";
+$query  = "DELETE FROM tb_jenis_sampah WHERE id_jenis_sampah=$id_jenis_sampah";
 $result = mysqli_query($koneksi, $query);
 
 if ($result) {

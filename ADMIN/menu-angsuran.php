@@ -38,7 +38,7 @@ if(empty($_SESSION)){
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Angsuran</li>
       </ol>
@@ -58,13 +58,13 @@ if(empty($_SESSION)){
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>ID Petugas</th>
-                  <th>ID Nasabah</th>
+                  <th>Tanggal Angsur</th>
+                  <th>Kode Petugas</th>
+                  <th>Kode Nasabah (NIK)</th>
                   <th>Nama Nasabah</th>
                   <th>Jenis Sampah</th>
                   <th>Berat Sampah</th>
                   <th>Total Angsur</th>
-                  <th>Tanggal Angsur</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -72,20 +72,20 @@ if(empty($_SESSION)){
                 <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi,"SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.nama_nasabah, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = a.id_nasabah AND j.id_jenis = a.id_jenis ORDER BY a.id_angsur ASC");
+                $result = mysqli_query($koneksi,"SELECT a.id_angsur, a.tanggal_angsur, p.kode_petugas, n.kode_nasabah, u.nama, j.nama_jenis, a.berat_angsur, a.total_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j, tb_users u, tb_petugas p WHERE a.petugas_id = p.id_petugas AND a.nasabah_id = n.id_nasabah AND n.users_id = u.id AND a.jenis_sampah_id = j.id_jenis_sampah ORDER BY a.id_angsur ASC");
                 $nomor = 1;
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
-                    echo "<td>".$data['id_petugas']."</td>";
-                    echo "<td>".$data['id_nasabah']."</td>";
-                    echo "<td>".$data['nama_nasabah']."</td>";
+                    echo "<td>".$data['tanggal_angsur']."</td>";
+                    echo "<td>".$data['kode_petugas']."</td>";
+                    echo "<td>".$data['kode_nasabah']."</td>";
+                    echo "<td>".$data['nama']."</td>";
                     echo "<td>".$data['nama_jenis']."</td>";
                     echo "<td>".$data['berat_angsur']."</td>";
                     echo "<td>Rp".$data['total_angsur']."</td>";
-                    echo "<td>".$data['tanggal_angsur']."</td>";
                     echo "<td>
                           <a href='print-struk-angsuran.php?id=".$data['id_angsur']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>
                           </td>";

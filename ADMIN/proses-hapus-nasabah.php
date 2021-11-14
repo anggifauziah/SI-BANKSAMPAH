@@ -3,7 +3,7 @@ include ('koneksi_db.php');
 // menyimpan data id kedalam variabel
 $id     = $_GET['id'];
 
-$query  = "DELETE n,l FROM tb_nasabah n INNER JOIN tb_login l ON n.norek_nasabah = l.username WHERE id_nasabah LIKE '%$id%'";
+$query  = "DELETE n, u FROM tb_nasabah n INNER JOIN tb_users u ON n.users_id = u.id WHERE u.id = $id";
 $result = mysqli_query($koneksi, $query);
 
 if ($result) {

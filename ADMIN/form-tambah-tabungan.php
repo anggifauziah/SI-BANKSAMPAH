@@ -48,7 +48,7 @@ if(empty($_SESSION)){
       <?php
       include('koneksi_db.php');
       //mengambil data surat dengan id paling besar
-      $query    = mysqli_query($koneksi, "SELECT MAX(id_tabung) as idTerbesar FROM tb_tabungan");
+      $query    = mysqli_query($koneksi, "SELECT MAX(kode_tabung) as idTerbesar FROM tb_tabungan");
       $data     = mysqli_fetch_array($query);
       $idTbg = $data['idTerbesar'];
 
@@ -77,19 +77,19 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Tabung</label>
-                <input type="text" class="form-control" name="idTabung" id="InputIdTabung" value="<?php echo($kode) ?>" readonly required>
+                <label for="InputKodeTabung">Kode Tabung</label>
+                <input type="text" class="form-control" name="kode_tabung" id="InputKodeTabung" value="<?php echo($kode) ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputNama">ID Petugas</label>
-                <input type="text" class="form-control" name="idPetugas" id="InputIdPetugas" placeholder="ID Petugas" required>
+                <label for="InputKodePetugas">Kode Petugas</label>
+                <input type="text" class="form-control" name="kode_petugas" id="InputKodePetugas" placeholder="Kode Petugas" required>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Load file proses-searchnasabah-angsuran.js -->
-        <script type="text/javascript" src="proses-searchnasabah-angsuran.js"></script>
+        <!-- Load file proses-search-nasabah.js -->
+        <script type="text/javascript" src="proses-search-nasabah.js"></script>
         <!-- Load library jquery -->
         <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
 
@@ -98,8 +98,8 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputIdNasabah">ID Nasabah</label>
-                <input type="number" class="form-control" name="idNasabah" id="idNasabah" placeholder="NIK KTP" required>
+                <label for="InputKodeNasabah">Kode Nasabah (NIK)</label>
+                <input type="number" class="form-control" name="kode_nasabah" id="kode_nasabah" placeholder="NIK KTP" required>
               </div>
               <div class="form-group col-md-4">
                 <label for="btn-search">Search Data Nasabah</label><br>
@@ -115,7 +115,7 @@ if(empty($_SESSION)){
                         search(); // Panggil function search
                     });
     
-                    $("#idNasabah").keyup(function(event){ // Ketika user menekan tombol di keyboard
+                    $("#kode_nasabah").keyup(function(event){ // Ketika user menekan tombol di keyboard
                         if(event.keyCode == 13){ // Jika user menekan tombol ENTER
                             search(); // Panggil function search
                         }
@@ -130,11 +130,11 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="namaNasabah" id="namaNasabah" placeholder="Nama Lengkap" readonly>
+                <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJk">Jenis Kelamin</label>
-                <input type="text" class="form-control" name="jk" id="jk" placeholder="Jenis Kelamin" readonly>
+                <input type="text" class="form-control" name="jenis_kelamin" id="jenis_kelamin" placeholder="Jenis Kelamin" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputAlamat">Alamat</label>
@@ -164,18 +164,18 @@ if(empty($_SESSION)){
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="InputJenis">Jenis Sampah</label>
-                <select name="id_jenis" id="id_jenis" class="form-control" required>
+                <select name="id_jenis_sampah" id="id_jenis_sampah" class="form-control" required>
                   <option value="" selected disabled>::. Pilih Jenis Sampah .::</option>
                 <?php
                 foreach ($sql as $key) { //menampilkan array dari $sql dialiaskan ke $key
-                echo '<option value="'.$key['id_jenis'].'">'.$key['nama_jenis'].'</option>'; // $key['kolom dari database']
+                echo '<option value="'.$key['id_jenis_sampah'].'">'.$key['nama_jenis'].'</option>'; // $key['kolom dari database']
                 }
                 ?>
               </select>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputHarga">Harga Beli</label>
-                <input type="text" class="form-control" name="harga" id="harga" placeholder="Harga" readonly>
+                <input type="text" class="form-control" name="harga_beli" id="harga_beli" placeholder="Harga" readonly>
               </div>
             </div>
 
@@ -189,8 +189,8 @@ if(empty($_SESSION)){
                 <input type="text" class="form-control" name="total" id="total" placeholder="Total" readonly required>
               </div>
               <div class="form-group col-md-4">
-                <label for="InputTglAngsur">Tanggal Tabung</label>
-                <input type="text" class="form-control" name="tgltbg" id="InputTglAngsur" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
+                <label for="InputTglTabung">Tanggal Tabung</label>
+                <input type="text" class="form-control" name="tanggal_tabung" id="InputTglTabung" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
               </div>
             </div>
           </div>
@@ -211,20 +211,20 @@ if(empty($_SESSION)){
         
       $(document).ready(function() { // ketika halaman sudah selesai terload, maka fungsi dijalankan
       $('#berat').on('change input', function () { //ketika id berat berubah valuenya maka
-      getHarga(); //memanggil fungsi getHarga
+      getHargaBeli(); //memanggil fungsi getHargaBeli
       });
       });
 
       var harga = 0; // deklarasi variabel harga
-      $('#id_jenis').change(function(){ // ketika mengklik id id_jenis / merubah valuenya maka fungsi dijalankan
-      getHarga(); //memanggil fungsi getHarga
+      $('#id_jenis_sampah').change(function(){ // ketika mengklik id id_jenis / merubah valuenya maka fungsi dijalankan
+      getHargaBeli(); //memanggil fungsi getHarga
       console.log(harga); //menampilkan hasil dari variabel data (menampilkan harga)
       });
 
-      function getHarga(){ // membuat fungsi getHarga
-      var id = $('#id_jenis').val(); // mendapatkan value dari id_jenis dan dimasukkan ke variabel id
-      $.post("getHargaJenis.php", {id:id}).done(function(data){ // mengirimkan data ke url getHargaJenis
-      $('#harga').val(data); // mengisi id harga dengan variabel data
+      function getHargaBeli(){ // membuat fungsi getHargaBeli
+      var id = $('#id_jenis_sampah').val(); // mendapatkan value dari id_jenis dan dimasukkan ke variabel id
+      $.post("getHargaBeli-jenis.php", {id:id}).done(function(data){ // mengirimkan data ke url getHargaJenis
+      $('#harga_beli').val(data); // mengisi id harga dengan variabel data
       if (($("#berat").val() != "")) { // pengecekan ketika id berat tidak kosong
       var berat = document.getElementById("berat").value; //maka ambil value dalam id berat
       var total = berat*data; // membuat variabel total, mengalikan variabel berat dan data
@@ -233,8 +233,8 @@ if(empty($_SESSION)){
       });
       }
 
-      function setHarga(){ //membuat fungsi setHarga
-      harga = $('#harga').val(); //set variabel harga dari id harga
+      function setHargaBeli(){ //membuat fungsi setHargaBeli
+      harga = $('#harga_beli').val(); //set variabel harga dari id harga
       }
     </script>
     <!-- Harga Jenis Sampah -->

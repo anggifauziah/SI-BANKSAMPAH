@@ -55,7 +55,7 @@
               <div class="card-header">Informasi Tabungan Nasabah</div>
               <div class="card-body text-dark">
                 
-                <!-- DataTables Petugas-->
+                <!-- DataTables Nasabah-->
                 <div class="card-body">
                   <div class="table table-responsive-xl">
                     <table class="table" id="dataTable" max-width="100%" cellspacing="0" style="width: 100%">
@@ -95,7 +95,7 @@
                   </div>
                 </div>
               </div>
-              <!-- DataTables Petugas-->
+              <!-- DataTables Nasabah-->
               
             </div>
           </div>
@@ -108,7 +108,7 @@
             <div class="card-header">Rincian Setor Tabungan Nasabah</div>
             <div class="card-body text-dark">
               
-              <!-- DataTables Petugas-->
+              <!-- DataTables Tabungan-->
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -145,7 +145,7 @@
                 </div>
               </div>
             </div>
-            <!-- DataTables Petugas-->
+            <!-- DataTables Tabungan-->
             
             
           </div>
@@ -156,7 +156,7 @@
             <div class="card-header">Rincian Tarik Tabungan Nasabah</div>
             <div class="card-body text-dark">
               
-              <!-- DataTables Petugas-->
+              <!-- DataTables Tabungan-->
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -193,7 +193,7 @@
                 </div>
               </div>
             </div>
-            <!-- DataTables Petugas-->
+            <!-- DataTables Tabungan-->
             
             
           </div>

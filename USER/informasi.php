@@ -64,101 +64,22 @@
 
         <table border="0" cellpadding="10">
           <tbody>
-            <tr>
-              <th><h2>Bank Sampah</h2></th>
-            </tr>
-            <tr>
-              <td>
-                <p align="justify">
-                  Bank Sampah ini didirikan untuk membantu masyarakat dalam pengelolaan sampah agar tidak dibuang sembarangan. Selain itu, manfaat adanya Bank Sampah ini juga membantu menambah penghasilan bagi nasabah yang menabung di Bank Sampah.
-                  Sistem Bank Sampah yang dibuat ini dapat mempermudah pengelola dan nasabah Bank Sampah dalam hal catatan tabungan maupun pinjaman.
-                </p>
-              </td>
-            </tr>
-
-            <tr>
-              <th><h2>Alur Bank Sampah</h2></th>
-            </tr>
-            <tr>
-              <td>
-                <p align="justify">
-                  Berikut penjelasan alur untuk sistem Bank Sampah.
-                </p>
-                <ol>
-                  <li>
-                    Jika ingin menabung di Bank Sampah maka harus mendaftar terlebih dahulu di outlet Bank sampah;
-                  </li>
-                  <li>
-                    Setelah mendaftar maka akan mendapatkan username dan password untuk masuk ke website Sistem Informasi Bank Sampah;
-                  </li>
-                  <li>
-                    Jika ingin menabung maka harus datang ke outlet untuk menyetorkan sampah sesuai jenis yang diperbolehkan Bank Sampah;
-                  </li>
-                  <li>
-                    Untuk penarikan uang tabungan dapat dilakukan jika uang yang diperoleh berjumlah lebih dari Rp50.000,00 (Lima Puluh Ribu Rupiah);
-                  </li>
-                  <li>
-                    Jika ingin meminjam uang, maka harus datang ke outlet;
-                  </li>
-                  <li>
-                    Untuk angsuran, dapat dilakukan seperti menabung sampah. Maka uang yang didapatkan akan otomatis mengurangi jumlah peminjaman, tidak akan masuk ke saldo nasabah;
-                  </li>
-                </ol>
-              </td>
-            </tr>
-
-            <tr>
-              <th><h2>Ketentuan dan Syarat Menabung dan Tarik</h2></th>
-            </tr>
-            <tr>
-              <td>
-                <p align="justify">
-                  Bank Sampah ini berguna bagi masyarakat jika ingin menabung dengan sampah. Berikut ketentuan untuk menabung sampah di Bank Sampah :
-                </p>
-                <ol>
-                  <li>
-                    Pastikan sudah terdaftar menjadi nasabah di Bank Sampah;
-                  </li>
-                  <li>
-                    Membawa tanda pengenal (KTP) setiap akan menabung di Bank Sampah;
-                  </li>
-                  <li>
-                    Membawa sampah yang ingin disetorkan ke Bank Sampah sesuai dengan jenis sampah yang diperbolehkan;
-                  </li>
-                  <li>
-                    Uang yang diperoleh dari setor sampah akan ditabung di Bank Sampah;
-                  </li>
-                  <li>
-                    Uang yang diperoleh dapat diambil jika jumlah uang lebih dari Rp50.000,00 (Lima Puluh Ribu Rupiah);
-                  </li>
-                </ol>
-              </td>
-            </tr>
-
-            <tr>
-              <th><h2>Ketentuan dan Syarat Pinjam dan Angsur</h2></th>
-            </tr>
-            <tr>
-              <td>
-                <p align="justify">
-                  Bank Sampah juga melayani pinjaman bagi masyarakat. Angsuran dibayar dengan sampah seperti saat menabung. Berikut ketentuan untuk pinjam dan angsur di Bank Sampah :
-                </p>
-                <ol>
-                  <li>
-                    Pastikan sudah terdaftar menjadi nasabah di Bank Sampah;
-                  </li>
-                  <li>
-                    Membawa tanda pengenal (KTP) setiap akan meminjam di Bank Sampah;
-                  </li>
-                  <li>
-                    Jika ingin mengangsur pinjaman, maka silahkan membawa sampah yang akan disetorkan seperti saat menabung;
-                  </li>
-                  <li>
-                    Angsuran hanya dapat dilakukan dengan sampah bukan uang tunai;
-                  </li>
-                </ol>
-              </td>
-            </tr>
+            <!-- Menampilkan data dari database ke Tabel -->
+            <?php
+            include('koneksi_db.php');
+            $result = mysqli_query($koneksi,"SELECT * FROM tb_config WHERE id_config != 10 AND id_config != 11 AND id_config != 12");
+            ?>
+            <?php
+              while($data = mysqli_fetch_array($result)) {
+                echo "<tr>";
+                echo "<td><h2>".$data['judul']."</h2></td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td>".$data['isi']."</td>";
+                echo "</tr>";
+              }
+              ?>
+            <!-- Sampai sini -->
           </tbody>
         </table>
 

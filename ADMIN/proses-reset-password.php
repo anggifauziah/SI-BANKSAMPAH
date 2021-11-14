@@ -3,11 +3,11 @@ include ('koneksi_db.php');
 // menyimpan data id kedalam variabel
 $id       = $_GET['id'];
 
-$data     = mysqli_query($koneksi, "SELECT * FROM tb_login WHERE id_login=$id");
+$data     = mysqli_query($koneksi, "SELECT * FROM tb_users WHERE id = $id");
 $row      = mysqli_fetch_array($data);
 $username = $row['username'];
 
-$query   = "UPDATE tb_login SET password=$username WHERE id_login=$id";
+$query   = "UPDATE tb_users SET password=$username WHERE id=$id";
 $result  = mysqli_query($koneksi, $query);
 
 if ($result) {

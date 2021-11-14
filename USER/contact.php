@@ -44,6 +44,13 @@
           <h2>Contact</h2>
         </div>
         </section><!-- End Breadcrumbs -->
+
+        <?php
+        include('koneksi_db.php');
+        $query   = mysqli_query($koneksi,"SELECT * FROM tb_config");
+        $contact = mysqli_fetch_array($query);
+        ?>
+
         <!-- ======= Contact Section ======= -->
         <section id="contact" class="contact">
           <div class="container" data-aos="fade-up">
@@ -57,7 +64,7 @@
                     <div class="address">
                       <i class="icofont-google-map"></i>
                       <h4>Location:</h4>
-                      <p>Jl. Masjid No.013 Sroyo</p>
+                      <p><?php echo $row['kode_jenis_sampah']; ?></p>
                     </div>
                     
                     <div class="email">

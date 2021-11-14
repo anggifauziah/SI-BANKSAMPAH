@@ -14,7 +14,7 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Laporan">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseData" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-area-chart"></i>
+            <i class="fa fa-fw fa-book"></i>
             <span class="nav-link-text">Data Master</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseData">
@@ -89,7 +89,12 @@
             <span class="nav-link-text">Penjualan</span>
           </a>
         </li>
-        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Configuration">
+          <a class="nav-link" href="menu-configuration.php">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">Configuration</span>
+          </a>
+        </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">

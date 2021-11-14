@@ -1,33 +1,37 @@
 <?php
 include('koneksi_db.php');
 
-$idAngsur 		= $_POST['idAngsur'];
-$idPetugas		= $_POST['idPetugas'];
+$kode_tabung		= $_POST['kode_tabung'];
+$kode_petugas		= $_POST['kode_petugas'];
 
-$idNasabah   	= $_POST['idNasabah'];
+$kode_nasabah   	= $_POST['kode_nasabah'];
 
-$id_jenis		= $_POST['id_jenis'];
-$berat 			= $_POST['berat'];
-$total			= $_POST['total'];
-$tglangsur		= $_POST['tglangsur'];
+$id_jenis_sampah	= $_POST['id_jenis_sampah'];
+$berat 				= $_POST['berat'];
+$total				= $_POST['total'];
+$tanggal_angsur		= $_POST['tanggal_angsur'];
+$tanggal_angsur 	= date("Y-m-d");
 
-$tglangsur 		= date("Y-m-d");
+//mengambil value kolom id petugas
+$data1      = mysqli_query($koneksi, "SELECT * FROM tb_petugas WHERE kode_petugas LIKE '%$kode_petugas%'");
+$row1      	= mysqli_fetch_array($data1);
+$id_petugas	= $row1['id_petugas'];
 
 //mengambil value kolom pinjaman_nasabah
-$data     = mysqli_query($koneksi, "SELECT * FROM tb_nasabah WHERE id_nasabah=$idNasabah");
-$row      = mysqli_fetch_array($data);
-$pinjam   = $row['pinjaman_nasabah'];
-
-$angsuran = $pinjam - $total;
+$data2     	= mysqli_query($koneksi, "SELECT * FROM tb_nasabah WHERE kode_nasabah=$kode_nasabah");
+$row2      	= mysqli_fetch_array($data2);
+$id_nasabah = $row2['id_nasabah'];
+$pinjam   	= $row2['pinjaman'];
+$angsur     = $pinjam - $total;
 
 
 // query SQL untuk insert data
-$nasabah = "INSERT INTO tb_angsuran VALUES ('".$idAngsur."', '".$idPetugas."', '".$idNasabah."', '".$id_jenis."', '".$berat."', '".$total."', '".$tglangsur."')";
+$angsuran  = "INSERT INTO tb_angsuran (kode_angsur, petugas_id, nasabah_id, jenis_sampah_id, berat_angsur, total_angsur, tanggal_angsur) VALUES ('$kode_angsur', '$id_petugas', '$id_nasabah', '$id_jenis_sampah', '$berat', '$total', '$tanggal_angsur')";
 
-$pinjaman = "UPDATE tb_nasabah SET pinjaman_nasabah=$angsuran WHERE id_nasabah=$idNasabah";
+$nasabah = "UPDATE tb_nasabah SET pinjaman=$angsur WHERE kode_nasabah=$kode_nasabah";
 
+$result = mysqli_query($koneksi, $angsuran);
 $result = mysqli_query($koneksi, $nasabah);
-$result = mysqli_query($koneksi, $pinjaman);
 
 if ($result) {
 	//jika sukses, lakukan :

@@ -12,7 +12,7 @@ if(empty($_SESSION)){
 <?php
 include 'koneksi_db.php';
 $id       = $_GET['id'];
-$nasabah  = mysqli_query($koneksi,"SELECT * FROM tb_nasabah WHERE id_nasabah='$id'");
+$nasabah  = mysqli_query($koneksi,"SELECT u.id, n.kode_nasabah, u.nama, u.jenis_kelamin, u.alamat, u.telp, n.pekerjaan, n.nomor_rekening, n.saldo, n.pinjaman FROM tb_nasabah n INNER JOIN tb_users u ON n.users_id = u.id WHERE u.id = $id");
 $row      = mysqli_fetch_array($nasabah);
 ?>
 
@@ -45,10 +45,10 @@ $row      = mysqli_fetch_array($nasabah);
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="menu-petugas.php">Nasabah</a>
+          <a href="menu-nasabah.php">Nasabah</a>
         </li>
         <li class="breadcrumb-item active">Form Edit Nasabah</li>
       </ol>
@@ -59,29 +59,30 @@ $row      = mysqli_fetch_array($nasabah);
           <div class="card-header">Data Diri Nasabah</div>
           <div class="card-body text-dark">
             <div class="form-row">
+              <input type="hidden" class="form-control" name="id" id="InputId" value="<?php echo $row['id']; ?>" readonly required>
               <div class="form-group col-md-6">
-                <label for="InputId">ID Nasabah</label>
-                <input type="number" class="form-control" name="idNasabah" id="InputId" value="<?php echo $row['id_nasabah']; ?>" readonly required>
+                <label for="InputKode">Kode Nasabah</label>
+                <input type="number" class="form-control" name="kode_nasabah" id="InputKode" value="<?php echo $row['kode_nasabah']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="namaNasabah" id="InputNama" value="<?php echo $row['nama_nasabah']; ?>" required>
+                <input type="text" class="form-control" name="nama" id="InputNama" value="<?php echo $row['nama']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputJk">Jenis Kelamin</label>
-                <input type="text" class="form-control" name="jk" id="InputJk" value="<?php echo $row['jk_nasabah']; ?>" readonly required>
+                <label for="InputJenisKelamin">Jenis Kelamin</label>
+                <input type="text" class="form-control" name="jenisKelamin" id="InputJenisKelamin" value="<?php echo $row['jenis_kelamin']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputAlamat">Alamat</label>
-                <textarea class="form-control" id="InputAlamat" name="alamat" required rows="2"><?php echo $row['alamat_nasabah']; ?></textarea>
+                <textarea class="form-control" id="InputAlamat" name="alamat" required rows="2"><?php echo $row['alamat']; ?></textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTelepon">Nomor Telepon/HP</label>
-                <input type="number" class="form-control" name="telp" id="InputTelepon" value="<?php echo $row['telp_nasabah']; ?>" required>
+                <input type="number" class="form-control" name="telp" id="InputTelepon" value="<?php echo $row['telp']; ?>" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputPekerjaan">Pekerjaan</label>
-                <input type="text" class="form-control" name="pekerjaan" id="InputPekerjaan" value="<?php echo $row['pekerjaan_nasabah']; ?>" required>
+                <input type="text" class="form-control" name="pekerjaan" id="InputPekerjaan" value="<?php echo $row['pekerjaan']; ?>" required>
               </div>
             </div>
           </div>
@@ -92,19 +93,19 @@ $row      = mysqli_fetch_array($nasabah);
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">Nomor Rekening</label>
-                <input type="text" class="form-control" name="norek" id="InputId" value="<?php echo $row['norek_nasabah']; ?>" readonly required>
+                <label for="InputNorek">Nomor Rekening</label>
+                <input type="text" class="form-control" name="norek" id="InputNorek" value="<?php echo $row['nomor_rekening']; ?>" readonly required>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">Saldo</label>
-                <input type="text" class="form-control" name="saldo" id="InputSaldo" value="<?php echo "Rp",$row['saldo_nasabah']; ?>" readonly required>
+                <label for="InputSaldo">Saldo</label>
+                <input type="text" class="form-control" name="saldo" id="InputSaldo" value="<?php echo "Rp",$row['saldo']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputId">Pinjaman</label>
-                <input type="text" class="form-control" name="pinjam" id="InputPinjam" value="<?php echo "Rp",$row['pinjaman_nasabah']; ?>" readonly required>
+                <label for="InputPinjam">Pinjaman</label>
+                <input type="text" class="form-control" name="pinjam" id="InputPinjam" value="<?php echo "Rp",$row['pinjaman']; ?>" readonly required>
               </div>
             </div>
           </div>

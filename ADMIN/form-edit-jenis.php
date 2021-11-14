@@ -39,7 +39,7 @@ if(empty($_SESSION)){
           <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="menu-pengepul.php">Jenis Sampah</a>
+          <a href="menu-jenis-sampah.php">Jenis Sampah</a>
         </li>
         <li class="breadcrumb-item active">Form Edit Jenis</li>
       </ol>
@@ -48,9 +48,9 @@ if(empty($_SESSION)){
       <?php
       include('koneksi_db.php');
       //mengambil data dengan id paling besar
-      $id       = $_GET['id'];
-      $jenis  = mysqli_query($koneksi,"SELECT * FROM tb_jenis_sampah WHERE id_jenis='$id'");
-      $row      = mysqli_fetch_array($jenis);
+      $id_jenis_sampah  = $_GET['id'];
+      $jenis            = mysqli_query($koneksi,"SELECT * FROM tb_jenis_sampah WHERE id_jenis_sampah='$id_jenis_sampah'");
+      $row              = mysqli_fetch_array($jenis);
       ?>
 
       <!-- Form Petugas -->
@@ -59,21 +59,22 @@ if(empty($_SESSION)){
           <div class="card-header">Data Jenis Sampah</div>
           <div class="card-body text-dark">
             <div class="form-row">
+              <input type="hidden" class="form-control" name="id_jenis_sampah" id="InputId" value="<?php echo $row['id_jenis_sampah']; ?>" readonly required>
               <div class="form-group col-md-6">
-                <label for="InputId">ID Jenis</label>
-                <input type="text" class="form-control" name="id_jenis" id="InputId" placeholder="ID Jenis Sampah" value="<?php echo $row['id_jenis']; ?>" readonly required>
+                <label for="InputId">Kode Jenis Sampah</label>
+                <input type="text" class="form-control" name="kode_jenis_sampah" id="InputKode" placeholder="Kode Jenis Sampah" value="<?php echo $row['kode_jenis_sampah']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputNama">Jenis Sampah</label>
-                <input type="text" class="form-control" name="nama_jenis" id="InputNama" placeholder="Jenis Sampah" value="<?php echo $row['nama_jenis']; ?>" readonly required>
+                <label for="InputNama">Nama Jenis Sampah</label>
+                <input type="text" class="form-control" name="nama_jenis_sampah" id="InputNama" placeholder="Nama Jenis Sampah" value="<?php echo $row['nama_jenis']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputBeli">Harga Beli/kg</label>
-                <input type="number" class="form-control" name="Beli" id="InputBeli" placeholder="Harga Beli"  value="<?php echo $row['harga_beli']; ?>" required>
+                <input type="number" class="form-control" name="harga_beli" id="InputBeli" placeholder="Harga Beli"  value="<?php echo $row['harga_beli']; ?>" required>
               </div>
                 <div class="form-group col-md-6">
                 <label for="InputBeli">Harga Jual/kg</label>
-                <input type="number" class="form-control" name="Jual" id="InputJual" placeholder="Harga Jual"  value="<?php echo $row['harga_jual']; ?>" required>
+                <input type="number" class="form-control" name="harga_jual" id="InputJual" placeholder="Harga Jual"  value="<?php echo $row['harga_jual']; ?>" required>
               </div>
              
             </div>

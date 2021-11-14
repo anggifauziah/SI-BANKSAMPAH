@@ -1,16 +1,16 @@
 <?php
 include "koneksi_db.php";
 $id = $_GET['id'];
-$result = ("SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.norek_nasabah, n.nama_nasabah, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = a.id_nasabah AND j.id_jenis = a.id_jenis AND a.id_angsur LIKE '%$id%'");
+$result = "SELECT n.kode_nasabah, n.nomor_rekening, u.nama, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j, tb_users u WHERE a.nasabah_id = n.id_nasabah AND n.users_id = u.id AND a.jenis_sampah_id = j.id_jenis_sampah AND a.id_angsur = '$id'";
 $hasil = mysqli_query($koneksi,$result);
 while($data = mysqli_fetch_array($hasil)) {
-$idNasabah  = $data['id_nasabah'];
-$norek      = $data['norek_nasabah'];
-$nama       = $data['nama_nasabah'];
-$jenis      = $data['nama_jenis'];
-$berat      = $data['berat_angsur'];
-$jumlah     = $data['total_angsur'];
-$tgl        = $data['tanggal_angsur'];
+$kode_nasabah  = $data['kode_nasabah'];
+$norek         = $data['nomor_rekening'];
+$nama          = $data['nama'];
+$jenis         = $data['nama_jenis'];
+$berat         = $data['berat_angsur'];
+$jumlah        = $data['total_angsur'];
+$tgl           = $data['tanggal_angsur'];
 }
 //ubah format bulan
 function formatBulan($tgl){
@@ -41,9 +41,9 @@ function formatBulan($tgl){
       </thead>
       <tbody>
         <tr>
-          <th align="left">ID Nasabah</th>
+          <th align="left" width="200">Kode Nasabah (NIK)</th>
           <td width="20">:</td>
-          <td width="170"><?php echo $idNasabah; ?></td>
+          <td width="170"><?php echo $kode_nasabah; ?></td>
         </tr>
         <tr>
           <th align="left">Rekening</th>

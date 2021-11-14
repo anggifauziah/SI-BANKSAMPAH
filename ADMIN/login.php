@@ -5,11 +5,11 @@ $pesan = "";
 if (isset($_POST['submit'])) {
 $username = $_POST['username'];
 $password = $_POST['password'];
-$query_login = "SELECT * FROM tb_login WHERE username = '$username' AND password = '$password'";
+$query_login = "SELECT * FROM tb_users WHERE username = '$username' AND password = '$password'";
 $cek = mysqli_num_rows($sql = mysqli_query($koneksi, $query_login));
 $data = mysqli_fetch_assoc($sql);
 if ($cek > 0) {
-$_SESSION['id_login']   = $data['id_login'];
+$_SESSION['id']         = $data['id'];
 $_SESSION['username']   = $data['username'];
 $_SESSION['password']   = $data['password'];
 $_SESSION['level_user'] = $data['level_user'];

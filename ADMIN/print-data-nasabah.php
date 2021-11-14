@@ -1,17 +1,17 @@
 <?php
 include "koneksi_db.php";
-$id = $_GET['id'];
-$result = ("SELECT * FROM tb_nasabah WHERE id_nasabah LIKE '%$id%'");
-$hasil = mysqli_query($koneksi,$result);
-while($data = mysqli_fetch_array($hasil)) {
-$idNasabah  = $data['id_nasabah'];
-$norek      = $data['norek_nasabah'];
-$nama       = $data['nama_nasabah'];
-$jk         = $data['jk_nasabah'];
-$alamat     = $data['alamat_nasabah'];
-$telp       = $data['telp_nasabah'];
-$pekerjaan  = $data['pekerjaan_nasabah'];
-$tgldaftar  = $data['tgl_daftar'];
+$id     = $_GET['id'];
+$query  = "SELECT n.kode_nasabah, n.nomor_rekening, u.nama, u.jenis_kelamin, u.alamat, u.telp, n.pekerjaan, n.tgl_daftar, u.username, u.password FROM tb_nasabah n INNER JOIN tb_users u ON n.users_id = u.id WHERE u.id = $id";
+$result = mysqli_query($koneksi, $query);
+while($data = mysqli_fetch_array($result)) {
+$kode_nasabah = $data['kode_nasabah'];
+$norek        = $data['nomor_rekening'];
+$nama         = $data['nama'];
+$jk           = $data['jenis_kelamin'];
+$alamat       = $data['alamat'];
+$telp         = $data['telp'];
+$pekerjaan    = $data['pekerjaan'];
+$tgldaftar    = $data['tgl_daftar'];
 
 }
 ?>
@@ -38,9 +38,9 @@ $tgldaftar  = $data['tgl_daftar'];
       </thead>
       <tbody>
         <tr>
-          <th align="left">ID Nasabah</th>
+          <th align="left">Kode Nasabah</th>
           <td>:</td>
-          <td><?php echo $idNasabah; ?></td>
+          <td><?php echo $kode_nasabah; ?></td>
         </tr>
         <tr>
           <th align="left">Rekening</th>

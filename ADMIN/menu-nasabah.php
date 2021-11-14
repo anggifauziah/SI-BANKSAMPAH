@@ -38,7 +38,7 @@ if(empty($_SESSION)){
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Nasabah</li>
       </ol>
@@ -58,7 +58,7 @@ if(empty($_SESSION)){
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>ID Nasabah</th>
+                  <th>Kode Nasabah (NIK)</th>
                   <th>Nomor Rekening</th>
                   <th>Nama Nasabah</th>
                   <th>Nomor Telpon</th>
@@ -71,26 +71,24 @@ if(empty($_SESSION)){
                 <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi,"SELECT n.id_nasabah, n.norek_nasabah, n.nama_nasabah, n.telp_nasabah, n.saldo_nasabah, n.pinjaman_nasabah, l.id_login, l.username, l.password 
-                  FROM tb_nasabah n INNER JOIN tb_login l
-                  WHERE n.norek_nasabah = l.username");
+                $result = mysqli_query($koneksi, "SELECT n.users_id, n.kode_nasabah, n.nomor_rekening, u.nama, u.telp, n.saldo, n.pinjaman, u.id FROM tb_nasabah n INNER JOIN tb_users u WHERE n.users_id = u.id");
                 $nomor = 1;
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
-                    echo "<td>".$data['id_nasabah']."</td>";
-                    echo "<td>".$data['norek_nasabah']."</td>";
-                    echo "<td>".$data['nama_nasabah']."</td>";
-                    echo "<td>".$data['telp_nasabah']."</td>";
-                    echo "<td>Rp".$data['saldo_nasabah']."</td>";
-                    echo "<td>Rp".$data['pinjaman_nasabah']."</td>";
+                    echo "<td>".$data['kode_nasabah']."</td>";
+                    echo "<td>".$data['nomor_rekening']."</td>";
+                    echo "<td>".$data['nama']."</td>";
+                    echo "<td>".$data['telp']."</td>";
+                    echo "<td>Rp".$data['saldo']."</td>";
+                    echo "<td>Rp".$data['pinjaman']."</td>";
                     echo "<td>
-                          <a href='form-edit-nasabah.php?id=".$data['id_nasabah']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
-                          <a data-href='proses-hapus-nasabah.php?id=".$data['id_nasabah']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
-                          <a href='print-data-nasabah.php?id=".$data['id_nasabah']."' class='btn btn-primary btn-sm'><i class='fa fa-print'></i> Print</a>
-                          <a data-href='proses-reset-password.php?id=".$data['id_login']."' class = 'btn btn-info btn-sm' data-toggle='modal' data-target='#konfirmasi_reset'><i class='fa fa-refresh'></i> Reset Password</a>
+                          <a href='form-edit-nasabah.php?id=".$data['id']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
+                          <a data-href='proses-hapus-nasabah.php?id=".$data['id']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
+                          <a href='print-data-nasabah.php?id=".$data['id']."' class='btn btn-primary btn-sm'><i class='fa fa-print'></i> Print</a>
+                          <a data-href='proses-reset-password.php?id=".$data['id']."' class = 'btn btn-info btn-sm' data-toggle='modal' data-target='#konfirmasi_reset'><i class='fa fa-refresh'></i> Reset Password</a>
                           </td>";
                     echo "</tr>";
                   }
@@ -108,7 +106,7 @@ if(empty($_SESSION)){
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <b>Anda yakin ingin menghapus data ini ?</b><br><br>
+                    <b>Anda yakin ingin menghapus data ini?</b><br><br>
                     <a class="btn btn-danger btn-ok"> Hapus</a>
                     <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-close"></i> Batal</button>
                 </div>
