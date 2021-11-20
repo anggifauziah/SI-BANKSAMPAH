@@ -12,7 +12,7 @@ if(empty($_SESSION)){
 <?php
 include 'koneksi_db.php';
 $id       = $_GET['id'];
-$petugas  = mysqli_query($koneksi,"SELECT * FROM tb_petugas WHERE id_petugas='$id'");
+$petugas  = mysqli_query($koneksi,"SELECT p.*, u.*  FROM tb_petugas p, tb_users u where p.users_id = u.id and p.kode_petugas = '$id'");
 $row      = mysqli_fetch_array($petugas);
 ?>
 
@@ -61,23 +61,23 @@ $row      = mysqli_fetch_array($petugas);
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="InputId">ID Petugas</label>
-                <input type="text" class="form-control" name="idPetugas" id="InputId" placeholder="ID Petugas" value="<?php echo $row['id_petugas']; ?>" readonly required>
+                <input type="text" class="form-control" name="idPetugas" id="InputId" placeholder="ID Petugas" value="<?php echo $row['kode_petugas']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="namaPetugas" id="InputNama" placeholder="Nama Lengkap" value="<?php echo $row['nama_petugas']; ?>" required>
+                <input type="text" class="form-control" name="nama" id="InputNama" placeholder="Nama Lengkap" value="<?php echo $row['nama']; ?>" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJk">Jenis Kelamin</label>
-                <input type="text" class="form-control" name="jk" id="InputJk" value="<?php echo $row['jk_petugas']; ?>" readonly required>
+                <input type="text" class="form-control" name="jk" id="InputJk" value="<?php echo $row['jenis_kelamin']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputAlamat">Alamat</label>
-                <textarea class="form-control" id="InputAlamat" name="alamat" placeholder="Alamat" required rows="2"><?php echo $row['alamat_petugas']; ?></textarea>
+                <textarea class="form-control" id="InputAlamat" name="alamat" placeholder="Alamat" required rows="2"><?php echo $row['alamat']; ?></textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTelepon">Nomor Telepon/HP</label>
-                <input type="number" class="form-control" name="telp" id="InputTelepon" placeholder="Nomor Telepon/HP" value="<?php echo $row['telp_petugas']; ?>" required>
+                <input type="number" class="form-control" name="telp" id="InputTelepon" placeholder="Nomor Telepon/HP" value="<?php echo $row['telp']; ?>" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJabatan">Jabatan</label>
