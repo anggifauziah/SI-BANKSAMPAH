@@ -72,22 +72,22 @@ if(empty($_SESSION)){
                 <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi,"SELECT pj.id_jual, pj.id_petugas, p.id_pengepul, p.nama_pengepul, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_pengepul p, tb_jenis_sampah j WHERE p.id_pengepul = pj.id_pengepul AND j.id_jenis = pj.id_jenis ORDER BY pj.tanggal_jual ASC");
+                $result = mysqli_query($koneksi,"SELECT pj.id_jual, pj.kode_jual, pt.kode_petugas, p.kode_pengepul, u.nama, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_petugas pt, tb_pengepul p, tb_users u, tb_jenis_sampah j WHERE p.id_pengepul = pj.pengepul_id and pt.id_petugas = pj.petugas_id and p.users_id = u.id AND j.id_jenis_sampah = pj.jenis_sampah_id ORDER BY pj.tanggal_jual ASC");
                 $nomor = 1;
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
-                    echo "<td>".$data['id_petugas']."</td>";
-                    echo "<td>".$data['id_pengepul']."</td>";
-                    echo "<td>".$data['nama_pengepul']."</td>";
+                    echo "<td>".$data['kode_petugas']."</td>";
+                    echo "<td>".$data['kode_pengepul']."</td>";
+                    echo "<td>".$data['nama']."</td>";
                     echo "<td>".$data['nama_jenis']."</td>";
                     echo "<td>".$data['berat_jual']."</td>";
                     echo "<td>Rp".$data['total_jual']."</td>";
                     echo "<td>".$data['tanggal_jual']."</td>";
                     echo "<td>
-                          <a href='print-struk-jual.php?id=".$data['id_jual']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>
+                          <a href='print-struk-jual.php?id=".$data['kode_jual']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>
                           </td>";
                     echo "</tr>";
                   }

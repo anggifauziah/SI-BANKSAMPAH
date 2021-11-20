@@ -1,11 +1,14 @@
 <?php
 include "koneksi_db.php";
 $id = $_GET['id'];
-$result = ("SELECT pj.id_jual, pj.id_petugas, p.id_pengepul, p.nama_pengepul, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_pengepul p, tb_jenis_sampah j WHERE p.id_pengepul = pj.id_pengepul AND j.id_jenis = pj.id_jenis AND pj.id_jual LIKE '%$id%'");
+
+$result = ("SELECT p.kode_pengepul, u.nama, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual 
+            FROM tb_penjualan pj, tb_pengepul p, tb_users u, tb_jenis_sampah j 
+            WHERE p.id_pengepul = pj.pengepul_id AND p.users_id = u.id AND j.id_jenis_sampah = pj.jenis_sampah_id AND pj.kode_jual LIKE '%$id%'");
 $hasil = mysqli_query($koneksi,$result);
 while($data = mysqli_fetch_array($hasil)) {
-$idPengepul = $data['id_pengepul'];
-$nama       = $data['nama_pengepul'];
+$idPengepul = $data['kode_pengepul'];
+$nama       = $data['nama'];
 $jenis      = $data['nama_jenis'];
 $berat      = $data['berat_jual'];
 $jumlah     = $data['total_jual'];

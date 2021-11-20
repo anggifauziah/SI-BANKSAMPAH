@@ -49,7 +49,7 @@ if(empty($_SESSION)){
       <?php
       include('koneksi_db.php');
       //mengambil data surat dengan id paling besar
-      $query    = mysqli_query($koneksi, "SELECT MAX(id_tarik) as idTerbesar FROM tb_tarik_tabungan");
+      $query    = mysqli_query($koneksi, "SELECT MAX(kode_tarik_tabungan) as idTerbesar FROM tb_tarik_tabungan");
       $data     = mysqli_fetch_array($query);
       $idTarik = $data['idTerbesar'];
 

@@ -47,20 +47,35 @@ if(empty($_SESSION)){
 
       <?php
       include('koneksi_db.php');
-      //mengambil data surat dengan id paling besar
-      $query  = mysqli_query($koneksi, "SELECT MAX(id_petugas) as idTerbesar FROM tb_petugas");
-      $data   = mysqli_fetch_array($query);
-      $idPtgs = $data['idTerbesar'];
+      //mengambil data kode dengan id paling besar
+      $query_id  = mysqli_query($koneksi, "SELECT MAX(kode_petugas) as idTerbesar FROM tb_petugas");
+      $data_id   = mysqli_fetch_array($query_id);
+      $idPtgs = $data_id['idTerbesar'];
 
-      //mengambil angka dari id surat terbesar, menggunakan fungsi substr
+      //mengambil angka dari id terbesar, menggunakan fungsi substr
       //dan diubah ke int
       $urutan = (int) substr($idPtgs, 3, 3);
       //bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
       $id = $urutan+1;
 
-      //membentuk id surat baru
+      //membentuk id petugas baru
       $huruf = "PT";
       $kode  = $huruf.sprintf("%03s", $id);
+
+      //mengambil data username dengan id paling besar
+      $query_un  = mysqli_query($koneksi, "SELECT MAX(username) AS user FROM tb_users");
+      $data_un   = mysqli_fetch_array($query_un);
+      $kode_un   = $data_un['user'];
+
+      //mengambil angka dari id username terbesar, menggunakan fungsi substr
+      //dan diubah ke int
+      $urutan_un = (int) substr($kode_un, 10, 3);
+      //bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
+      $id_un = $urutan_un+1;
+
+      //membentuk id username baru
+      $angka_un  = "18";
+      $username  = $angka_un.rand().sprintf("%03s", $id_un);
       ?>
 
       <!-- Form Petugas -->
@@ -75,11 +90,11 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="namaPetugas" id="InputNama" placeholder="Nama Lengkap" required>
+                <input type="text" class="form-control" name="nama" id="InputNama" placeholder="Nama Lengkap" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJenisKelamin">Jenis Kelamin</label>
-                <select name="jenisKelamin" id="InputJenisKelamin" class="form-control" required>
+                <select name="jk" id="InputJenisKelamin" class="form-control" required>
                   <option selected disabled>::. Jenis Kelamin .::</option>
                   <option>Laki-laki</option>
                   <option>Perempuan</option>
@@ -96,6 +111,12 @@ if(empty($_SESSION)){
               <div class="form-group col-md-6">
                 <label for="InputJabatan">Jabatan</label>
                 <input type="text" class="form-control" name="jabatan" id="InputJabatan" placeholder="Jabatan" required>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="hidden" class="form-control" name="username" id="InputUsername" value="<?php echo($username) ?>" readonly required>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="hidden" class="form-control" name="password" id="InputPassword" value="<?php echo($username) ?>" readonly required>
               </div>
             </div>
           </div>

@@ -73,17 +73,29 @@ document.location='login.php';
         $tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
 
         if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-        // Buat query untuk menampilkan semua data angsuran
-        $query     = "SELECT t.id_tabung, t.id_petugas, t.id_nasabah, n.nama_nasabah, j.nama_jenis, t.berat_tabung, t.total_tabung, t.tanggal_tabung FROM tb_tabungan t, tb_nasabah n, tb_jenis_sampah j WHERE t.id_nasabah = n.id_nasabah AND j.id_jenis = t.id_jenis ORDER BY t.id_tabung ASC";
-        $url_cetak = "print-laporan-tabungan.php";
-        $label     = "Semua Data Tabungan";
+          // Buat query untuk menampilkan semua data angsuran
+          $query     = "SELECT t.id_tabung, t.kode_tabung, p.kode_petugas, n.kode_nasabah, u.nama, j.nama_jenis, t.berat_tabung, t.total_tabung, t.tanggal_tabung FROM tb_tabungan t, tb_petugas p, tb_nasabah n, tb_users u, tb_jenis_sampah j WHERE t.petugas_id = p.id_petugas and t.nasabah_id = n.id_nasabah and n.users_id = u.id AND j.id_jenis_sampah = t.jenis_sampah_id ORDER BY t.id_tabung ASC";
+          $url_cetak = "print-laporan-tabungan.php";
+          $label     = "Semua Data Tabungan";
         }else{ // Jika terisi
-        // Buat query untuk menampilkan data angsuran sesuai periode tanggal
-        $query     = "SELECT t.id_tabung, t.id_petugas, t.id_nasabah, n.nama_nasabah, j.nama_jenis, t.berat_tabung, t.total_tabung, t.tanggal_tabung FROM tb_tabungan t, tb_nasabah n, tb_jenis_sampah j WHERE t.id_nasabah = n.id_nasabah AND j.id_jenis = t.id_jenis AND (tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
-        $url_cetak = "print-laporan-tabungan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
-        $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-        $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
-        $label     = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+          // Buat query untuk menampilkan data angsuran sesuai periode tanggal
+          $query     = "SELECT t.id_tabung, t.kode_tabung, p.kode_petugas, n.kode_nasabah, u.nama, j.nama_jenis, t.berat_tabung, t.total_tabung, t.tanggal_tabung FROM tb_tabungan t, tb_petugas p, tb_nasabah n, tb_users u, tb_jenis_sampah j WHERE t.petugas_id = p.id_petugas and t.nasabah_id = n.id_nasabah and n.users_id = u.id AND j.id_jenis_sampah = t.jenis_sampah_id AND (tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+          $url_cetak = "print-laporan-tabungan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
+          
+          //ubah format bulan
+          function formatBulan($tgl){
+            $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            $pecah = explode('-', $tgl);
+            return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
+          }
+          
+          if (date("m", strtotime($tgl_awal)) != date("m", strtotime($tgl_akhir))){
+              $label =  'Periode Tanggal '.(formatBulan(date(" -m-d", strtotime($tgl_awal)))." s/d ".formatBulan(date("Y-m-d", strtotime($tgl_akhir))));
+          } elseif (date("Y", strtotime($tgl_awal)) != date("Y", strtotime($tgl_akhir))){
+              $label =  'Periode Tanggal '.(formatBulan(date("Y-m-d", strtotime($tgl_awal)))." s/d ".formatBulan(date("Y-m-d", strtotime($tgl_akhir))));
+          } else {
+              $label =  'Periode Tanggal '.(date("d", strtotime($tgl_awal))." s/d ".formatBulan(date("Y-m-d", strtotime($tgl_akhir))));
+          }
         }
         ?>
         <hr />
@@ -117,16 +129,16 @@ document.location='login.php';
               echo "<tr>";
                 echo "<td>".$nomor++."</td>";
                 echo "<td>".$tgl."</td>";
-                echo "<td>".$data['id_petugas']."</td>";
-                echo "<td>".$data['id_nasabah']."</td>";
-                echo "<td>".$data['nama_nasabah']."</td>";
+                echo "<td>".$data['kode_petugas']."</td>";
+                echo "<td>".$data['kode_nasabah']."</td>";
+                echo "<td>".$data['nama']."</td>";
                 echo "<td>".$data['nama_jenis']."</td>";
                 echo "<td>".$data['berat_tabung']."</td>";
                 echo "<td>Rp".$data['total_tabung']."</td>";
               echo "</tr>";
               }
               }else{ // Jika data tidak ada
-              echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
+              echo "<tr><td colspan='8'>Data tidak ada</td></tr>";
               }
               ?>
             </tbody>
@@ -163,10 +175,10 @@ document.location='login.php';
       <script src="vendor/libraries/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
       <!-- Include File JS Custom (untuk fungsi Datepicker) -->
       <script src="js/custom.js"></script>
-      <script>
-      $(document).ready(function(){
-      setDateRangePicker(".tgl_awal", ".tgl_akhir")
-      })
+        <script>
+        $(document).ready(function(){
+        setDateRangePicker(".tgl_awal", ".tgl_akhir")
+        })
       </script>
 
     </div>

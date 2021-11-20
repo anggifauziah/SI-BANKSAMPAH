@@ -1,14 +1,14 @@
 <?php
 include "koneksi_db.php";
 $id = $_GET['id'];
-$result = ("SELECT t.id_nasabah, n.norek_nasabah, n.nama_nasabah, t.jumlah_tarik, t.tanggal_tarik
-            FROM tb_tarik_tabungan t INNER JOIN tb_nasabah n
-            WHERE t.id_nasabah=n.id_nasabah AND t.id_tarik LIKE '%$id%'");
+$result = ("SELECT n.kode_nasabah, n.nomor_rekening, u.nama, t.jumlah_tarik, t.tanggal_tarik
+            FROM tb_tarik_tabungan t, tb_nasabah n, tb_users u
+            WHERE t.nasabah_id=n.id_nasabah and n.users_id = u.id AND t.kode_tarik_tabungan LIKE '%$id%'");
 $hasil = mysqli_query($koneksi,$result);
 while($data = mysqli_fetch_array($hasil)) {
-$idNasabah  = $data['id_nasabah'];
-$norek      = $data['norek_nasabah'];
-$nama       = $data['nama_nasabah'];
+$idNasabah  = $data['kode_nasabah'];
+$norek      = $data['nomor_rekening'];
+$nama       = $data['nama'];
 $jumlah     = $data['jumlah_tarik'];
 $tgl        = $data['tanggal_tarik'];
 }

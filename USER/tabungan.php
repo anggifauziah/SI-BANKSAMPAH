@@ -21,11 +21,10 @@
     <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
+    <link href="assets/vendor/libraries/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+
     <!-- =======================================================
     * Template Name: Anyar - v2.2.1
     * Template URL: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/
@@ -55,7 +54,7 @@
               <div class="card-header">Informasi Tabungan Nasabah</div>
               <div class="card-body text-dark">
                 
-                <!-- DataTables Nasabah-->
+                <!-- DataTables Petugas-->
                 <div class="card-body">
                   <div class="table table-responsive-xl">
                     <table class="table" id="dataTable" max-width="100%" cellspacing="0" style="width: 100%">
@@ -64,29 +63,29 @@
                         <!-- Menampilkan data dari database ke Tabel -->
                         <?php
                         include('koneksi_db.php');
-                        $result = mysqli_query($koneksi,"SELECT l.username, n.id_nasabah, n.nama_nasabah, n.norek_nasabah, n.saldo_nasabah FROM tb_login l, tb_nasabah n WHERE n.norek_nasabah=$_SESSION[username]");
+                        $result = mysqli_query($koneksi,"SELECT u.username, n.kode_nasabah, u.nama, n.nomor_rekening, n.saldo FROM tb_users u, tb_nasabah n WHERE n.users_id = u.id AND n.nomor_rekening=$_SESSION[username]");
                         $data   = mysqli_fetch_array($result);
                         ?>
                         
                         <tr>
                           <td>ID Nasabah</td>
                           <td>:</td>
-                          <td><?php echo $data['id_nasabah'] ?></td>
+                          <td><?php echo $data['kode_nasabah'] ?></td>
                         </tr>
                         <tr>
                           <td>Nomor Rekening</td>
                           <td>:</td>
-                          <td><?php echo $data['norek_nasabah'] ?></td>
+                          <td><?php echo $data['nomor_rekening'] ?></td>
                         </tr >
                         <tr>
                           <td>Nama Nasabah</td>
                           <td>:</td>
-                          <td><?php echo $data['nama_nasabah'] ?></td>
+                          <td><?php echo $data['nama'] ?></td>
                         </tr>
                         <tr>
                           <td>Saldo Nasabah</td>
                           <td>:</td>
-                          <td><?php echo "Rp",$data['saldo_nasabah'] ?></td>
+                          <td><?php echo "Rp",$data['saldo'] ?></td>
                         </tr>
                         
                         <!-- Sampai sini -->
@@ -95,7 +94,7 @@
                   </div>
                 </div>
               </div>
-              <!-- DataTables Nasabah-->
+              <!-- DataTables Petugas-->
               
             </div>
           </div>
@@ -105,97 +104,89 @@
         <section id="blog" class="blog">
           <div class="container">
             
-            <div class="card-header">Rincian Setor Tabungan Nasabah</div>
+            <div class="card-header">Riwayat Transaksi</div>
             <div class="card-body text-dark">
               
-              <!-- DataTables Tabungan-->
+              <!-- DataTables Petugas-->
               <div class="card-body">
+                <form method="GET" action="tabungan.php">
+                  <div class="form-group">
+                    <label>Filter Tanggal</label>
+                    <div class="input-group">
+                      <input type="text" name="tgl_awal" value="<?= @$_GET['tgl_awal'] ?>" class="form-control tgl_awal datetimepicker-input" placeholder="Tanggal Awal" data-toggle="datetimepicker" data-target=".tgl_awal" autocomplete="off">
+                      <div class="input-group-append">
+                        <span class="input-group-text">s/d</span>
+                      </div>
+                      <input type="text" name="tgl_akhir" value="<?= @$_GET['tgl_akhir'] ?>" class="form-control tgl_akhir datetimepicker-input" placeholder="Tanggal Akhir" data-toggle="datetimepicker" data-target=".tgl_akhir" autocomplete="off">
+                    </div>
+                  </div>
+                  <div>
+                    <button type="submit" name="filter" value="true" class="btn btn-primary">TAMPILKAN</button>
+                    <?php
+                      if(isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
+                      echo '<a href="tabungan.php" class="btn btn-warning">RESET</a>';
+                    ?>
+                  </div>
+                </form>
+                <?php
+                  // Load file koneksi.php
+                  include "koneksi_db.php";
+
+                  $tgl_awal  = @$_GET['tgl_awal']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+                  $tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+
+                  if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+                    // Buat query untuk menampilkan semua data tabungan
+                    $queryp      = "SELECT p.total_tabung, p.tanggal_tabung FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username]";
+                    $queryt     = "SELECT t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username]";
+                  }else{ // Jika terisi
+                    // Buat query untuk menampilkan data tabungan sesuai periode tanggal
+                    $queryp     = "SELECT p.total_tabung, p.tanggal_tabung FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username] AND (tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+                    $queryt     = "SELECT t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username] AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+                  }
+                ?>
+                
+                <br>
                 <div class="table-responsive">
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Jumlah Setor</th>
-                        <th>Tanggal Setor</th>
+                        <th>Nominal</th>
+                        <th>Tanggal</th>
                         
                       </tr>
                     </thead>
                     <tbody>
                       <!-- Menampilkan data dari database ke Tabel -->
                       <?php
-                      include('koneksi_db.php');
                       $nomor = 1;
-                      $result = mysqli_query($koneksi,"SELECT p.total_tabung,p.tanggal_tabung FROM tb_tabungan p, tb_nasabah n WHERE p.id_nasabah=n.id_nasabah and n.norek_nasabah=$_SESSION[username]");
-                      ?>
-                      
-                      <?php
-                      while($data = mysqli_fetch_array($result)) {
-                      $tgl = date('d-m-Y', strtotime($data['tanggal_tabung']));
-                      echo "<tr>";
-                        echo "<td>".$nomor++."</td>";
-                        echo "<td>Rp".$data['total_tabung']."</td>";
-                        echo "<td>".$tgl."</td>";
-                      echo "</tr>";
+                      $result_tabung = mysqli_query($koneksi, $queryp);
+                      $result_tarik  = mysqli_query($koneksi, $queryt);
+                      while($data_tabung = mysqli_fetch_array($result_tabung)) {
+                        $tgl_tabung = date('d-m-Y', strtotime($data_tabung['tanggal_tabung']));
+                        echo "<tr>";
+                          echo "<td>".$nomor++."</td>";
+                          echo "<td>+ Rp".$data_tabung['total_tabung']."</td>";
+                          echo "<td>".$tgl_tabung."</td>";
+                        echo "</tr>";
+                      }
+                      while($data_tarik = mysqli_fetch_array($result_tarik)) {
+                        $tgl_tarik = date('d-m-Y', strtotime($data_tarik['tanggal_tarik']));
+                        echo "<tr>";
+                          echo "<td>".$nomor++."</td>";
+                          echo "<td>- Rp".$data_tarik['jumlah_tarik']."</td>";
+                          echo "<td>".$tgl_tarik."</td>";
+                        echo "</tr>";
                       }
                       ?>
-                      
                       <!-- Sampai sini -->
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-            <!-- DataTables Tabungan-->
-            
-            
-          </div>
-        </section>
-        <section id="blog" class="blog">
-          <div class="container">
-            
-            <div class="card-header">Rincian Tarik Tabungan Nasabah</div>
-            <div class="card-body text-dark">
-              
-              <!-- DataTables Tabungan-->
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Jumlah Tarik</th>
-                        <th>Tanggal Tarik</th>
-                        
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- Menampilkan data dari database ke Tabel -->
-                      <?php
-                      include('koneksi_db.php');
-                      $nomor = 1;
-                      $result = mysqli_query($koneksi,"SELECT p.jumlah_tarik,p.tanggal_tarik FROM tb_tarik_tabungan p, tb_nasabah n WHERE p.id_nasabah=n.id_nasabah and n.norek_nasabah=$_SESSION[username]");
-                      ?>
-                      
-                      <?php
-                      while($data = mysqli_fetch_array($result)) {
-                      $tgl = date('d-m-Y', strtotime($data['tanggal_tarik']));
-                      echo "<tr>";
-                        echo "<td>".$nomor++."</td>";
-                        echo "<td>Rp".$data['jumlah_tarik']."</td>";
-                        echo "<td>".$tgl."</td>";
-                      echo "</tr>";
-                      }
-                      ?>
-                      
-                      <!-- Sampai sini -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <!-- DataTables Tabungan-->
-            
-            
+            <!-- DataTables Petugas-->
           </div>
         </section>
         </main><!-- End #main -->
@@ -216,7 +207,18 @@
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
         <!-- Page level plugin JavaScript-->
-        <script src="vendor/datatables/jquery.dataTables.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+        <script src="assets/vendor/datatables/jquery.dataTables.js"></script>
+        <script src="assets/vendor/datatables/dataTables.bootstrap4.js"></script>
+        <!-- Include library Moment (Dibutuhkan untuk Datepicker) -->
+        <script src="assets/vendor/libraries/moment/moment.min.js"></script>
+        <!-- Include library Bootstrap Datepicker -->
+        <script src="assets/vendor/libraries/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+        <!-- Include File JS Custom (untuk fungsi Datepicker) -->
+        <script src="assets/js/custom.js"></script>
+        <script>
+          $(document).ready(function(){
+            setDateRangePicker(".tgl_awal", ".tgl_akhir")
+          })
+        </script>
       </body>
     </html>

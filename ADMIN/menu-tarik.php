@@ -51,7 +51,7 @@ if(empty($_SESSION)){
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Tabungan</div>
+          <i class="fa fa-table"></i> Data Tarik Tabungan</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -70,22 +70,23 @@ if(empty($_SESSION)){
                 <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi,"SELECT t.id_tarik, t.id_petugas, t.id_nasabah, n.nama_nasabah, t.jumlah_tarik, t.tanggal_tarik 
-                  FROM tb_tarik_tabungan t INNER JOIN tb_nasabah n
-                  WHERE t.id_nasabah = n.id_nasabah");
+                $result = mysqli_query($koneksi,"SELECT t.id_tarik_tabungan, t.kode_tarik_tabungan, p.kode_petugas, n.kode_nasabah, u.nama, t.jumlah_tarik, t.tanggal_tarik 
+                  FROM tb_tarik_tabungan t, tb_nasabah n, tb_users u, tb_petugas p
+                  WHERE t.nasabah_id = n.id_nasabah and t.petugas_id = p.id_petugas and n.users_id = u.id
+                  ORDER BY t.tanggal_tarik ASC");
                 $nomor = 1;
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
-                    echo "<td>".$data['id_petugas']."</td>";
-                    echo "<td>".$data['id_nasabah']."</td>";
-                    echo "<td>".$data['nama_nasabah']."</td>";
+                    echo "<td>".$data['kode_petugas']."</td>";
+                    echo "<td>".$data['kode_nasabah']."</td>";
+                    echo "<td>".$data['nama']."</td>";
                     echo "<td>Rp".$data['jumlah_tarik']."</td>";
                     echo "<td>".$data['tanggal_tarik']."</td>";
                     echo "<td>
-                          <a href='print-struk-tarik.php?id=".$data['id_tarik']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>
+                          <a href='print-struk-tarik.php?id=".$data['kode_tarik_tabungan']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>
                           </td>";
                     echo "</tr>";
                   }

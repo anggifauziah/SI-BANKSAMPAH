@@ -71,22 +71,22 @@ if(empty($_SESSION)){
                 <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi,"SELECT * FROM tb_petugas");
+                $result = mysqli_query($koneksi,"SELECT p.*, u.*  FROM tb_petugas p, tb_users u where p.users_id = u.id");
                 $nomor = 1;
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
-                    echo "<td>".$data['id_petugas']."</td>";
-                    echo "<td>".$data['nama_petugas']."</td>";
-                    echo "<td>".$data['jk_petugas']."</td>";
-                    echo "<td>".$data['alamat_petugas']."</td>";
-                    echo "<td>".$data['telp_petugas']."</td>";
+                    echo "<td>".$data['kode_petugas']."</td>";
+                    echo "<td>".$data['nama']."</td>";
+                    echo "<td>".$data['jenis_kelamin']."</td>";
+                    echo "<td>".$data['alamat']."</td>";
+                    echo "<td>".$data['telp']."</td>";
                     echo "<td>".$data['jabatan']."</td>";
                     echo "<td>
-                          <a href='form-edit-petugas.php?id=".$data['id_petugas']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
-                          <a data-href='proses-hapus-petugas.php?id=".$data['id_petugas']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
+                          <a href='form-edit-petugas.php?id=".$data['kode_petugas']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
+                          <a data-href='proses-hapus-petugas.php?id=".$data['kode_petugas']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
                           </td>";
                     echo "</tr>";
                   }

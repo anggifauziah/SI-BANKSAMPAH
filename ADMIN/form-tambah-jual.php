@@ -48,7 +48,7 @@ if(empty($_SESSION)){
       <?php
       include('koneksi_db.php');
       //mengambil data surat dengan id paling besar
-      $query    = mysqli_query($koneksi, "SELECT MAX(id_jual) as idTerbesar FROM tb_penjualan");
+      $query    = mysqli_query($koneksi, "SELECT MAX(kode_jual) as idTerbesar FROM tb_penjualan");
       $data     = mysqli_fetch_array($query);
       $idJl     = $data['idTerbesar'];
 
@@ -126,7 +126,7 @@ if(empty($_SESSION)){
 
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="namaPengepul" id="namaPengepul" placeholder="Nama Lengkap" readonly>
+                <input type="text" class="form-control" name="nama" id="namaPengepul" placeholder="Nama Lengkap" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJk">Jenis Kelamin</label>
@@ -160,7 +160,7 @@ if(empty($_SESSION)){
                   <option value="" selected disabled>::. Pilih Jenis Sampah .::</option>
                 <?php
                 foreach ($sql as $key) { //menampilkan array dari $sql dialiaskan ke $key
-                echo '<option value="'.$key['id_jenis'].'">'.$key['nama_jenis'].'</option>'; // $key['kolom dari database']
+                echo '<option value="'.$key['id_jenis_sampah'].'">'.$key['nama_jenis'].'</option>'; // $key['kolom dari database']
                 }
                 ?>
               </select>

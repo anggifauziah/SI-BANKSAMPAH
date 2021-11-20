@@ -73,17 +73,29 @@ document.location='login.php';
         $tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
 
         if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-        // Buat query untuk menampilkan semua data angsuran
-        $query     = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.nama_nasabah, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = a.id_nasabah AND j.id_jenis = a.id_jenis ORDER BY a.id_angsur ASC";
-        $url_cetak = "print-laporan-angsuran.php";
-        $label     = "Semua Data Angsuran";
+          // Buat query untuk menampilkan semua data angsuran
+          $query     = "SELECT a.id_angsur, a.kode_angsur, p.kode_petugas, n.kode_nasabah, u.nama, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_petugas p, tb_nasabah n, tb_users u, tb_jenis_sampah j WHERE a.nasabah_id = n.id_nasabah and a.petugas_id = p.id_petugas and n.users_id = u.id AND j.id_jenis_sampah = a.jenis_sampah_id ORDER BY a.id_angsur ASC";
+          $url_cetak = "print-laporan-angsuran.php";
+          $label     = "Semua Data Angsuran";
         }else{ // Jika terisi
-        // Buat query untuk menampilkan data angsuran sesuai periode tanggal
-        $query     = "SELECT a.id_angsur, a.id_petugas, a.id_nasabah, n.nama_nasabah, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_nasabah n, tb_jenis_sampah j WHERE n.id_nasabah = a.id_nasabah AND j.id_jenis = a.id_jenis AND (tanggal_angsur BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
-        $url_cetak = "print-laporan-angsuran.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
-        $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-        $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
-        $label     = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+          // Buat query untuk menampilkan data angsuran sesuai periode tanggal
+          $query     = "SELECT a.id_angsur, a.kode_angsur, p.kode_petugas, n.kode_nasabah, u.nama, j.nama_jenis, a.berat_angsur, a.total_angsur, a.tanggal_angsur FROM tb_angsuran a, tb_petugas p, tb_nasabah n, tb_users u, tb_jenis_sampah j WHERE a.nasabah_id = n.id_nasabah and a.petugas_id = p.id_petugas and n.users_id = u.id AND j.id_jenis_sampah = a.jenis_sampah_id AND (tanggal_angsur BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+          $url_cetak = "print-laporan-angsuran.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
+
+          //ubah format bulan
+          function formatBulan($tgl){
+            $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            $pecah = explode('-', $tgl);
+            return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
+          }
+          
+          if (date("m", strtotime($tgl_awal)) != date("m", strtotime($tgl_akhir))){
+              $label =  'Periode Tanggal '.(formatBulan(date(" -m-d", strtotime($tgl_awal)))." s/d ".formatBulan(date("Y-m-d", strtotime($tgl_akhir))));
+          } elseif (date("Y", strtotime($tgl_awal)) != date("Y", strtotime($tgl_akhir))){
+              $label =  'Periode Tanggal '.(formatBulan(date("Y-m-d", strtotime($tgl_awal)))." s/d ".formatBulan(date("Y-m-d", strtotime($tgl_akhir))));
+          } else {
+              $label =  'Periode Tanggal '.(date("d", strtotime($tgl_awal))." s/d ".formatBulan(date("Y-m-d", strtotime($tgl_akhir))));
+          }
         }
         ?>
         <hr />
@@ -117,16 +129,16 @@ document.location='login.php';
               echo "<tr>";
                 echo "<td>".$nomor++."</td>";
                 echo "<td>".$tgl."</td>";
-                echo "<td>".$data['id_petugas']."</td>";
-                echo "<td>".$data['id_nasabah']."</td>";
-                echo "<td>".$data['nama_nasabah']."</td>";
+                echo "<td>".$data['kode_petugas']."</td>";
+                echo "<td>".$data['kode_nasabah']."</td>";
+                echo "<td>".$data['nama']."</td>";
                 echo "<td>".$data['nama_jenis']."</td>";
                 echo "<td>".$data['berat_angsur']."</td>";
                 echo "<td>Rp".$data['total_angsur']."</td>";
               echo "</tr>";
               }
               }else{ // Jika data tidak ada
-              echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
+              echo "<tr><td colspan='8'>Data tidak ada</td></tr>";
               }
               ?>
             </tbody>

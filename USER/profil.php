@@ -80,44 +80,44 @@
                             <!-- Menampilkan data dari database ke Tabel -->
                             <?php
                             include('koneksi_db.php');
-                            $result = mysqli_query($koneksi,"SELECT n.id_nasabah, n.norek_nasabah, n.nama_nasabah, n.jk_nasabah, n.alamat_nasabah, n.telp_nasabah, n.pekerjaan_nasabah, n.tgl_daftar, l.username FROM tb_nasabah n, tb_login l WHERE n.norek_nasabah=$_SESSION[username]");
+                            $result = mysqli_query($koneksi,"SELECT n.kode_nasabah, n.nomor_rekening, u.nama, u.jenis_kelamin, u.alamat, u.telp, n.pekerjaan, n.tgl_daftar, u.username FROM tb_nasabah n, tb_users u WHERE n.users_id = u.id AND n.nomor_rekening=$_SESSION[username]");
                             $data   = mysqli_fetch_array($result);
                             ?>
                             <tr>
                               <td>ID Nasabah</td>
                               <td>:</td>
-                              <td><?php echo $data['id_nasabah'] ?></td>
+                              <td><?php echo $data['kode_nasabah'] ?></td>
                             </tr>
                             <tr>
                               <td>Nomor Rekening</td>
                               <td>:</td>
-                              <td><?php echo $data['norek_nasabah'] ?></td>
+                              <td><?php echo $data['nomor_rekening'] ?></td>
                             </tr>
                             
                             <tr>
                               <td>Nama Nasabah</td>
                               <td>:</td>
-                              <td><?php echo $data['nama_nasabah'] ?></td>
+                              <td><?php echo $data['nama'] ?></td>
                             </tr>
                             <tr>
                               <td>Jenis Kelamin</td>
                               <td>:</td>
-                              <td><?php echo $data['jk_nasabah'] ?></td>
+                              <td><?php echo $data['jenis_kelamin'] ?></td>
                             </tr>
                             <tr>
                               <td>Alamat</td>
                               <td>:</td>
-                              <td><?php echo $data['alamat_nasabah'] ?></td>
+                              <td><?php echo $data['alamat'] ?></td>
                             </tr>
                             <tr>
                               <td>Telepon</td>
                               <td>:</td>
-                              <td><?php echo $data['telp_nasabah'] ?></td>
+                              <td><?php echo $data['telp'] ?></td>
                             </tr>
                             <tr>
                               <td>Pekerjaan</td>
                               <td>:</td>
-                              <td><?php echo $data['pekerjaan_nasabah'] ?></td>
+                              <td><?php echo $data['pekerjaan'] ?></td>
                             </tr>
                             <tr>
                               <td>Tanggal Daftar</td>
