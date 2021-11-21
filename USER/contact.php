@@ -48,7 +48,6 @@
         <?php
         include('koneksi_db.php');
         $query   = mysqli_query($koneksi,"SELECT * FROM tb_config WHERE id_config = 10 OR id_config = 11 OR id_config = 12 ");
-        //$contact = mysqli_fetch_array($query);
         ?>
 
         <!-- ======= Contact Section ======= -->

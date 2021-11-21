@@ -104,7 +104,10 @@
 
       </div>
     </section><!-- End Icon Boxes Section -->
-
+    <?php
+      include('koneksi_db.php');
+      $query   = mysqli_query($koneksi,"SELECT * FROM tb_config WHERE id_config = 10 OR id_config = 11 OR id_config = 12 ");
+    ?>
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -113,35 +116,28 @@
         <div class="section-title">
           <h2>Contact Us</h2>
         </div>
-
-         <div class="section-title" margin-left:100px>
-          <div class="col-lg-5">
-            <div class="info">
-              <div class="address">
-                <i class="icofont-google-map"></i>
-                <h4>Location:</h4>
-                <p>Jl. Masjid No.013 Sroyo</p>
+        <div class="row">
+          <div class="col-lg-12 d-flex align-items-stretch" data-aos="fade-right" data-aos-delay="100">
+            <div class="col-lg-5">
+              <div class="info">
+                <?php 
+                  $class = [ "address", "icofont-google-map", "email", "icofont-envelope", "phone", "icofont-phone"];
+                  $div = 0;
+                  $i = 1;
+                  while($data = mysqli_fetch_array($query)) {
+                ?>
+                <div class=<?php echo $class[$div]; $div += 2;?>>
+                  <i class=<?php echo $class[$i]; $i += 2;?>></i>
+                  <h4><?php echo $data['judul']; echo" :";?></h4>
+                  <p><?php echo $data['isi']; ?></p>
+                </div>
+                <?php 
+                  }
+                ?>
               </div>
-
-              <div class="email">
-                <i class="icofont-envelope"></i>
-                <h4>Email:</h4>
-                <p>banksampahsroyo@gmail.com</p>
-              </div>
-
-              <div class="phone">
-                <i class="icofont-phone"></i>
-                <h4>Call:</h4>
-                <p>081357780664</p>
-              </div>
-
-            </div>
-
+            </div>  
           </div>
-
-         
         </div>
-
       </div>
     </section><!-- End Contact Section -->
 
