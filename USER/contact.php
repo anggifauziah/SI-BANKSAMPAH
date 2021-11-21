@@ -69,7 +69,7 @@
                     ?>
                     <div class=<?php echo $class[$div]; $div += 2;?>>
                       <i class=<?php echo $class[$i]; $i += 2;?>></i>
-                      <h4><?php echo $data['judul']; ?></h4>
+                      <h4><?php echo $data['judul']; echo" :";?></h4>
                       <p><?php echo $data['isi']; ?></p>
                     </div>
                     <?php 

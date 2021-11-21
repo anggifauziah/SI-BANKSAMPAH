@@ -16,17 +16,31 @@
               <li><a href="contact.php">Contact</a></li>
             </ul>
           </div>
-
+          <?php
+          include('koneksi_db.php');
+          $query   = mysqli_query($koneksi,"SELECT judul, isi FROM tb_config WHERE id_config = 11 OR id_config = 12 ");
+          $query2 = mysqli_query($koneksi,"SELECT isi FROM tb_config WHERE id_config = 10 ");
+          $data2   = mysqli_fetch_array($query2);
+          $isi = $data2['isi'];
+          $jln = substr($isi, 0, 13);
+          $no  = substr($isi, 13, 7);
+          $alamat = substr($isi, 20, 6);
+          ?>
           <div class="col-lg-3 col-md-6 footer-contact">
             <h4>Contact Us</h4>
             <p>
-              Jl. Masjid<br>
-              No.13<br>
-              Sroyo <br><br>
-              <strong>Phone:</strong> 081357780664<br>
-              <strong>Email:</strong> banksampahsroyo@gmail.com<br>
+              <?php echo $jln; ?><br>
+              <?php echo $no; ?><br>
+              <?php echo $alamat; ?><br>
             </p>
-
+            <?php
+              while($data = mysqli_fetch_array($query)) {
+            ?>
+                <strong><?php echo $data['judul'] ?></strong>
+                <?php echo ":".$data['isi']; ?>
+            <?php
+              }
+            ?>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-info">
