@@ -3,7 +3,7 @@ function searchpengepul(){
   
   $.ajax({
       type: "POST", // Method pengiriman data bisa dengan GET atau POST
-      url: "proses-searchdatapengepul-penjualan.php", // Isi dengan url/path file php yang dituju
+      url: "proses-search-data-pengepul.php", // Isi dengan url/path file php yang dituju
       data: {idPengepul : $("#idPengepul").val()}, // data yang akan dikirim ke file proses
       dataType: "json",
       beforeSend: function(e) {

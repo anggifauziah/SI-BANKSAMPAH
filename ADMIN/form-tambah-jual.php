@@ -89,7 +89,7 @@ if(empty($_SESSION)){
         </div>
 
         <!-- Load file proses-searchnasabah-angsuran.js -->
-        <script type="text/javascript" src="proses-searchpengepul-penjualan.js"></script>
+        <script type="text/javascript" src="proses-search-pengepul.js"></script>
         <!-- Load library jquery -->
         <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
 
