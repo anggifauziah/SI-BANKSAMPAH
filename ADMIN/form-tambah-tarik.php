@@ -78,19 +78,19 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Tarik</label>
-                <input type="text" class="form-control" name="idTarik" id="InputIdPinjam" value="<?php echo($kode) ?>" readonly required>
+                <label for="InputKodeTarik">Kode Tarik</label>
+                <input type="text" class="form-control" name="kode_tarik" id="InputKodeTarik" value="<?php echo($kode) ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputNama">ID Petugas</label>
-                <input type="text" class="form-control" name="idPetugas" id="InputIdPetugas" placeholder="ID Petugas" required>
+                <label for="InputKodePetugas">Kode Petugas</label>
+                <input type="text" class="form-control" name="kode_petugas" id="InputKodePetugas" placeholder="Kode Petugas" required>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Load file proses-searchnasabah-pinjaman.js -->
-        <script type="text/javascript" src="proses-searchnasabah-pinjaman.js"></script>
+        <script type="text/javascript" src="proses-search-nasabah.js"></script>
         <!-- Load library jquery -->
         <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
 
@@ -99,8 +99,8 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputIdNasabah">ID Nasabah</label>
-                <input type="number" class="form-control" name="idNasabah" id="idNasabah" placeholder="NIK KTP" required>
+                <label for="InputKodeNasabah">Kode Nasabah (NIK)</label>
+                <input type="number" class="form-control" name="kode_nasabah" id="kode_nasabah" placeholder="NIK KTP" required>
               </div>
               <div class="form-group col-md-4">
                 <label for="btn-search">Search Data Nasabah</label><br>
@@ -116,7 +116,7 @@ if(empty($_SESSION)){
                         search(); // Panggil function search
                     });
     
-                    $("#idNasabah").keyup(function(event){ // Ketika user menekan tombol di keyboard
+                    $("#kode_nasabah").keyup(function(event){ // Ketika user menekan tombol di keyboard
                         if(event.keyCode == 13){ // Jika user menekan tombol ENTER
                             search(); // Panggil function search
                         }
@@ -131,11 +131,11 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="namaNasabah" id="namaNasabah" placeholder="Nama Lengkap" readonly>
+                <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJk">Jenis Kelamin</label>
-                <input type="text" class="form-control" name="jk" id="jk" placeholder="Jenis Kelamin" readonly>
+                <input type="text" class="form-control" name="jenis_kelamin" id="jenis_kelamin" placeholder="Jenis Kelamin" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputAlamat">Alamat</label>

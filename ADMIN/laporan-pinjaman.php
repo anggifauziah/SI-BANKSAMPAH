@@ -116,10 +116,10 @@ document.location='login.php';
               echo "<tr>";
                 echo "<td>".$nomor++."</td>";
                 echo "<td>".$tgl."</td>";
-                echo "<td>".$data['id_petugas']."</td>";
-                echo "<td>".$data['id_nasabah']."</td>";
-                echo "<td>".$data['norek_nasabah']."</td>";
-                echo "<td>".$data['nama_nasabah']."</td>";
+                echo "<td>".$data['kode_petugas']."</td>";
+                echo "<td>".$data['kode_nasabah']."</td>";
+                echo "<td>".$data['nomor_rekening']."</td>";
+                echo "<td>".$data['nama']."</td>";
                 echo "<td>Rp".$data['jumlah_pinjam']."</td>";
               echo "</tr>";
               }
