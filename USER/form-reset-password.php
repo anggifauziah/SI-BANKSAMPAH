@@ -1,3 +1,13 @@
+<!-- Alert Login -->
+<?php
+session_start();
+if(empty($_SESSION)){
+  echo "<script>alert('Anda Harus Login Terlebih Dahulu');
+  document.location='../USER/index.php';
+  </script>";
+}
+?>
+<!-- Alert Login -->
 
 <!DOCTYPE html>
 <html lang="en">
