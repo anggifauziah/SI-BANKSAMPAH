@@ -28,7 +28,6 @@ if(empty($_SESSION)){
   <link href="css/sb-admin.css" rel="stylesheet">
   <!-- Navigation-->
   <?php include 'navbar.php'; ?>
-   
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -40,16 +39,16 @@ if(empty($_SESSION)){
           <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="menu-pinjaman.php">Pinjaman</a>
+          <a href="menu-angsuran.php">Pinjaman</a>
         </li>
-        <li class="breadcrumb-item active">Form Tambah Peminjaman</li>
+        <li class="breadcrumb-item active">Form Tambah Pinjaman</li>
       </ol>
       <!-- Breadcrumbs -->
 
       <?php
       include('koneksi_db.php');
       //mengambil data surat dengan id paling besar
-      $query    = mysqli_query($koneksi, "SELECT MAX(id_pinjam) as idTerbesar FROM tb_pinjaman");
+      $query    = mysqli_query($koneksi, "SELECT MAX(kode_pinjam) as idTerbesar FROM tb_pinjaman");
       $data     = mysqli_fetch_array($query);
       $idPinjam = $data['idTerbesar'];
 
@@ -59,7 +58,7 @@ if(empty($_SESSION)){
       //bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
       $id = $urutan+1;
 
-      //membentuk id surat baru
+      //membentuk kode baru
       $huruf = "PJ";
       $kode  = $huruf.sprintf("%03s", $id);
 
@@ -71,26 +70,26 @@ if(empty($_SESSION)){
       }
       ?>
 
-      <!-- Form Pinjaman -->
+      <!-- Form Angsuran -->
       <form method="POST" action="proses-tambah-pinjaman.php">
         <div class="card border-dark mb-3" style="max-width: 100rem;">
           <div class="card-header">Data Bank</div>
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Pinjam</label>
-                <input type="text" class="form-control" name="idPinjam" id="InputIdPinjam" value="<?php echo($kode) ?>" readonly required>
+                <label for="InputIdAngsur">Kode Pinjam</label>
+                <input type="text" class="form-control" name="kode_pinjam" id="InputIdAngsur" value="<?php echo($kode) ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputNama">ID Petugas</label>
-                <input type="text" class="form-control" name="idPetugas" id="InputIdPetugas" placeholder="ID Petugas" required>
+                <label for="InputKodePetugas">Kode Petugas</label>
+                <input type="text" class="form-control" name="kode_petugas" id="InputKodePetugas" placeholder="ID Petugas" required>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Load file proses-searchnasabah-pinjaman.js -->
-        <script type="text/javascript" src="proses-searchnasabah-pinjaman.js"></script>
+        <!-- Load file proses-search-nasabah.js -->
+        <script type="text/javascript" src="proses-search-nasabah.js"></script>
         <!-- Load library jquery -->
         <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
 
@@ -99,8 +98,8 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputIdNasabah">ID Nasabah</label>
-                <input type="number" class="form-control" name="idNasabah" id="idNasabah" placeholder="NIK KTP" required>
+                <label for="InputKodeNasabah">Kode Nasabah (NIK)</label>
+                <input type="number" class="form-control" name="kode_nasabah" id="kode_nasabah" placeholder="NIK KTP" required>
               </div>
               <div class="form-group col-md-4">
                 <label for="btn-search">Search Data Nasabah</label><br>
@@ -116,7 +115,7 @@ if(empty($_SESSION)){
                         search(); // Panggil function search
                     });
     
-                    $("#idNasabah").keyup(function(event){ // Ketika user menekan tombol di keyboard
+                    $("#kode_nasabah").keyup(function(event){ // Ketika user menekan tombol di keyboard
                         if(event.keyCode == 13){ // Jika user menekan tombol ENTER
                             search(); // Panggil function search
                         }
@@ -131,11 +130,11 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="namaNasabah" id="namaNasabah" placeholder="Nama Lengkap" readonly>
+                <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJk">Jenis Kelamin</label>
-                <input type="text" class="form-control" name="jk" id="jk" placeholder="Jenis Kelamin" readonly>
+                <input type="text" class="form-control" name="jenis_kelamin" id="jenis_kelamin" placeholder="Jenis Kelamin" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputAlamat">Alamat</label>
@@ -153,17 +152,19 @@ if(empty($_SESSION)){
           </div>
         </div>
 
+
+
         <div class="card border-dark mb-3" style="max-width: 100rem;">
-          <div class="card-header">Peminjaman</div>
+          <div class="card-header">Pinjaman</div>
           <div class="card-body text-dark">
             <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="InputJumPinjam">Jumlah Pinjam</label>
-                <input type="number" class="form-control" name="jumpinjam" id="InputJumPinjam" placeholder="Jumlah Pinjam" required>
+              <div class="form-group col-md-4">
+                <label for="InputTotal">Jumlah Pinjam</label>
+                <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
               </div>
-              <div class="form-group col-md-6">
-                <label for="InputTglPinjam">Tanggal Pinjam</label>
-                <input type="text" class="form-control" name="tglpinjam" id="InputTglPinjam" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
+              <div class="form-group col-md-4">
+                <label for="InputTglAngsur">Tanggal Pinjam</label>
+                <input type="text" class="form-control" name="tanggal_pinjam" id="InputTglPinjam" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
               </div>
             </div>
           </div>
@@ -174,9 +175,12 @@ if(empty($_SESSION)){
           <input type="button" value="Cancel" class="btn btn-warning" onclick="history.back(-1)" />
         </div>
       </form>
-      <!-- Form Pinjaman -->
+      <!-- Form Angsuran -->
 
     </div>
+
+    
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <?php include 'footer.php'; ?>
@@ -190,7 +194,6 @@ if(empty($_SESSION)){
     <?php include('logout-modal.php'); ?>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->

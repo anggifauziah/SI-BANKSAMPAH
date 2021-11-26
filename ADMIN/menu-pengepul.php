@@ -71,22 +71,24 @@ if(empty($_SESSION)){
                 <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi,"SELECT * FROM tb_pengepul");
+                $result = mysqli_query($koneksi, "SELECT p.users_id, p.kode_pengepul, u.nama, u.jenis_kelamin, u.alamat, u.telp, u.id FROM tb_pengepul p INNER JOIN tb_users u WHERE p.users_id = u.id");
                 $nomor = 1;
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
-                    echo "<td>".$data['id_pengepul']."</td>";
-                    echo "<td>".$data['nama_pengepul']."</td>";
-                    echo "<td>".$data['jk_pengepul']."</td>";
-                    echo "<td>".$data['alamat_pengepul']."</td>";
-                    echo "<td>".$data['telp_pengepul']."</td>";
+                    echo "<td>".$data['kode_pengepul']."</td>";
+                    echo "<td>".$data['nama']."</td>";
+                    echo "<td>".$data['jenis_kelamin']."</td>";
+                    echo "<td>".$data['alamat']."</td>";
+                    echo "<td>".$data['telp']."</td>";
                     echo "<td>
-                          <a href='form-edit-pengepul.php?id=".$data['id_pengepul']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
-                          <a data-href='proses-hapus-pengepul.php?id=".$data['id_pengepul']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
-                          </td>";
+                            <a href='form-edit-pengepul.php?id=".$data['id']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
+                            <a data-href='proses-hapus-pengepul.php?id=".$data['id']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
+                            <a href='print-data-pengepul.php?id=".$data['id']."' class='btn btn-primary btn-sm'><i class='fa fa-print'></i> Print</a>
+                            <a data-href='proses-reset-password.php?id=".$data['id']."' class = 'btn btn-info btn-sm' data-toggle='modal' data-target='#konfirmasi_reset'><i class='fa fa-refresh'></i> Reset Password</a>
+                            </td>";
                     echo "</tr>";
                   }
                  ?>
