@@ -78,9 +78,7 @@ if(empty($_SESSION)){
                     echo "<td>".$data['judul']."</td>";
                     echo "<td>".$data['isi']."</td>";
                     echo "<td>
-                          <a href='form-edit-configuration.php?id=".$data['id_config']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
-                          <a data-href='proses-hapus-configuration.php?id=".$data['id_config']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
-                          </td>";
+                          <a href='form-edit-configuration.php?id=".$data['id_config']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>";
                     echo "</tr>";
                   }
                  ?>
@@ -92,20 +90,6 @@ if(empty($_SESSION)){
         </div>
       </div>
     </div>
-
-    <!-- Hapus Configuration-->
-    <div class="modal fade" id="konfirmasi_hapus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <b>Anda yakin ingin menghapus data ini?</b><br><br>
-                    <a class="btn btn-danger btn-ok"> Hapus</a>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-close"></i> Batal</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Hapus Configuration-->
 
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -131,18 +115,6 @@ if(empty($_SESSION)){
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
   </div>
-
-  <!-- Hapus Configuration-->
-  <script type="text/javascript">
-    $(document).ready(function() {
-        $('#konfirmasi_hapus').on('show.bs.modal', function(e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        });
-    });
-
-  </script>
-  <script src="js/bootstrap.min.js"></script>
-  <!-- Hapus Configuration-->
 
 </body>
 

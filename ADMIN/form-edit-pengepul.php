@@ -8,6 +8,12 @@ if(empty($_SESSION)){
 }
 ?>
 <!-- Alert Login -->
+<?php
+include 'koneksi_db.php';
+$id        = $_GET['id'];
+$pengepul  = mysqli_query($koneksi,"SELECT u.id, p.kode_pengepul, u.nama, u.jenis_kelamin, u.alamat, u.telp FROM tb_pengepul p INNER JOIN tb_users u ON p.users_id = u.id WHERE u.id = $id");
+$row       = mysqli_fetch_array($pengepul);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,42 +51,33 @@ if(empty($_SESSION)){
       </ol>
       <!-- Breadcrumbs -->
 
-      <?php
-      include('koneksi_db.php');
-      //mengambil data dengan id paling besar
-      $id       = $_GET['id'];
-      $pengepul    = mysqli_query($koneksi,"SELECT * FROM tb_pengepul WHERE id_pengepul='$id'");
-      $row      = mysqli_fetch_array($pengepul);
-      ?>
-
-
       <!-- Form Petugas -->
       <form method="POST" action="proses-edit-pengepul.php" enctype="multipart/form-data">
         <div class="card border-dark mb-3" style="max-width: 100rem;">
           <div class="card-header">Data Diri Pengepul</div>
           <div class="card-body text-dark">
             <div class="form-row">
+              <input type="hidden" class="form-control" name="id" id="InputId" value="<?php echo $row['id']; ?>" readonly required>
               <div class="form-group col-md-6">
-                <label for="InputId">ID Pengepul</label>
-                <input type="text" class="form-control" name="id_Pengepul" id="InputId" placeholder="ID Pengepul" value="<?php echo $row['id_pengepul']; ?>"  readonly required>
+                <label for="InputId">Kode Pengepul</label>
+                <input type="text" class="form-control" name="kode_Pengepul" id="InputId" required value="<?php echo $row['kode_pengepul']; ?>" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="nama_Pengepul" id="InputNama" placeholder="Nama Lengkap"  value="<?php echo $row['nama_pengepul']; ?>" readonly required>
+                <input type="text" class="form-control" name="nama_Pengepul" id="InputNama" value="<?php echo $row['nama']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJenisKelamin">Jenis Kelamin</label>
-               <input type="text" class="form-control" name="nama_Pengepul" id="InputNama" placeholder="Nama Lengkap"  value="<?php echo $row['jk_pengepul']; ?>" readonly required>
+                <input type="text" class="form-control" name="jenis_kelamin" id="InputJK" value="<?php echo $row['jenis_kelamin']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputAlamat">Alamat</label>
-                <textarea class="form-control" id="InputAlamat" name="alamat" placeholder="Alamat" required rows="2"><?php echo $row['alamat_pengepul']; ?></textarea>
+                <textarea class="form-control" id="InputAlamat" name="alamat" placeholder="Alamat"  value="<?php echo $row['alamat']; ?>" required rows="2"></textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTelepon">Nomor Telepon/HP</label>
-                <input type="number" class="form-control" name="telp" id="InputTelepon"  value="<?php echo $row['telp_pengepul']; ?>" placeholder="Nomor Telepon/HP" required>
-              </div>
-             
+                <input type="number" class="form-control" name="telp" id="InputTelepon" placeholder="Nomor Telepon/HP"  value="<?php echo $row['telp']; ?>" required>
+              </div>     
             </div>
           </div>
         </div>

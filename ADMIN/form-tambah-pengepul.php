@@ -47,20 +47,25 @@ if(empty($_SESSION)){
 
       <?php
       include('koneksi_db.php');
-      //mengambil data surat dengan id paling besar
-      $query  = mysqli_query($koneksi, "SELECT MAX(id_pengepul) as idTerbesar FROM tb_pengepul");
+      //mengambil data pengepul dengan id paling besar
+      $query  = mysqli_query($koneksi, "SELECT MAX(kode_pengepul) as idTerbesar FROM tb_pengepul");
       $data   = mysqli_fetch_array($query);
-      $idPtgs = $data['idTerbesar'];
+      $idPngpl = $data['idTerbesar'];
 
-      //mengambil angka dari id surat terbesar, menggunakan fungsi substr
+      //mengambil angka dari id terbesar, menggunakan fungsi substr
       //dan diubah ke int
-      $urutan = (int) substr($idPtgs, 3, 3);
+      $urutan = (int) substr($idPngpl,3,3);
       //bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
       $id = $urutan+1;
 
-      //membentuk id surat baru
+      //membentuk Kode pengepul baru
       $huruf = "PP";
       $kode  = $huruf.sprintf("%03s", $id);
+      
+
+      //membentuk username pengepul baru
+      $angka  = "19";
+      $user  = $angka.rand().sprintf("%03s", $id);
       ?>
 
       <!-- Form Petugas -->
@@ -70,8 +75,8 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Pengepul</label>
-                <input type="text" class="form-control" name="id_Pengepul" id="InputId" placeholder="NIK KTP" required value="<?php echo($kode) ?>" readonly>
+                <label for="InputId">Kode Pengepul</label>
+                <input type="text" class="form-control" name="kode_Pengepul" id="InputId" required value="<?php echo($kode) ?>" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
@@ -92,6 +97,14 @@ if(empty($_SESSION)){
               <div class="form-group col-md-6">
                 <label for="InputTelepon">Nomor Telepon/HP</label>
                 <input type="number" class="form-control" name="telp" id="InputTelepon" placeholder="Nomor Telepon/HP" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="InputTelepon">Username</label>
+                <input type="text" class="form-control" name="UN" id="InputUN" placeholder="Username" value="<?php echo($user) ?>" readonly required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="InputTelepon">Password</label>
+                <input type="text" class="form-control" name="PW" id="InputPW" placeholder="Password" value="<?php echo($user) ?>" readonly required>
               </div>
              
             </div>

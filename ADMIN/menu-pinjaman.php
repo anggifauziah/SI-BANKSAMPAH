@@ -58,11 +58,11 @@ if(empty($_SESSION)){
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>ID Petugas</th>
-                  <th>ID Nasabah</th>
+                  <th>Tanggal Pinjam</th>
+                  <th>Kode Petugas</th>
+                  <th>Kode Nasabah (NIK)</th>
                   <th>Nama Nasabah</th>
                   <th>Jumlah Pinjam</th>
-                  <th>Tanggal Pinjam</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -70,20 +70,18 @@ if(empty($_SESSION)){
                 <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi,"SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam 
-                  FROM tb_pinjaman p INNER JOIN tb_nasabah n
-                  WHERE p.id_nasabah = n.id_nasabah");
+                $result = mysqli_query($koneksi,"SELECT p.id_pinjam, p.tanggal_pinjam, pt.kode_petugas, n.kode_nasabah, u.nama, p.jumlah_pinjam FROM tb_pinjaman p, tb_petugas pt, tb_nasabah n, tb_users u where p.petugas_id=pt.id_petugas and p.nasabah_id=n.id_nasabah and n.users_id=u.id ORDER BY p.id_pinjam ASC");
                 $nomor = 1;
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
-                    echo "<td>".$data['id_petugas']."</td>";
-                    echo "<td>".$data['id_nasabah']."</td>";
-                    echo "<td>".$data['nama_nasabah']."</td>";
-                    echo "<td>Rp".$data['jumlah_pinjam']."</td>";
                     echo "<td>".$data['tanggal_pinjam']."</td>";
+                    echo "<td>".$data['kode_petugas']."</td>";
+                    echo "<td>".$data['kode_nasabah']."</td>";
+                    echo "<td>".$data['nama']."</td>";
+                    echo "<td>Rp".$data['jumlah_pinjam']."</td>";
                     echo "<td>
                           <a href='print-struk-pinjaman.php?id=".$data['id_pinjam']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>
                           </td>";
