@@ -59,7 +59,7 @@ if(empty($_SESSION)){
                 <tr>
                   <th>No</th>
                   <th>Kode Petugas</th>
-                  <th>Kode Nasabah</th>
+                  <th>Kode Nasabah (NIK)</th>
                   <th>Nama Nasabah</th>
                   <th>Jumlah Tarik</th>
                   <th>Tanggal Tarik</th>

@@ -1753,7 +1753,7 @@ class Html2Pdf
             $inBL[1]-= $border['b']['width'];
         }
 
-        if ($inTL[0]<=0 || $inTL[1]<=0) {
+        /*if ($inTL[0]<=0 || $inTL[1]<=0) {
             $inTL = null;
         }
         if ($inTR[0]<=0 || $inTR[1]<=0) {
@@ -1764,7 +1764,7 @@ class Html2Pdf
         }
         if ($inBL[0]<=0 || $inBL[1]<=0) {
             $inBL = null;
-        }
+        }*/
 
         // prepare the background color
         $pdfStyle = '';

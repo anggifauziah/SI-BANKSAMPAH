@@ -7,12 +7,12 @@ $result = ("SELECT p.kode_pengepul, u.nama, j.nama_jenis, pj.berat_jual, pj.tota
             WHERE p.id_pengepul = pj.pengepul_id AND p.users_id = u.id AND j.id_jenis_sampah = pj.jenis_sampah_id AND pj.kode_jual LIKE '%$id%'");
 $hasil = mysqli_query($koneksi,$result);
 while($data = mysqli_fetch_array($hasil)) {
-$idPengepul = $data['kode_pengepul'];
-$nama       = $data['nama'];
-$jenis      = $data['nama_jenis'];
-$berat      = $data['berat_jual'];
-$jumlah     = $data['total_jual'];
-$tgl        = $data['tanggal_jual'];
+$kode_pengepul = $data['kode_pengepul'];
+$nama          = $data['nama'];
+$jenis         = $data['nama_jenis'];
+$berat         = $data['berat_jual'];
+$jumlah        = $data['total_jual'];
+$tgl           = $data['tanggal_jual'];
 }
 //ubah format bulan
 function formatBulan($tgl){
@@ -32,7 +32,18 @@ function formatBulan($tgl){
         <td><strong><h3 align="center">BANK SAMPAH</h3></strong></td>
       </tr>
       <tr>
-        <td align="center">Jl. Masjid No.013 Sroyo <br> Telepon : 081357780664 </td>
+        <td align="center">
+          <?php
+            while($data = mysqli_fetch_array($query)) {
+              $isi = preg_replace('#</?p.*?>#is', '', $data['isi']);
+              if ($data['judul'] == "Telepon"){
+                echo "Telepon : ".$isi;
+              } else {
+                echo $isi."<br>";
+              }
+            }
+          ?>
+        </td>
       </tr>
       <tr>
         <td>--------------------------------------------------------</td>
@@ -43,9 +54,9 @@ function formatBulan($tgl){
       </thead>
       <tbody>
         <tr>
-          <th align="left">ID Pengepul</th>
+          <th align="left">Kode Pengepul</th>
           <td width="20">:</td>
-          <td width="170"><?php echo $idPengepul; ?></td>
+          <td width="170"><?php echo $kode_pengepul; ?></td>
         </tr>
         <tr>
           <th align="left">Nama</th>

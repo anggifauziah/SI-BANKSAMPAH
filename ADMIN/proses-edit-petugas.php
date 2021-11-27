@@ -1,14 +1,14 @@
 <?php
 include 'koneksi_db.php';
 // menyimpan data kedalam variabel
-$id   		= $_POST['idPetugas'];
-$nama		= $_POST['nama'];
-$alamat		= $_POST['alamat'];
-$telp 		= $_POST['telp'];
-$jabatan	= $_POST['jabatan'];
+$kode_petugas  	= $_POST['kode_petugas'];
+$nama			= $_POST['nama'];
+$alamat			= $_POST['alamat'];
+$telp 			= $_POST['telp'];
+$jabatan		= $_POST['jabatan'];
 
 // query SQL untuk update data
-$petugas	= mysqli_query($koneksi, "SELECT users_id FROM tb_petugas WHERE kode_petugas = '$id'");
+$petugas	= mysqli_query($koneksi, "SELECT users_id FROM tb_petugas WHERE kode_petugas = '$kode_petugas'");
 $hasil 		= mysqli_fetch_array($petugas);
 $iduser		= $hasil['users_id'];
 $users  	= "UPDATE tb_users SET nama = '$nama', alamat = '$alamat', telp = '$telp' WHERE id = '$iduser'";

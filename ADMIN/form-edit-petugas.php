@@ -60,8 +60,8 @@ $row      = mysqli_fetch_array($petugas);
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Petugas</label>
-                <input type="text" class="form-control" name="idPetugas" id="InputId" placeholder="ID Petugas" value="<?php echo $row['kode_petugas']; ?>" readonly required>
+                <label for="InputKode">ID Petugas</label>
+                <input type="text" class="form-control" name="kode_petugas" id="InputKode" placeholder="Kode Petugas" value="<?php echo $row['kode_petugas']; ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>

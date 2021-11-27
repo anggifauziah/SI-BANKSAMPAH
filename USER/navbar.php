@@ -6,9 +6,22 @@ session_start();
     <div class="container d-flex align-items-center">
       <div class="contact-info mr-auto">
         <ul>
-          <li><i class="icofont-envelope"></i><a href="mailto:contact@example.com">banksampahsroyo@gmail.com</a></li>
-          <li><i class="icofont-phone"></i>081357780664</li>
-          <li><i class="icofont-clock-time icofont-flip-horizontal"></i> Senin-Sabtu 9.00 - 17.00</li>
+          <?php
+            include('koneksi_db.php'); 
+            $query   = mysqli_query($koneksi,"SELECT judul, isi FROM tb_config WHERE id_config = 11 OR id_config = 12 OR id_config = 13 ");
+            $class = ["icofont-envelope", "icofont-phone", "icofont-clock-time icofont-flip-horizontal"];
+            $div = 0;
+            while($data = mysqli_fetch_array($query)) {
+              $isi = preg_replace('#</?p.*?>#is', '', $data['isi']);
+              if ($data['judul'] == "Email"){
+                echo "<li><i class=".$class[$div]."></i><a href='mailto:".$isi."'>".$isi."</a></li>";
+                $div += 1;
+              } else {
+                echo "<li><i class=".$class[$div]."></i>".$isi."</li>";
+                $div += 1;
+              }
+            }
+          ?>
         </ul>
       </div>
       <div class="cta">
