@@ -67,7 +67,7 @@
             <!-- Menampilkan data dari database ke Tabel -->
             <?php
             include('koneksi_db.php');
-            $result = mysqli_query($koneksi,"SELECT * FROM tb_config WHERE id_config != 10 AND id_config != 11 AND id_config != 12");
+            $result = mysqli_query($koneksi,"SELECT * FROM tb_config WHERE id_config = 3 OR id_config = 4 OR id_config = 5 OR id_config = 6");
             ?>
             <?php
               while($data = mysqli_fetch_array($result)) {

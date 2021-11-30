@@ -85,8 +85,8 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Petugas</label>
-                <input type="text" class="form-control" name="idPetugas" id="InputId" placeholder="ID Petugas" value="<?php echo($kode) ?>" readonly required>
+                <label for="InputKode">Kode Petugas</label>
+                <input type="text" class="form-control" name="kode_petugas" id="InputKode" placeholder="Kode Petugas" value="<?php echo($kode) ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>

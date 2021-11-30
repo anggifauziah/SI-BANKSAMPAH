@@ -22,6 +22,7 @@
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="assets/vendor/libraries/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
+    <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -68,7 +69,7 @@
                         ?>
                         
                         <tr>
-                          <td>ID Nasabah</td>
+                          <td>Kode Nasabah (NIK)</td>
                           <td>:</td>
                           <td><?php echo $data['kode_nasabah'] ?></td>
                         </tr>
@@ -137,12 +138,12 @@
 
                   if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
                     // Buat query untuk menampilkan semua data tabungan
-                    $queryp      = "SELECT p.total_tabung, p.tanggal_tabung FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username]";
-                    $queryt     = "SELECT t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username]";
+                    $queryp      = "SELECT p.kode_tabung, p.total_tabung, p.tanggal_tabung FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username]";
+                    $queryt     = "SELECT t.kode_tarik_tabungan, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username]";
                   }else{ // Jika terisi
                     // Buat query untuk menampilkan data tabungan sesuai periode tanggal
-                    $queryp     = "SELECT p.total_tabung, p.tanggal_tabung FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username] AND (tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
-                    $queryt     = "SELECT t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username] AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+                    $queryp     = "SELECT p.kode_tabung, p.total_tabung, p.tanggal_tabung FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username] AND (tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+                    $queryt     = "SELECT t.kode_tarik_tabungan, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username] AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
                   }
                 ?>
                 
@@ -154,7 +155,6 @@
                         <th>No</th>
                         <th>Nominal</th>
                         <th>Tanggal</th>
-                        
                       </tr>
                     </thead>
                     <tbody>

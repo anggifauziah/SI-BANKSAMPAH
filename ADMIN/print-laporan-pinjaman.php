@@ -58,7 +58,18 @@
         <td><strong><h3 align="center">...BANK SAMPAH...</h3></strong></td>
       </tr>
       <tr>
-        <td align="center">Jl. Masjid No. 13, <br> Sroyo <br> Telpon : 081357780664 </td>
+        <td align="center">
+          <?php
+            while($data = mysqli_fetch_array($query)) {
+              $isi = preg_replace('#</?p.*?>#is', '', $data['isi']);
+              if ($data['judul'] == "Telepon"){
+                echo "Telepon : ".$isi;
+              } else {
+                echo $isi."<br>";
+              }
+            }
+          ?>
+        </td>
       </tr>
       <tr>
         <td align="center">------------------------------------------------------------------------------------------------------------------------</td>

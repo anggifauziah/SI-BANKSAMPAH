@@ -58,8 +58,8 @@ if(empty($_SESSION)){
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>ID Petugas</th>
-                  <th>ID Pengepul</th>
+                  <th>Kode Petugas</th>
+                  <th>Kode Pengepul</th>
                   <th>Nama Pengepul</th>
                   <th>Jenis Sampah</th>
                   <th>Berat Sampah</th>

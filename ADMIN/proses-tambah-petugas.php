@@ -9,7 +9,7 @@ $username 		= $_POST['username'];
 $password 		= $_POST['password'];
 $level 			= 3;
 
-$idPetugas 		= $_POST['idPetugas'];
+$kode_petugas 	= $_POST['kode_petugas'];
 $jabatan		= $_POST['jabatan'];
 
 // query SQL untuk insert data
@@ -19,7 +19,7 @@ $result = mysqli_query($koneksi, $users);
 
 if ($users) {
 	$users_id	= mysqli_insert_id($koneksi); //mengambil id terakhir yang diinput ke tb_users
-	$petugas 	= "INSERT INTO tb_petugas (kode_petugas, users_id, jabatan) VALUES ('$idPetugas', '$users_id', '$jabatan')";
+	$petugas 	= "INSERT INTO tb_petugas (kode_petugas, users_id, jabatan) VALUES ('$kode_petugas', '$users_id', '$jabatan')";
 	$result 	= mysqli_query($koneksi, $petugas);
 }
 
