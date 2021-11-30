@@ -37,11 +37,11 @@ document.location='login.php';
           <li class="breadcrumb-item">
             <a href="index.php">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Laporan Penjualan</li>
+          <li class="breadcrumb-item active">Laporan PenJUALAN</li>
         </ol>
 
         <!-- FORM FILTER -->
-        <form method="GET" action="laporan-penjualan.php">
+        <form method="GET" action="laporan-pinjaman.php">
           <div class="row">
             <div class="col-sm-6 col-md-4">
               <div class="form-group">
@@ -73,13 +73,13 @@ document.location='login.php';
         $tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
 
         if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-        // Buat query untuk menampilkan semua data penjualan
-        $query     = "SELECT pj.id_petugas, p.id_pengepul, p.nama_pengepul, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_pengepul p, tb_jenis_sampah j WHERE p.id_pengepul = pj.id_pengepul AND j.id_jenis = pj.id_jenis ORDER BY pj.tanggal_jual ASC";
+        // Buat query untuk menampilkan semua data Pinjaman
+        $query     = "SELECT pj.id_jual, pj.kode_jual, pt.kode_petugas, p.kode_pengepul, u.nama, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_petugas pt, tb_pengepul p, tb_users u, tb_jenis_sampah j WHERE p.id_pengepul = pj.pengepul_id and pt.id_petugas = pj.petugas_id and p.users_id = u.id AND j.id_jenis_sampah = pj.jenis_sampah_id";
         $url_cetak = "print-laporan-penjualan.php";
         $label     = "Semua Data Penjualan";
         }else{ // Jika terisi
-        // Buat query untuk menampilkan data penjualan sesuai periode tanggal
-        $query     = "SELECT pj.id_petugas, p.id_pengepul, p.nama_pengepul, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_pengepul p, tb_jenis_sampah j WHERE p.id_pengepul = pj.id_pengepul AND j.id_jenis = pj.id_jenis AND (tanggal_jual BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+        // Buat query untuk menampilkan data Pinjaman sesuai periode tanggal
+        $query     = "SELECT pj.id_jual, pj.kode_jual, pt.kode_petugas, p.kode_pengepul, u.nama, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_petugas pt, tb_pengepul p, tb_users u, tb_jenis_sampah j WHERE p.id_pengepul = pj.pengepul_id and pt.id_petugas = pj.petugas_id and p.users_id = u.id AND j.id_jenis_sampah = pj.jenis_sampah_id AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
         $url_cetak = "print-laporan-penjualan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
         $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -97,13 +97,13 @@ document.location='login.php';
             <thead>
               <tr>
                 <th>No</th>
-                <th>Tanggal Jual</th>
-                <th>ID Petugas</th>
-                <th>ID Pengepul</th>
+                <th>Tanggal Penjualan</th>
+                <th>Kode Petugas</th>
+                <th>Kode Pengepul</th>
                 <th>Nama Pengepul</th>
                 <th>Jenis Sampah</th>
                 <th>Berat Sampah</th>
-                <th>Total Jual</th>
+                <th>Total Penjualan</th>
               </tr>
             </thead>
             <tbody>
@@ -117,9 +117,9 @@ document.location='login.php';
               echo "<tr>";
                 echo "<td>".$nomor++."</td>";
                 echo "<td>".$tgl."</td>";
-                echo "<td>".$data['id_petugas']."</td>";
-                echo "<td>".$data['id_pengepul']."</td>";
-                echo "<td>".$data['nama_pengepul']."</td>";
+                echo "<td>".$data['kode_petugas']."</td>";
+                echo "<td>".$data['kode_pengepul']."</td>";
+                echo "<td>".$data['nama']."</td>";
                 echo "<td>".$data['nama_jenis']."</td>";
                 echo "<td>".$data['berat_jual']."</td>";
                 echo "<td>Rp".$data['total_jual']."</td>";

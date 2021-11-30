@@ -27,28 +27,57 @@
 
 	if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
 		// Buat query untuk menampilkan semua data Pinjaman
-		$query = "SELECT t.id_tarik, t.id_petugas, t.id_nasabah, n.norek_nasabah, n.nama_nasabah, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t INNER JOIN tb_nasabah n WHERE t.id_nasabah = n.id_nasabah";
+		$query = "SELECT t.tanggal_tarik, pt.kode_petugas, n.kode_nasabah, n.nomor_rekening, u.nama, t.jumlah_tarik FROM tb_tarik_tabungan t, tb_petugas pt, tb_nasabah n, tb_users u WHERE t.petugas_id = pt.id_petugas AND t.nasabah_id = n.id_nasabah AND n.users_id = u.id";
 
 		$label = "Semua Data Penarikan";
 	}else{ // Jika terisi
 		// Buat query untuk menampilkan data Pinjaman sesuai periode tanggal
-		$query = "SELECT t.id_tarik, t.id_petugas, t.id_nasabah, n.norek_nasabah, n.nama_nasabah, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t INNER JOIN tb_nasabah n WHERE t.id_nasabah = n.id_nasabah AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+		$query = "SELECT t.tanggal_tarik, pt.kode_petugas, n.kode_nasabah, n.nomor_rekening, u.nama, t.jumlah_tarik FROM tb_tarik_tabungan t, tb_petugas pt, tb_nasabah n, tb_users u WHERE t.petugas_id = pt.id_petugas AND t.nasabah_id = n.id_nasabah AND n.users_id = u.id AND (tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
 
-		$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-		$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
-		$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+		//$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+		//$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+		//$label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+		function formatBulan($tgl){
+          $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+          $pecah = explode('-', $tgl);
+          return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
+        }
+
+		if (date("m", strtotime($tgl_awal)) != date("m", strtotime($tgl_akhir))){
+            $label =  'Periode Tanggal '.(formatBulan(date(" -m-d", strtotime($tgl_awal)))." s/d ".formatBulan(date("Y-m-d", strtotime($tgl_akhir))));
+        } elseif (date("Y", strtotime($tgl_awal)) != date("Y", strtotime($tgl_akhir))){
+            $label =  'Periode Tanggal '.(formatBulan(date("Y-m-d", strtotime($tgl_awal)))." s/d ".formatBulan(date("Y-m-d", strtotime($tgl_akhir))));
+        } else {
+            $label =  'Periode Tanggal '.(date("d", strtotime($tgl_awal))." s/d ".formatBulan(date("Y-m-d", strtotime($tgl_akhir))));
+        }
 	}
 	?>
 
-	<h4 style="margin-bottom: 5px;">Data Laporan Penarikan</h4>
-	<?php echo $label ?>
+	<table width="100%" border="0" align="center">
+      <tr>
+        <td><strong><h3 align="center">...BANK SAMPAH...</h3></strong></td>
+      </tr>
+      <tr>
+        <td align="center">Jl. Masjid No. 13, <br> Sroyo <br> Telpon : 081357780664 </td>
+      </tr>
+      <tr>
+        <td align="center">------------------------------------------------------------------------------------------------------------------------</td>
+      </tr>
+      <tr>
+      	<td><h4 align="center" style="margin-bottom: 5px;">Data Laporan Tabungan</h4></td>
+      </tr>
+      <tr>
+      	<td align="center"><?php echo $label ?></td>
+      </tr>
+    </table>
+    <br>
 
 	<table class="table" border="1" width="100%" style="margin-top: 10px;">
 		<tr>
 			<th>No</th>
             <th>Tanggal Tarik</th>
-            <th>ID Petugas</th>
-            <th>ID Nasabah</th>
+            <th>Kode Petugas</th>
+            <th>Kode Nasabah (NIK)</th>
             <th>Nomor Rekening</th>
             <th>Nama Nasabah</th>
             <th>Jumlah Tarik</th>
@@ -65,11 +94,11 @@
 
 				echo "<tr>";
 				echo "<td style='width: 5%;'>".$nomor++."</td>";
-                echo "<td>".$tgl."</td>";
-                echo "<td>".$data['id_petugas']."</td>";
-                echo "<td>".$data['id_nasabah']."</td>";
-                echo "<td>".$data['norek_nasabah']."</td>";
-                echo "<td>".$data['nama_nasabah']."</td>";
+                echo "<td style='width: 5%;'>".$tgl."</td>";
+                echo "<td style='width: 5%;'>".$data['kode_petugas']."</td>";
+                echo "<td style='width: 18%;'>".$data['kode_nasabah']."</td>";
+                echo "<td style='width: 15%;'>".$data['nomor_rekening']."</td>";
+                echo "<td style='width: 18%;'>".$data['nama']."</td>";
                 echo "<td>Rp".$data['jumlah_tarik']."</td>";
 				echo "</tr>";
 			}
