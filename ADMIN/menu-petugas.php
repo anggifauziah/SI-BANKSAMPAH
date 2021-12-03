@@ -58,7 +58,7 @@ if(empty($_SESSION)){
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>ID Petugas</th>
+                  <th>Kode Petugas</th>
                   <th>Nama Petugas</th>
                   <th>Jenis Kelamin</th>
                   <th>Alamat</th>

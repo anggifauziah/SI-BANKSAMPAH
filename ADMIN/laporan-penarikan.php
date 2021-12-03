@@ -37,11 +37,11 @@ document.location='login.php';
           <li class="breadcrumb-item">
             <a href="index.php">Dashboard</a>
           </li>
-          <li class="breadcrumb-item active">Laporan Penarikan</li>
+          <li class="breadcrumb-item active">Laporan Penarikann</li>
         </ol>
 
         <!-- FORM FILTER -->
-        <form method="GET" action="laporan-penarikan.php">
+        <form method="GET" action="laporan-pinjaman.php">
           <div class="row">
             <div class="col-sm-6 col-md-4">
               <div class="form-group">
@@ -74,12 +74,12 @@ document.location='login.php';
 
         if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
         // Buat query untuk menampilkan semua data Pinjaman
-        $query     = "SELECT t.id_tarik, t.id_petugas, t.id_nasabah, n.norek_nasabah, n.nama_nasabah, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t INNER JOIN tb_nasabah n WHERE t.id_nasabah = n.id_nasabah";
+        $query     = "SELECT t.tanggal_tarik, pt.kode_petugas, n.kode_nasabah, n.nomor_rekening, u.nama, t.jumlah_tarik FROM tb_tarik_tabungan t, tb_petugas pt, tb_nasabah n, tb_users u WHERE t.petugas_id = pt.id_petugas AND t.nasabah_id = n.id_nasabah AND n.users_id = u.id";
         $url_cetak = "print-laporan-penarikan.php";
         $label     = "Semua Data Penarikan";
         }else{ // Jika terisi
         // Buat query untuk menampilkan data Pinjaman sesuai periode tanggal
-        $query     = "SELECT t.id_tarik, t.id_petugas, t.id_nasabah, n.norek_nasabah, n.nama_nasabah, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t INNER JOIN tb_nasabah n WHERE t.id_nasabah = n.id_nasabah AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+        $query     = "SELECT t.id_tarik_tabungan, t.id_petugas, t.id_nasabah, n.norek_nasabah, n.nama_nasabah, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t INNER JOIN tb_nasabah n WHERE t.id_nasabah = n.id_nasabah AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
         $url_cetak = "print-laporan-penarikan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
         $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -98,8 +98,8 @@ document.location='login.php';
               <tr>
                 <th>No</th>
                 <th>Tanggal Tarik</th>
-                <th>ID Petugas</th>
-                <th>ID Nasabah</th>
+                <th>Kode Petugas</th>
+                <th>Kode Nasabah (NIK)</th>
                 <th>Nomor Rekening</th>
                 <th>Nama Nasabah</th>
                 <th>Jumlah Tarik</th>
@@ -116,10 +116,10 @@ document.location='login.php';
               echo "<tr>";
                 echo "<td>".$nomor++."</td>";
                 echo "<td>".$tgl."</td>";
-                echo "<td>".$data['id_petugas']."</td>";
-                echo "<td>".$data['id_nasabah']."</td>";
-                echo "<td>".$data['norek_nasabah']."</td>";
-                echo "<td>".$data['nama_nasabah']."</td>";
+                echo "<td>".$data['kode_petugas']."</td>";
+                echo "<td>".$data['kode_nasabah']."</td>";
+                echo "<td>".$data['nomor_rekening']."</td>";
+                echo "<td>".$data['nama']."</td>";
                 echo "<td>Rp".$data['jumlah_tarik']."</td>";
               echo "</tr>";
               }

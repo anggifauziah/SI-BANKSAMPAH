@@ -1,7 +1,7 @@
 <?php
 include('koneksi_db.php');
 
-$nama			= $_POST['nama_pengepul'];
+$nama			= $_POST['nama_Pengepul'];
 $jenisKelamin   = $_POST['jenisKelamin'];
 $alamat			= $_POST['alamat'];
 $telp 			= $_POST['telp'];
@@ -17,9 +17,8 @@ $result = mysqli_query($koneksi, $users);
 
 if($users) {
 	$users_id = mysqli_insert_id($koneksi); // mengambil id terakhir yang diinput ke tb_users
-	$pengepul = "INSERT INTO tb_pengepul (kode_pengepul, users_id) VALUES ('$kode_kodePengepul', '$users_id')";
-	$result = mysqli_query($koneksi, $pengepul);
-}
+	$pengepul = "INSERT INTO tb_pengepul (kode_pengepul, users_id) VALUES ('$kode_pengepul', '$users_id')";
+	$result = mysqli_query($koneksi, $pengepul);}
 
 if ($result) {
 	//jika sukses, lakukan :

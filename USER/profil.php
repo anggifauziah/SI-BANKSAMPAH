@@ -84,7 +84,7 @@
                             $data   = mysqli_fetch_array($result);
                             ?>
                             <tr>
-                              <td>ID Nasabah</td>
+                              <td>Kode Nasabah (NIK)</td>
                               <td>:</td>
                               <td><?php echo $data['kode_nasabah'] ?></td>
                             </tr>

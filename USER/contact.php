@@ -47,7 +47,7 @@
 
         <?php
         include('koneksi_db.php');
-        $query   = mysqli_query($koneksi,"SELECT * FROM tb_config WHERE id_config = 10 OR id_config = 11 OR id_config = 12 ");
+        $query   = mysqli_query($koneksi,"SELECT judul, isi FROM tb_config WHERE id_config = 10 OR id_config = 11 OR id_config = 12 ");
         ?>
 
         <!-- ======= Contact Section ======= -->
@@ -62,7 +62,7 @@
                   <div class="info">
                     <?php 
                       $class = [ "address", "icofont-google-map", "email", "icofont-envelope", "phone", "icofont-phone"];
-                      $div = 0;
+                      $div = 0; 
                       $i = 1;
                       while($data = mysqli_fetch_array($query)) {
                     ?>

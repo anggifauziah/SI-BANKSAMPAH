@@ -12,7 +12,7 @@ $tgltarik 		= $_POST['tgltarik'];
 $tgltarik 		= date("Y-m-d");
 
 //mengambil value kolom id_petugas
-$petugas 	= mysqli_query($koneksi, "SELECT * FROM tb_petugas WHERE kode_petugas LIKE '%$idPetugas%'");
+$petugas 	= mysqli_query($koneksi, "SELECT * FROM tb_petugas WHERE kode_petugas LIKE '%$kode_petugas%'");
 $data_p 	= mysqli_fetch_array($petugas);
 $id_p		= $data_p['id_petugas'];
 

@@ -110,8 +110,8 @@ document.location='login.php';
               <tr>
                 <th>No</th>
                 <th>Tanggal Tabung</th>
-                <th>ID Petugas</th>
-                <th>ID Nasabah</th>
+                <th>Kode Petugas</th>
+                <th>Kode Nasabah (NIK)</th>
                 <th>Nama Nasabah</th>
                 <th>Jenis Sampah</th>
                 <th>Berat Sampah</th>

@@ -77,12 +77,12 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputId">ID Jual</label>
-                <input type="text" class="form-control" name="idJual" id="InputIdTabung" value="<?php echo($kode) ?>" readonly required>
+                <label for="InputKodeJual">Kode Jual</label>
+                <input type="text" class="form-control" name="kode_jual" id="InputKodeJual" value="<?php echo($kode) ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputNama">ID Petugas</label>
-                <input type="text" class="form-control" name="idPetugas" id="InputIdPetugas" placeholder="ID Petugas" required>
+                <label for="InputKodePetugas">Kode Petugas</label>
+                <input type="text" class="form-control" name="kode_petugas" id="InputKodePetugas" placeholder="Kode Petugas" required>
               </div>
             </div>
           </div>
@@ -98,8 +98,8 @@ if(empty($_SESSION)){
           <div class="card-body text-dark">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="InputPengepul">ID Pengepul</label>
-                <input type="text" class="form-control" name="idPengepul" id="idPengepul" placeholder="ID PENGEPUL" required>
+                <label for="InputPengepul">Kode Pengepul</label>
+                <input type="text" class="form-control" name="kode_pengepul" id="idPengepul" placeholder="Kode Pengepul" required>
               </div>
               <div class="form-group col-md-4">
                 <label for="btn-search">Search Data Pengepul</label><br>

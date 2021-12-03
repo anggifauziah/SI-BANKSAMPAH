@@ -48,13 +48,13 @@ if(empty($_SESSION)){
       <?php
       include('koneksi_db.php');
       //mengambil data pengepul dengan id paling besar
-      $query  = mysqli_query($koneksi, "SELECT MAX(id_pengepul) as idTerbesar FROM tb_pengepul");
+      $query  = mysqli_query($koneksi, "SELECT MAX(kode_pengepul) as idTerbesar FROM tb_pengepul");
       $data   = mysqli_fetch_array($query);
-      $idPtgs = $data['idTerbesar'];
+      $idPngpl = $data['idTerbesar'];
 
       //mengambil angka dari id terbesar, menggunakan fungsi substr
       //dan diubah ke int
-      $urutan = (int) substr($idPtgs, 3, 3);
+      $urutan = (int) substr($idPngpl,3,3);
       //bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
       $id = $urutan+1;
 
