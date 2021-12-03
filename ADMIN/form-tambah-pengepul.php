@@ -99,12 +99,10 @@ if(empty($_SESSION)){
                 <input type="number" class="form-control" name="telp" id="InputTelepon" placeholder="Nomor Telepon/HP" required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputTelepon">Username</label>
-                <input type="text" class="form-control" name="UN" id="InputUN" placeholder="Username" value="<?php echo($user) ?>" readonly required>
+                <input type="hidden" class="form-control" name="UN" id="InputUN" placeholder="Username" value="<?php echo($user) ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
-                <label for="InputTelepon">Password</label>
-                <input type="text" class="form-control" name="PW" id="InputPW" placeholder="Password" value="<?php echo($user) ?>" readonly required>
+                <input type="hidden" class="form-control" name="PW" id="InputPW" placeholder="Password" value="<?php echo($user) ?>" readonly required>
               </div>
              
             </div>

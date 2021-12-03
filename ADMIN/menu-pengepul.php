@@ -86,8 +86,6 @@ if(empty($_SESSION)){
                     echo "<td>
                             <a href='form-edit-pengepul.php?id=".$data['id']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
                             <a data-href='proses-hapus-pengepul.php?id=".$data['id']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
-                            <a href='print-data-pengepul.php?id=".$data['id']."' class='btn btn-primary btn-sm'><i class='fa fa-print'></i> Print</a>
-                            <a data-href='proses-reset-password.php?id=".$data['id']."' class = 'btn btn-info btn-sm' data-toggle='modal' data-target='#konfirmasi_reset'><i class='fa fa-refresh'></i> Reset Password</a>
                             </td>";
                     echo "</tr>";
                   }
