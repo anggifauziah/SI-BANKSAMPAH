@@ -9,7 +9,7 @@ $username		= $_POST['UN'];
 $Password		= $_POST['PW'];
 $level			= 4;
 
-$kode_pengepul= $_POST['kode_Pengepul']
+$kode_pengepul  = $_POST['kode_Pengepul'];
 
 // query SQL untuk insert data
 $users	= "INSERT INTO tb_users (nama, jenis_kelamin, alamat, telp, username, password, level_user) VALUES ('$nama', '$jenisKelamin', '$alamat', '$telp', '$username', '$Password', '$level')";
