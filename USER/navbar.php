@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (empty($_SESSION)) {
+  session_start();
+}
 ?>
 <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top topbar-inner-pages">

@@ -70,7 +70,7 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title">Informasi</h4>
+              <h4 class="title"><a href="informasi.php">Informasi</a></h4>
               <p class="description">Informasi mengenai Bank Sampah</p>
             </div>
           </div>
@@ -78,7 +78,7 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" >
             <div class="icon-box">
               <div class="icon"><i class="bx bx-photo-album"></i></div>
-              <h4 class="title">Profil</h4>
+              <h4 class="title"><a href="profil.php">Profil</a></h4>
               <p class="description">Informasi Identitas Pengguna</p>
             </div>
           </div>
@@ -86,7 +86,7 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title">Tabungan</h4>
+              <h4 class="title"><a href="tabungan.php">Tabungan</a></h4>
               <p class="description">Catatan Tabungan dan Informasi Saldo Pengguna</p>
             </div>
           </div>
@@ -94,7 +94,7 @@
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title">Pinjaman</h4>
+              <h4 class="title"><a href="pinjaman.php">Pinjaman</a></h4>
               <p class="description">Catatan Pinjaman dan Informasi Hutang Pengguna</p>
             </div>
           </div>
