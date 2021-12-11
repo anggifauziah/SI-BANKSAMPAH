@@ -1,3 +1,14 @@
+<!-- Alert Login -->
+<?php
+session_start();
+if(empty($_SESSION)){
+  echo "<script>alert('Anda Harus Login Terlebih Dahulu');
+  document.location='index.php';
+  </script>";
+}
+?>
+<!-- Alert Login -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -138,12 +149,10 @@
 
                   if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
                     // Buat query untuk menampilkan semua data tabungan
-                    $queryp      = "SELECT p.kode_tabung, p.total_tabung, p.tanggal_tabung FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username]";
-                    $queryt     = "SELECT t.kode_tarik_tabungan, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username]";
+                    $queryp      = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' AS ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] ORDER BY tgl";
                   }else{ // Jika terisi
                     // Buat query untuk menampilkan data tabungan sesuai periode tanggal
-                    $queryp     = "SELECT p.kode_tabung, p.total_tabung, p.tanggal_tabung FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username] AND (tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
-                    $queryt     = "SELECT t.kode_tarik_tabungan, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah and n.nomor_rekening=$_SESSION[username] AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+                    $queryp      = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username]  AND tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' AS ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' ORDER BY tgl";
                   }
                 ?>
                 
@@ -153,30 +162,21 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Nominal</th>
                         <th>Tanggal</th>
+                        <th>Nominal</th>
                       </tr>
                     </thead>
                     <tbody>
                       <!-- Menampilkan data dari database ke Tabel -->
                       <?php
                       $nomor = 1;
-                      $result_tabung = mysqli_query($koneksi, $queryp);
-                      $result_tarik  = mysqli_query($koneksi, $queryt);
-                      while($data_tabung = mysqli_fetch_array($result_tabung)) {
-                        $tgl_tabung = date('d-m-Y', strtotime($data_tabung['tanggal_tabung']));
+                      $result = mysqli_query($koneksi, $queryp);
+                      while($data = mysqli_fetch_array($result)) {
+                        $tgl = date('d-m-Y', strtotime($data['tgl']));
                         echo "<tr>";
                           echo "<td>".$nomor++."</td>";
-                          echo "<td>+ Rp".$data_tabung['total_tabung']."</td>";
-                          echo "<td>".$tgl_tabung."</td>";
-                        echo "</tr>";
-                      }
-                      while($data_tarik = mysqli_fetch_array($result_tarik)) {
-                        $tgl_tarik = date('d-m-Y', strtotime($data_tarik['tanggal_tarik']));
-                        echo "<tr>";
-                          echo "<td>".$nomor++."</td>";
-                          echo "<td>- Rp".$data_tarik['jumlah_tarik']."</td>";
-                          echo "<td>".$tgl_tarik."</td>";
+                          echo "<td>".$tgl."</td>";
+                          echo "<td>".$data['ket']." Rp".$data['total']."</td>";
                         echo "</tr>";
                       }
                       ?>
@@ -215,6 +215,8 @@
         <script src="assets/vendor/libraries/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
         <!-- Include File JS Custom (untuk fungsi Datepicker) -->
         <script src="assets/js/custom.js"></script>
+        <!-- Custom scripts for this page-->
+        <script src="assets/js/sb-admin-datatables.min.js"></script>
         <script>
           $(document).ready(function(){
             setDateRangePicker(".tgl_awal", ".tgl_akhir")
