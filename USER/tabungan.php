@@ -3,11 +3,7 @@
 session_start();
 if(empty($_SESSION)){
   echo "<script>alert('Anda Harus Login Terlebih Dahulu');
-<<<<<<< HEAD
-  document.location='index.php';
-=======
   document.location='../USER/index.php';
->>>>>>> 3b0ea5e3335b1635edc05293859fcf404f96fe1a
   </script>";
 }
 ?>
@@ -153,19 +149,11 @@ if(empty($_SESSION)){
 
                   if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
                     // Buat query untuk menampilkan semua data tabungan
-<<<<<<< HEAD
-                    $queryp      = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' AS ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] ORDER BY tgl";
-                  }else{ // Jika terisi
-                    // Buat query untuk menampilkan data tabungan sesuai periode tanggal
-                    $queryp      = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username]  AND tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' AS ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' ORDER BY tgl";
-                  }
-=======
                     $query      = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' as ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] ORDER BY tgl";
                   }else{ // Jika terisi
                     // Buat query untuk menampilkan data tabungan sesuai periode tanggal
                     $query     = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' AS ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' ORDER BY tgl";
-                  } 
->>>>>>> 3b0ea5e3335b1635edc05293859fcf404f96fe1a
+                  }
                 ?>
                 
                 <br>
@@ -181,17 +169,6 @@ if(empty($_SESSION)){
                     <tbody>
                       <!-- Menampilkan data dari database ke Tabel -->
                       <?php
-<<<<<<< HEAD
-                      $nomor = 1;
-                      $result = mysqli_query($koneksi, $queryp);
-                      while($data = mysqli_fetch_array($result)) {
-                        $tgl = date('d-m-Y', strtotime($data['tgl']));
-                        echo "<tr>";
-                          echo "<td>".$nomor++."</td>";
-                          echo "<td>".$tgl."</td>";
-                          echo "<td>".$data['ket']." Rp".$data['total']."</td>";
-                        echo "</tr>";
-=======
                       $nomor = 1; 
                       $result = mysqli_query($koneksi, $query);
                       $row    = mysqli_num_rows($result);
@@ -206,7 +183,6 @@ if(empty($_SESSION)){
                         }
                       } else { //jika data tidak ada
                         echo "<tr><td colspan='3'>Data tidak ada</td></tr>";
->>>>>>> 3b0ea5e3335b1635edc05293859fcf404f96fe1a
                       }
                       ?>
                       <!-- Sampai sini -->
