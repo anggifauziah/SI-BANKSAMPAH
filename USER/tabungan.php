@@ -183,7 +183,7 @@
                           echo "</tr>";
                         }
                       } else { //jika data tidak ada
-                        echo "<tr><td colspan='8'>Data tidak ada</td></tr>";
+                        echo "<tr><td colspan='3'>Data tidak ada</td></tr>";
                       }
                       
                       ?>
