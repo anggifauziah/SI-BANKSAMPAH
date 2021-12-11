@@ -163,22 +163,29 @@
                       $nomor = 1;
                       $result_tabung = mysqli_query($koneksi, $queryp);
                       $result_tarik  = mysqli_query($koneksi, $queryt);
-                      while($data_tabung = mysqli_fetch_array($result_tabung)) {
-                        $tgl_tabung = date('d-m-Y', strtotime($data_tabung['tanggal_tabung']));
-                        echo "<tr>";
-                          echo "<td>".$nomor++."</td>";
-                          echo "<td>+ Rp".$data_tabung['total_tabung']."</td>";
-                          echo "<td>".$tgl_tabung."</td>";
-                        echo "</tr>";
+                      $row1          = mysqli_num_rows($result_tabung);
+                      $row2          = mysqli_num_rows($result_tarik);
+                      if ($row1 + $row2 > 0) {
+                        while($data_tabung = mysqli_fetch_array($result_tabung)) {
+                          $tgl_tabung = date('d-m-Y', strtotime($data_tabung['tanggal_tabung']));
+                          echo "<tr>";
+                            echo "<td>".$nomor++."</td>";
+                            echo "<td>+ Rp".$data_tabung['total_tabung']."</td>";
+                            echo "<td>".$tgl_tabung."</td>";
+                          echo "</tr>";
+                        }
+                        while($data_tarik = mysqli_fetch_array($result_tarik)) {
+                          $tgl_tarik = date('d-m-Y', strtotime($data_tarik['tanggal_tarik']));
+                          echo "<tr>";
+                            echo "<td>".$nomor++."</td>";
+                            echo "<td>- Rp".$data_tarik['jumlah_tarik']."</td>";
+                            echo "<td>".$tgl_tarik."</td>";
+                          echo "</tr>";
+                        }
+                      } else { //jika data tidak ada
+                        echo "<tr><td colspan='8'>Data tidak ada</td></tr>";
                       }
-                      while($data_tarik = mysqli_fetch_array($result_tarik)) {
-                        $tgl_tarik = date('d-m-Y', strtotime($data_tarik['tanggal_tarik']));
-                        echo "<tr>";
-                          echo "<td>".$nomor++."</td>";
-                          echo "<td>- Rp".$data_tarik['jumlah_tarik']."</td>";
-                          echo "<td>".$tgl_tarik."</td>";
-                        echo "</tr>";
-                      }
+                      
                       ?>
                       <!-- Sampai sini -->
                     </tbody>
