@@ -19,7 +19,6 @@ function formatBulan($tgl){
   $pecah = explode('-', $tgl);
   return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
 }
-$query   = mysqli_query($koneksi,"SELECT judul,isi FROM tb_config WHERE id_config = 10 OR id_config = 12");
 ?>
 <html>
   <head> 

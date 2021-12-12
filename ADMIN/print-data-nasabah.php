@@ -12,7 +12,6 @@ $alamat       = $data['alamat'];
 $telp         = $data['telp'];
 $pekerjaan    = $data['pekerjaan'];
 $tgldaftar    = $data['tgl_daftar'];
-
 }
 ?>
 <html>

@@ -14,11 +14,11 @@ $tgl           = $data['tanggal_tabung'];
 }
 
 //ubah format bulan
-      function formatBulan($tgl){
-        $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-        $pecah = explode('-', $tgl);
-        return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
-      }
+function formatBulan($tgl){
+  $bln    = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+  $pecah = explode('-', $tgl);
+  return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
+}
 ?>
 <html>
   <head>
