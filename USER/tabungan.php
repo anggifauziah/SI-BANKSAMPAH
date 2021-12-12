@@ -153,7 +153,7 @@ if(empty($_SESSION)){
                   }else{ // Jika terisi
                     // Buat query untuk menampilkan data tabungan sesuai periode tanggal
                     $query     = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' AS ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' ORDER BY tgl";
-                  } 
+                  }
                 ?>
                 
                 <br>
