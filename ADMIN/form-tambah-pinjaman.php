@@ -68,6 +68,17 @@ if(empty($_SESSION)){
         $pecah = explode('-', $tgl);
         return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
       }
+      function decrypt_aes($string) {
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = 'sadgjakgdkjafkj';
+        $secret_iv = 'This is my secret iv';
+
+        $key = hash('sha256', $secret_key);  
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        return $output;
+      };
       ?>
 
       <!-- Form Angsuran -->
@@ -123,6 +134,7 @@ if(empty($_SESSION)){
                 });
               </script>
               <!-- Load file DATA NASABAH -->
+              
 
               <div class="form-group col-md-6">
                 <label for="InputNorek">Nomor Rekening</label>

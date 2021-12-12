@@ -73,16 +73,27 @@ if(empty($_SESSION)){
                 include('koneksi_db.php');
                 $result = mysqli_query($koneksi, "SELECT p.users_id, p.kode_pengepul, u.nama, u.jenis_kelamin, u.alamat, u.telp, u.id FROM tb_pengepul p INNER JOIN tb_users u WHERE p.users_id = u.id");
                 $nomor = 1;
+                function decrypt_aes($string) {
+                  $encrypt_method = "AES-256-CBC";
+                  $secret_key = 'sadgjakgdkjafkj';
+                  $secret_iv = 'This is my secret iv';
+
+                  $key = hash('sha256', $secret_key);  
+                  $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+                  $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                  return $output;
+                };
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
                     echo "<td>".$data['kode_pengepul']."</td>";
-                    echo "<td>".$data['nama']."</td>";
+                    echo "<td>".decrypt_aes($data['nama'])."</td>";
                     echo "<td>".$data['jenis_kelamin']."</td>";
-                    echo "<td>".$data['alamat']."</td>";
-                    echo "<td>".$data['telp']."</td>";
+                    echo "<td>".decrypt_aes($data['alamat'])."</td>";
+                    echo "<td>".decrypt_aes($data['telp'])."</td>";
                     echo "<td>
                             <a href='form-edit-pengepul.php?id=".$data['id']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
                             <a data-href='proses-hapus-pengepul.php?id=".$data['id']."' class = 'btn btn-danger btn-sm' data-toggle='modal' data-target='#konfirmasi_hapus'><i class='fa fa-trash-o'></i> Hapus</a>
