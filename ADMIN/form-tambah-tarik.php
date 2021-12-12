@@ -40,7 +40,7 @@ if(empty($_SESSION)){
           <a href="index.php">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="menu-tarik.php">Pinjaman</a>
+          <a href="menu-tarik.php">Tarik Tabungan</a>
         </li>
         <li class="breadcrumb-item active">Form Tambah Tarik</li>
       </ol>
