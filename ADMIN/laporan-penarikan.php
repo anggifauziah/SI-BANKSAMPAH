@@ -107,6 +107,17 @@ document.location='login.php';
             </thead>
             <tbody>
               <?php
+              function decrypt_aes($string) {
+                $encrypt_method = "AES-256-CBC";
+                $secret_key = 'sadgjakgdkjafkj';
+                $secret_iv = 'This is my secret iv';
+
+                $key = hash('sha256', $secret_key);  
+                $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+                $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                return $output;
+              };
               $sql = mysqli_query($koneksi, $query); // Eksekusi/Jalankan query dari variabel $query
               $row = mysqli_num_rows($sql); // Ambil jumlah data dari hasil eksekusi $sql
               $nomor = 1;
