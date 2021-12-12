@@ -1,7 +1,7 @@
 <?php
 include('koneksi_db.php');
 
-$kode_tabung		= $_POST['kode_tabung'];
+$kode_angsur		= $_POST['kode_angsur'];
 $kode_petugas		= $_POST['kode_petugas'];
 
 $kode_nasabah   	= $_POST['kode_nasabah'];

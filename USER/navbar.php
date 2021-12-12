@@ -10,12 +10,12 @@ if (empty($_SESSION)) {
         <ul>
           <?php
             include('koneksi_db.php'); 
-            $query   = mysqli_query($koneksi,"SELECT judul, isi FROM tb_config WHERE id_config = 11 OR id_config = 12 OR id_config = 13 ");
+            $query   = mysqli_query($koneksi,"SELECT judul, isi FROM tb_config WHERE id_config = 2 OR id_config = 3 OR id_config = 4 ");
             $class = ["icofont-envelope", "icofont-phone", "icofont-clock-time icofont-flip-horizontal"];
             $div = 0;
             while($data = mysqli_fetch_array($query)) {
               $isi = preg_replace('#</?p.*?>#is', '', $data['isi']);
-              if ($data['judul'] == "Email"){
+              if ($data['judul'] == "Email" || "email"){
                 echo "<li><i class=".$class[$div]."></i><a href='mailto:".$isi."'>".$isi."</a></li>";
                 $div += 1;
               } else {
