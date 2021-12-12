@@ -47,7 +47,7 @@
 
         <?php
         include('koneksi_db.php');
-        $query   = mysqli_query($koneksi,"SELECT judul, isi FROM tb_config WHERE id_config = 10 OR id_config = 11 OR id_config = 12 ");
+        $query   = mysqli_query($koneksi,"SELECT judul, isi FROM tb_config WHERE id_config = 1 OR id_config = 2 OR id_config = 3 ");
         ?>
 
         <!-- ======= Contact Section ======= -->

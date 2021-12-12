@@ -72,7 +72,7 @@ $row       = mysqli_fetch_array($pengepul);
               </div>
               <div class="form-group col-md-6">
                 <label for="InputAlamat">Alamat</label>
-                <textarea class="form-control" id="InputAlamat" name="alamat" placeholder="Alamat"  value="<?php echo $row['alamat']; ?>" required rows="2"></textarea>
+                <textarea class="form-control" id="InputAlamat" name="alamat" placeholder="Alamat"  value="<?php echo $row['alamat']; ?>" required rows="2"><?php echo $row['alamat']; ?></textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTelepon">Nomor Telepon/HP</label>

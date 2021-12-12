@@ -2,13 +2,12 @@
 <?php
 session_start();
 if(empty($_SESSION)){
-  echo "<script>alert('Anda Harus Login Terlebih Dahulu');
-  document.location='../USER/index.php';
-  </script>";
+echo "<script>alert('Anda Harus Login Terlebih Dahulu');
+document.location='../USER/index.php';
+</script>";
 }
 ?>
 <!-- Alert Login -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,7 +35,6 @@ if(empty($_SESSION)){
     <link href="assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
-
     <!-- =======================================================
     * Template Name: Anyar - v2.2.1
     * Template URL: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/
@@ -135,25 +133,23 @@ if(empty($_SESSION)){
                   <div>
                     <button type="submit" name="filter" value="true" class="btn btn-primary">TAMPILKAN</button>
                     <?php
-                      if(isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
-                      echo '<a href="tabungan.php" class="btn btn-warning">RESET</a>';
+                    if(isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
+                    echo '<a href="tabungan.php" class="btn btn-warning">RESET</a>';
                     ?>
                   </div>
                 </form>
                 <?php
-                  // Load file koneksi.php
-                  include "koneksi_db.php";
-
-                  $tgl_awal  = @$_GET['tgl_awal']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-                  $tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-
-                  if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-                    // Buat query untuk menampilkan semua data tabungan
-                    $query      = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' as ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] ORDER BY tgl";
-                  }else{ // Jika terisi
-                    // Buat query untuk menampilkan data tabungan sesuai periode tanggal
-                    $query     = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' AS ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' ORDER BY tgl";
-                  }
+                // Load file koneksi.php
+                include "koneksi_db.php";
+                $tgl_awal  = @$_GET['tgl_awal']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+                $tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+                if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+                // Buat query untuk menampilkan semua data tabungan
+                $query      = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' as ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] ORDER BY tgl";
+                }else{ // Jika terisi
+                // Buat query untuk menampilkan data tabungan sesuai periode tanggal
+                $query     = "SELECT p.kode_tabung, p.total_tabung AS total, p.tanggal_tabung AS tgl, '+' AS ket FROM tb_tabungan p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tabung BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' UNION SELECT t.kode_tarik_tabungan, t.jumlah_tarik AS total, t.tanggal_tarik AS tgl, '-' AS ket FROM tb_tarik_tabungan t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' ORDER BY tgl";
+                }
                 ?>
                 
                 <br>
@@ -169,20 +165,20 @@ if(empty($_SESSION)){
                     <tbody>
                       <!-- Menampilkan data dari database ke Tabel -->
                       <?php
-                      $nomor = 1; 
+                      $nomor = 1;
                       $result = mysqli_query($koneksi, $query);
                       $row    = mysqli_num_rows($result);
                       if ($row > 0) {
-                        while($data = mysqli_fetch_array($result)) {
-                          $tgl = date('d-m-Y', strtotime($data['tgl']));
-                          echo "<tr>";
-                            echo "<td>".$nomor++."</td>";
-                            echo "<td>".$tgl."</td>";
-                            echo "<td>".$data['ket']." Rp".$data['total']."</td>";
-                          echo "</tr>";
-                        }
+                      while($data = mysqli_fetch_array($result)) {
+                      $tgl = date('d-m-Y', strtotime($data['tgl']));
+                      echo "<tr>";
+                        echo "<td>".$nomor++."</td>";
+                        echo "<td>".$tgl."</td>";
+                        echo "<td>".$data['ket']." Rp".$data['total']."</td>";
+                      echo "</tr>";
+                      }
                       } else { //jika data tidak ada
-                        echo "<tr><td colspan='3'>Data tidak ada</td></tr>";
+                      echo "<tr><td colspan='3'>Data tidak ada</td></tr>";
                       }
                       ?>
                       <!-- Sampai sini -->
@@ -223,9 +219,9 @@ if(empty($_SESSION)){
         <!-- Custom scripts for this page-->
         <script src="assets/js/sb-admin-datatables.min.js"></script>
         <script>
-          $(document).ready(function(){
-            setDateRangePicker(".tgl_awal", ".tgl_akhir")
-          })
+        $(document).ready(function(){
+        setDateRangePicker(".tgl_awal", ".tgl_akhir")
+        })
         </script>
       </body>
     </html>
