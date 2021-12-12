@@ -26,7 +26,19 @@ $tgldaftar    = $data['tgl_daftar'];
         <td><strong><h3 align="center">BANK SAMPAH</h3></strong></td>
       </tr>
       <tr>
-        <td align="center">Jl. Masjid No.013 Sroyo <br> Telepon : 081357780664 </td>
+        <td align="center">
+          <?php
+            $queryConfig   = mysqli_query($koneksi,"SELECT judul, isi FROM tb_config WHERE id_config = 1 OR id_config = 2 OR id_config = 3 ");
+            while($dataConfig = mysqli_fetch_array($queryConfig)) {
+              $isi = preg_replace('#</?p.*?>#is', '', $dataConfig['isi']);
+              if ($dataConfig['judul'] == "Telepon"){
+                echo "Telepon : ".$isi;
+              } else {
+                echo $isi."<br>";
+              }
+            }
+          ?>
+        </td>
       </tr>
       <tr>
         <td>-------------------------------------------------------------------------------------------</td>

@@ -34,9 +34,10 @@ function formatBulan($tgl){
       <tr>
         <td align="center">
           <?php
-            while($data = mysqli_fetch_array($query)) {
-              $isi = preg_replace('#</?p.*?>#is', '', $data['isi']);
-              if ($data['judul'] == "Telepon"){
+            $queryConfig   = mysqli_query($koneksi,"SELECT judul, isi FROM tb_config WHERE id_config = 1 OR id_config = 2 OR id_config = 3 ");
+            while($dataConfig = mysqli_fetch_array($queryConfig)) {
+              $isi = preg_replace('#</?p.*?>#is', '', $dataConfig['isi']);
+              if ($dataConfig['judul'] == "Telepon"){
                 echo "Telepon : ".$isi;
               } else {
                 echo $isi."<br>";
