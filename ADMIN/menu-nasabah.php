@@ -71,8 +71,20 @@ if(empty($_SESSION)){
                 <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi, "SELECT n.users_id, n.kode_nasabah, n.nomor_rekening, u.nama, u.telp, n.saldo, n.pinjaman, u.id FROM tb_nasabah n INNER JOIN tb_users u WHERE n.users_id = u.id");
+                $result = mysqli_query($koneksi, "SELECT n.users_id, n.kode_nasabah, n.nomor_rekening, u.nama, u.telp, n.saldo, n.pinjaman, u.id FROM tb_nasabah n INNER JOIN tb_users u WHERE n.users_id = u.id");        
                 $nomor = 1;
+
+                function decrypt_aes($string) {
+                  $encrypt_method = "AES-256-CBC";
+                  $secret_key = 'sadgjakgdkjafkj';
+                  $secret_iv = 'This is my secret iv';
+
+                  $key = hash('sha256', $secret_key);  
+                  $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+                  $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                  return $output;
+                }
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
