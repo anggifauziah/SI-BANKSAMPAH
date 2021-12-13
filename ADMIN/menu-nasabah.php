@@ -71,8 +71,9 @@ if(empty($_SESSION)){
                 <!-- Menampilkan data dari database ke Tabel -->
                 <?php
                 include('koneksi_db.php');
-                $result = mysqli_query($koneksi, "SELECT n.users_id, n.kode_nasabah, n.nomor_rekening, u.nama, u.telp, n.saldo, n.pinjaman, u.id FROM tb_nasabah n INNER JOIN tb_users u WHERE n.users_id = u.id");
+                $result = mysqli_query($koneksi, "SELECT n.users_id, n.kode_nasabah, n.nomor_rekening, u.nama, u.telp, n.saldo, n.pinjaman, u.id FROM tb_nasabah n INNER JOIN tb_users u WHERE n.users_id = u.id");        
                 $nomor = 1;
+
                 function decrypt_aes($string) {
                   $encrypt_method = "AES-256-CBC";
                   $secret_key = 'sadgjakgdkjafkj';
@@ -91,8 +92,8 @@ if(empty($_SESSION)){
                     echo "<td>".$nomor++."</td>";
                     echo "<td>".$data['kode_nasabah']."</td>";
                     echo "<td>".$data['nomor_rekening']."</td>";
-                    echo "<td>".decrypt_aes($data['nama'])."</td>";
-                    echo "<td>".decrypt_aes($data['telp'])."</td>";
+                    echo "<td>".$data['nama']."</td>";
+                    echo "<td>".$data['telp']."</td>";
                     echo "<td>Rp".$data['saldo']."</td>";
                     echo "<td>Rp".$data['pinjaman']."</td>";
                     echo "<td>

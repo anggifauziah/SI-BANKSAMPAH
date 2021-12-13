@@ -11,6 +11,20 @@ $tgltarik 		= $_POST['tgltarik'];
 
 $tgltarik 		= date("Y-m-d");
 
+function encrypt_aes($string) {
+	$encrypt_method = "AES-256-CBC";
+    $secret_key = 'sadgjakgdkjafkj';
+    $secret_iv = 'This is my secret iv';
+
+    $key = hash('sha256', $secret_key);  
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+    $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
+    return $output;
+}
+
+$kode_nasabah = encrypt_aes($kode_nasabah);
+
 //mengambil value kolom id_petugas
 $petugas 	= mysqli_query($koneksi, "SELECT * FROM tb_petugas WHERE kode_petugas LIKE '%$kode_petugas%'");
 $data_p 	= mysqli_fetch_array($petugas);
@@ -24,7 +38,7 @@ $saldo   	= $data_u['saldo'];
 
 
 if ($saldo <= 50000) {
-	echo "<script>alert('Tidak bisa tarik! Saldo tidak mencukupi!');
+	echo "<script>alert('Tidak bisa tarik! Saldo tidak mencukupi!, $saldo');
 	document.location='menu-tarik.php';
   	</script>";
 } else {
