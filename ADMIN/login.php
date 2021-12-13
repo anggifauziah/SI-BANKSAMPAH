@@ -2,27 +2,36 @@
 session_start();
 include 'koneksi_db.php';
 $pesan = "";
+function encrypt_aes($string) {
+	$encrypt_method = "AES-256-CBC";
+    $secret_key = 'sadgjakgdkjafkj';
+    $secret_iv = 'This is my secret iv';
+
+    $key = hash('sha256', $secret_key);  
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+    $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
+    return $output;
+}
 if (isset($_POST['submit'])) {
 $username = $_POST['username'];
 $password = $_POST['password'];
-$query_login = "SELECT * FROM tb_users WHERE username = '$username' AND password = '$password'";
+$en_un=encrypt_aes($username);
+$en_pw=encrypt_aes($password);
+$query_login = "SELECT * FROM tb_users WHERE username = '$en_un' AND password = '$en_pw'";
 $cek = mysqli_num_rows($sql = mysqli_query($koneksi, $query_login));
 $data = mysqli_fetch_assoc($sql);
 if ($cek > 0) {
 $_SESSION['id']         = $data['id'];
-$_SESSION['username']   = $data['username'];
-$_SESSION['password']   = $data['password'];
+$_SESSION['username']   = encrypt_aes($data['username']);
+$_SESSION['password']   = encrypt_aes($data['password']);
 $_SESSION['level_user'] = $data['level_user'];
 
 if ($data['level_user']==1) {
 header("location: ../ADMIN/index.php");
 }elseif ($data['level_user']==2) {
 header("location: ../USER/index.php");
-}elseif ($data['level_user']==3) {
-  header("location: ../ADMIN/index.php");
-}elseif ($data['level_user']==4) {
-  header("location: ../ADMIN/index.php");
-  }
+}
 }else{
 $pesan = "<script>alert('Username or Password incorrect !!')</script>";
 }

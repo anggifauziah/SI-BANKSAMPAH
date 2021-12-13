@@ -7,7 +7,7 @@ $alamat			= $_POST['alamat'];
 $telp 			= $_POST['telp'];
 $username		= $_POST['UN'];
 $Password		= $_POST['PW'];
-$level			= 4;
+$level			= 3;
 
 $kode_pengepul  = $_POST['kode_Pengepul'];
 
