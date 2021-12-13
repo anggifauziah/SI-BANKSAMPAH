@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2021 at 08:13 AM
+-- Generation Time: Dec 13, 2021 at 08:19 AM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.1.29
 
@@ -102,21 +102,14 @@ INSERT INTO `tb_jenis_sampah` (`id_jenis_sampah`, `kode_jenis_sampah`, `nama_jen
 
 CREATE TABLE `tb_nasabah` (
   `id_nasabah` int(11) NOT NULL,
-  `kode_nasabah` varchar(20) NOT NULL,
+  `kode_nasabah` varchar(100) NOT NULL,
   `users_id` int(11) NOT NULL,
-  `pekerjaan` varchar(15) NOT NULL,
+  `pekerjaan` varchar(150) NOT NULL,
   `tgl_daftar` date NOT NULL,
-  `nomor_rekening` varchar(20) NOT NULL,
+  `nomor_rekening` varchar(32) NOT NULL,
   `saldo` int(11) NOT NULL,
   `pinjaman` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tb_nasabah`
---
-
-INSERT INTO `tb_nasabah` (`id_nasabah`, `kode_nasabah`, `users_id`, `pekerjaan`, `tgl_daftar`, `nomor_rekening`, `saldo`, `pinjaman`) VALUES
-(1, '2342484899', 2, 'Guru', '2021-12-12', '17968109032001', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -159,6 +152,13 @@ CREATE TABLE `tb_petugas` (
   `users_id` int(11) NOT NULL,
   `jabatan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_petugas`
+--
+
+INSERT INTO `tb_petugas` (`id_petugas`, `kode_petugas`, `users_id`, `jabatan`) VALUES
+(1, 'PT001', 8, 'Admin');
 
 -- --------------------------------------------------------
 
@@ -215,12 +215,12 @@ CREATE TABLE `tb_tarik_tabungan` (
 
 CREATE TABLE `tb_users` (
   `id` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
+  `nama` varchar(150) NOT NULL,
   `jenis_kelamin` varchar(10) NOT NULL,
-  `alamat` varchar(50) NOT NULL,
-  `telp` varchar(15) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `alamat` varchar(150) NOT NULL,
+  `telp` varchar(32) NOT NULL,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
   `level_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -229,8 +229,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`id`, `nama`, `jenis_kelamin`, `alamat`, `telp`, `username`, `password`, `level_user`) VALUES
-(1, 'Admin', 'Laki-laki', 'Bank Sampah', '081357780664', 'admin', '123', 1),
-(2, 'Nathan', 'Laki-laki', 'Jl. Melati', '085167382916', '17968109032001', '17968109032001', 2);
+(1, 'Tnlxb3BtT0trWHprUEg0NHlla21Udz09', 'Laki-laki', 'MUg3QnFyZUtKYU5CajhSMXd3cUZKdz09', 'Q291UE9DdkdxdWhwOEVpT0ZuQjlxUT09', 'a0w1bXhGK1d2Rzhsa2hVc2ZFNUowQT09', 'cU8ySFEyK3ZqVjlVZytGZmRTVStiZz09', 1);
 
 --
 -- Indexes for dumped tables
@@ -362,7 +361,7 @@ ALTER TABLE `tb_jenis_sampah`
 -- AUTO_INCREMENT for table `tb_nasabah`
 --
 ALTER TABLE `tb_nasabah`
-  MODIFY `id_nasabah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_nasabah` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_pengepul`
@@ -380,7 +379,7 @@ ALTER TABLE `tb_penjualan`
 -- AUTO_INCREMENT for table `tb_petugas`
 --
 ALTER TABLE `tb_petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_pinjaman`
@@ -404,7 +403,7 @@ ALTER TABLE `tb_tarik_tabungan`
 -- AUTO_INCREMENT for table `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
