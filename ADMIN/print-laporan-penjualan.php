@@ -100,6 +100,17 @@
 		$sql = mysqli_query($koneksi, $query); // Eksekusi/Jalankan query dari variabel $query
 		$row = mysqli_num_rows($sql); // Ambil jumlah data dari hasil eksekusi $sql
 		$nomor = 1;
+		function decrypt_aes($string) {
+			$encrypt_method = "AES-256-CBC";
+			$secret_key = 'sadgjakgdkjafkj';
+			$secret_iv = 'This is my secret iv';
+
+			$key = hash('sha256', $secret_key);  
+			$iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+			$output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+			return $output;
+		  };
 
 		if($row > 0){ // Jika jumlah data lebih dari 0 (Berarti jika data ada)
 			while($data = mysqli_fetch_array($sql)){ // Ambil semua data dari hasil eksekusi $sql
@@ -109,7 +120,7 @@
                 echo "<td style='width: 5%;'>".$tgl."</td>";
                 echo "<td style='width: 5%;'>".$data['kode_petugas']."</td>";
                 echo "<td style='width: 5%;'>".$data['kode_pengepul']."</td>";
-                echo "<td style='width: 15%;'>".$data['nama']."</td>";
+                echo "<td style='width: 15%;'>".decrypt_aes($data['nama'])."</td>";
                 echo "<td style='width: 13%;'>".$data['nama_jenis']."</td>";
 				echo "<td style='width: 12%;'>".$data['berat_jual']."</td>";
 				echo "<td Rp. style='width: 13s%;'>".$data['total_jual']."</td>";

@@ -41,7 +41,7 @@ document.location='login.php';
         </ol>
 
         <!-- FORM FILTER -->
-        <form method="GET" action="laporan-pinjaman.php">
+        <form method="GET" action="laporan-penarikan.php">
           <div class="row">
             <div class="col-sm-6 col-md-4">
               <div class="form-group">
@@ -117,7 +117,7 @@ document.location='login.php';
 
                 $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
                 return $output;
-              };
+              }
               $sql = mysqli_query($koneksi, $query); // Eksekusi/Jalankan query dari variabel $query
               $row = mysqli_num_rows($sql); // Ambil jumlah data dari hasil eksekusi $sql
               $nomor = 1;
