@@ -22,7 +22,7 @@ $username = encrypt_aes($username);
 $password = encrypt_aes($password);
 
 if ($password == $password1) {
-  $query  = "UPDATE tb_users SET password = '$password' WHERE username = '$username'";
+  $query  = "UPDATE tb_users SET password = '$password' WHERE username LIKE '%$username%'";
   $result = mysqli_query($koneksi, $query);
 }else{
   echo"<script>alert('Sesuaikan pengulangan password !!');document.location='form-reset-password.php';</script>"; 
