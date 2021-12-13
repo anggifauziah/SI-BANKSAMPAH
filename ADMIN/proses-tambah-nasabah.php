@@ -38,11 +38,14 @@ function encrypt_decrypt($action, $string) {
 	return $output;
 }
 
-$encrypted_pw = encrypt_decrypt('encrypt', $Password);
+$encrypted_pw = encrypt_decrypt('encrypt', $password);
 $encrypted_un = encrypt_decrypt('encrypt', $username);
 $encrypted_almt = encrypt_decrypt('encrypt', $alamat);
 $encrypted_nm= encrypt_decrypt('encrypt',$nama);
 $encrypted_telp = encrypt_decrypt('encrypt', $telp);
+$encrypted_kode = encrypt_decrypt('encrypt', $kode_nasabah);
+$encrypted_kerja = encrypt_decrypt('encrypt', $pekerjaan);
+$encrypted_norek = encrypt_decrypt('encrypt', $norek);
 
 // query SQL untuk insert data
 $users	= "INSERT INTO tb_users (nama, jenis_kelamin, alamat, telp, username, password, level_user) VALUES ('$encrypted_nm', '$jenisKelamin', '$encrypted_almt', '$encrypted_telp', '$encrypted_un', '$encrypted_pw', '$level')";
@@ -50,7 +53,7 @@ $result = mysqli_query($koneksi, $users);
 
 if($users) {
 	$users_id = mysqli_insert_id($koneksi); // mengambil id terakhir yang diinput ke tb_users
-	$nasabah = "INSERT INTO tb_nasabah (kode_nasabah, users_id, pekerjaan, tgl_daftar, nomor_rekening, saldo, pinjaman) VALUES ('$kode_nasabah', '$users_id','$pekerjaan', '$tgldaftar', '$norek', '$saldo', '$pinjam')";
+	$nasabah = "INSERT INTO tb_nasabah (kode_nasabah, users_id, pekerjaan, tgl_daftar, nomor_rekening, saldo, pinjaman) VALUES ('$encrypted_kode', '$users_id','$encrypted_kerja', '$tgldaftar', '$encrypted_norek', '$saldo', '$pinjam')";
 	$result = mysqli_query($koneksi, $nasabah);
 }
 

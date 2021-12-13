@@ -36,6 +36,17 @@ $tgldaftar    = $data['tgl_daftar'];
                 echo $isi."<br>";
               }
             }
+            function decrypt_aes($string) {
+            $encrypt_method = "AES-256-CBC";
+            $secret_key = 'sadgjakgdkjafkj';
+            $secret_iv = 'This is my secret iv';
+
+            $key = hash('sha256', $secret_key);  
+            $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+            return $output;
+            }
           ?>
         </td>
       </tr>
@@ -51,17 +62,17 @@ $tgldaftar    = $data['tgl_daftar'];
         <tr>
           <th align="left">Kode Nasabah</th>
           <td>:</td>
-          <td><?php echo $kode_nasabah; ?></td>
+          <td><?php echo decrypt_aes($kode_nasabah); ?></td>
         </tr>
         <tr>
           <th align="left">Rekening</th>
           <td>:</td>
-          <td><?php echo $norek; ?></td>
+          <td><?php echo decrypt_aes($norek); ?></td>
         </tr>
         <tr>
           <th align="left">Nama</th>
           <td>:</td>
-          <td><?php echo $nama; ?></td>
+          <td><?php echo decrypt_aes($nama); ?></td>
         </tr>
         <tr>
           <th align="left">Jenis Kelamin</th>
@@ -71,17 +82,17 @@ $tgldaftar    = $data['tgl_daftar'];
         <tr>
           <th align="left">Alamat</th>
           <td>:</td>
-          <td><?php echo $alamat; ?></td>
+          <td><?php echo decrypt_aes($alamat); ?></td>
         </tr>
         <tr>
           <th align="left">Telepon</th>
           <td>:</td>
-          <td><?php echo $telp; ?></td>
+          <td><?php echo decrypt_aes($telp); ?></td>
         </tr>
         <tr>
           <th align="left">Pekerjaan</th>
           <td>:</td>
-          <td><?php echo $pekerjaan; ?></td>
+          <td><?php echo decrypt_aes($pekerjaan); ?></td>
         </tr>
         <tr>
           <th align="left">Tanggal daftar</th>
@@ -91,12 +102,12 @@ $tgldaftar    = $data['tgl_daftar'];
         <tr>
           <th align="left">Username</th>
           <td>:</td>
-          <td><?php echo $norek; ?></td>
+          <td><?php echo decrypt_aes($norek); ?></td>
         </tr>
         <tr>
           <th align="left">Password</th>
           <td>:</td>
-          <td><?php echo $norek; ?></td>
+          <td><?php echo decrypt_aes($norek); ?></td>
         </tr>
         <tr>
           <td colspan="3">------------------------------------------------------------------------------------------</td>

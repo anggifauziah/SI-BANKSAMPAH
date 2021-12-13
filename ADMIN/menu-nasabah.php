@@ -84,16 +84,16 @@ if(empty($_SESSION)){
 
                   $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
                   return $output;
-                };
+                }
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
-                    echo "<td>".$data['kode_nasabah']."</td>";
-                    echo "<td>".$data['nomor_rekening']."</td>";
-                    echo "<td>".$data['nama']."</td>";
-                    echo "<td>".$data['telp']."</td>";
+                    echo "<td>".decrypt_aes($data['kode_nasabah'])."</td>";
+                    echo "<td>".decrypt_aes($data['nomor_rekening'])."</td>";
+                    echo "<td>".decrypt_aes($data['nama'])."</td>";
+                    echo "<td>".decrypt_aes($data['telp'])."</td>";
                     echo "<td>Rp".$data['saldo']."</td>";
                     echo "<td>Rp".$data['pinjaman']."</td>";
                     echo "<td>

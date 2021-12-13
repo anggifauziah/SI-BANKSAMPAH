@@ -14,6 +14,17 @@ include 'koneksi_db.php';
 $id       = $_GET['id'];
 $nasabah  = mysqli_query($koneksi,"SELECT u.id, n.kode_nasabah, u.nama, u.jenis_kelamin, u.alamat, u.telp, n.pekerjaan, n.nomor_rekening, n.saldo, n.pinjaman FROM tb_nasabah n INNER JOIN tb_users u ON n.users_id = u.id WHERE u.id = $id");
 $row      = mysqli_fetch_array($nasabah);
+function decrypt_aes($string) {
+  $encrypt_method = "AES-256-CBC";
+  $secret_key = 'sadgjakgdkjafkj';
+  $secret_iv = 'This is my secret iv';
+
+  $key = hash('sha256', $secret_key);  
+  $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+  $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+  return $output;
+}
 ?>
 
 <!DOCTYPE html>
@@ -62,11 +73,11 @@ $row      = mysqli_fetch_array($nasabah);
               <input type="hidden" class="form-control" name="id" id="InputId" value="<?php echo $row['id']; ?>" readonly required>
               <div class="form-group col-md-6">
                 <label for="InputKode">Kode Nasabah</label>
-                <input type="number" class="form-control" name="kode_nasabah" id="InputKode" value="<?php echo $row['kode_nasabah']; ?>" readonly required>
+                <input type="number" class="form-control" name="kode_nasabah" id="InputKode" value="<?php echo decrypt_aes($row['kode_nasabah']); ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputNama">Nama Lengkap</label>
-                <input type="text" class="form-control" name="nama" id="InputNama" value="<?php echo $row['nama']; ?>" readonly required>
+                <input type="text" class="form-control" name="nama" id="InputNama" value="<?php echo decrypt_aes($row['nama']); ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputJenisKelamin">Jenis Kelamin</label>
@@ -74,15 +85,15 @@ $row      = mysqli_fetch_array($nasabah);
               </div>
               <div class="form-group col-md-6">
                 <label for="InputAlamat">Alamat</label>
-                <textarea class="form-control" id="InputAlamat" name="alamat" required rows="2"><?php echo $row['alamat']; ?></textarea>
+                <textarea class="form-control" id="InputAlamat" name="alamat" required rows="2"><?php echo decrypt_aes($row['alamat']); ?></textarea>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTelepon">Nomor Telepon/HP</label>
-                <input type="number" class="form-control" name="telp" id="InputTelepon" value="<?php echo $row['telp']; ?>" required>
+                <input type="number" class="form-control" name="telp" id="InputTelepon" value="<?php echo decrypt_aes($row['telp']); ?>" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputPekerjaan">Pekerjaan</label>
-                <input type="text" class="form-control" name="pekerjaan" id="InputPekerjaan" value="<?php echo $row['pekerjaan']; ?>" required>
+                <input type="text" class="form-control" name="pekerjaan" id="InputPekerjaan" value="<?php echo decrypt_aes($row['pekerjaan']); ?>" required>
               </div>
             </div>
           </div>
@@ -94,7 +105,7 @@ $row      = mysqli_fetch_array($nasabah);
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="InputNorek">Nomor Rekening</label>
-                <input type="text" class="form-control" name="norek" id="InputNorek" value="<?php echo $row['nomor_rekening']; ?>" readonly required>
+                <input type="text" class="form-control" name="norek" id="InputNorek" value="<?php echo decrypt_aes($row['nomor_rekening']); ?>" readonly required>
               </div>
             </div>
 

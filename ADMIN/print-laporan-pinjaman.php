@@ -96,6 +96,17 @@
 		</tr>
 
 		<?php
+		function decrypt_aes($string) {
+           	$encrypt_method = "AES-256-CBC";
+            $secret_key = 'sadgjakgdkjafkj';
+            $secret_iv = 'This is my secret iv';
+
+            $key = hash('sha256', $secret_key);  
+            $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+            return $output;
+        }
 		$sql = mysqli_query($koneksi, $query); // Eksekusi/Jalankan query dari variabel $query
 		$row = mysqli_num_rows($sql); // Ambil jumlah data dari hasil eksekusi $sql
 		$nomor = 1;
@@ -108,9 +119,9 @@
 				echo "<td style='width: 5%;'>".$nomor++."</td>";
                 echo "<td style='width: 5%;'>".$tgl."</td>";
                 echo "<td style='width: 5%;'>".$data['kode_petugas']."</td>";
-                echo "<td style='width: 18%;'>".$data['kode_nasabah']."</td>";
-                echo "<td style='width: 15%;'>".$data['nomor_rekening']."</td>";
-                echo "<td style='width: 18%;'>".$data['nama']."</td>";
+                echo "<td style='width: 18%;'>".decrypt_aes($data['kode_nasabah'])."</td>";
+                echo "<td style='width: 15%;'>".decrypt_aes($data['nomor_rekening'])."</td>";
+                echo "<td style='width: 18%;'>".decrypt_aes($data['nama'])."</td>";
                 echo "<td>Rp".$data['jumlah_pinjam']."</td>";
 				echo "</tr>";
 			}
