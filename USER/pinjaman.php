@@ -109,7 +109,7 @@ document.location='../USER/index.php';
                           <td><?php echo encrypt_decrypt('decrypt',$data['nama']) ?></td>
                         </tr>
                         <tr>
-                          <td>Saldo Nasabah</td>
+                          <td>Total Pinjaman Nasabah</td>
                           <td>:</td>
                           <td><?php echo "Rp",$data['pinjaman'] ?></td>
                         </tr>
