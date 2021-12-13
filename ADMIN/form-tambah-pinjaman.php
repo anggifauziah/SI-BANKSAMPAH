@@ -170,11 +170,11 @@ if(empty($_SESSION)){
           <div class="card-header">Pinjaman</div>
           <div class="card-body text-dark">
             <div class="form-row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-6">
                 <label for="InputTotal">Jumlah Pinjam</label>
                 <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" required>
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-6">
                 <label for="InputTglAngsur">Tanggal Pinjam</label>
                 <input type="text" class="form-control" name="tanggal_pinjam" id="InputTglPinjam" value="<?php echo(formatBulan(date('Y-m-d')));?>" readonly required>
               </div>

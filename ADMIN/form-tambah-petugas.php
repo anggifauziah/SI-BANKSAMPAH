@@ -113,9 +113,11 @@ if(empty($_SESSION)){
                 <input type="text" class="form-control" name="jabatan" id="InputJabatan" placeholder="Jabatan" required>
               </div>
               <div class="form-group col-md-6">
+                <label for="InputUsername">Username</label>
                 <input type="text" class="form-control" name="username" id="InputUsername" value="<?php echo($username) ?>" readonly required>
               </div>
               <div class="form-group col-md-6">
+                <label for="InputPassword">Password</label>
                 <input type="text" class="form-control" name="password" id="InputPassword" value="<?php echo($username) ?>" readonly required>
               </div>
             </div>
