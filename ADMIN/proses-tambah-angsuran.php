@@ -42,7 +42,7 @@ $angsur     = $pinjam - $total;
 // query SQL untuk insert data
 $angsuran  = "INSERT INTO tb_angsuran (kode_angsur, petugas_id, nasabah_id, jenis_sampah_id, berat_angsur, total_angsur, tanggal_angsur) VALUES ('$kode_angsur', '$id_petugas', '$id_nasabah', '$id_jenis_sampah', '$berat', '$total', '$tanggal_angsur')";
 
-$nasabah = "UPDATE tb_nasabah SET pinjaman=$angsur WHERE kode_nasabah=$kode_nasabah";
+$nasabah = "UPDATE tb_nasabah SET pinjaman=$angsur WHERE kode_nasabah='$kode_nasabah'";
 
 $result = mysqli_query($koneksi, $angsuran);
 $result = mysqli_query($koneksi, $nasabah);
