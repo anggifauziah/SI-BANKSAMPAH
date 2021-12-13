@@ -19,9 +19,9 @@ function encrypt_aes($string) {
 }
 // query SQL untuk update data jika pw diulang sama
 $username = encrypt_aes($username);
-$password = encrypt_aes($password);
 
 if ($password == $password1) {
+  $password = encrypt_aes($password);
   $query  = "UPDATE tb_users SET password = '$password' WHERE username LIKE '%$username%'";
   $result = mysqli_query($koneksi, $query);
 }else{

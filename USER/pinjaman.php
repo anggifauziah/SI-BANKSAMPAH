@@ -73,29 +73,45 @@ document.location='../USER/index.php';
                         <!-- Menampilkan data dari database ke Tabel -->
                         <?php
                         include('koneksi_db.php');
-                        $result = mysqli_query($koneksi,"SELECT u.username, n.kode_nasabah, u.nama, n.nomor_rekening, n.pinjaman FROM tb_users u, tb_nasabah n WHERE n.users_id = u.id AND n.nomor_rekening=$_SESSION[username]");
+                        function encrypt_decrypt($action, $string) {
+                          $encrypt_method = "AES-256-CBC";
+                          $secret_key = 'sadgjakgdkjafkj';
+                          $secret_iv = 'This is my secret iv';
+
+                          $key = hash('sha256', $secret_key);  
+                          $iv = substr(hash('sha256', $secret_iv), 0, 16);
+                          if ( $action == 'encrypt' ) {
+                              $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
+                          } else if( $action == 'decrypt' ) {
+                              $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                          }
+                          return $output;
+                        }
+                        $user = encrypt_decrypt('decrypt', $_SESSION['username']);
+
+                        $result = mysqli_query($koneksi,"SELECT u.username, n.kode_nasabah, u.nama, n.nomor_rekening, n.pinjaman FROM tb_users u, tb_nasabah n WHERE n.users_id = u.id AND n.nomor_rekening LIKE '%$user%'");
                         $data   = mysqli_fetch_array($result);
                         ?>
                         
                         <tr>
                           <td>Kode Nasabah (NIK)</td>
                           <td>:</td>
-                          <td><?php echo $data['kode_nasabah'] ?></td>
+                          <td><?php echo encrypt_decrypt('decrypt',$data['kode_nasabah']) ?></td>
                         </tr>
                         <tr>
                           <td>Nomor Rekening</td>
                           <td>:</td>
-                          <td><?php echo $data['nomor_rekening'] ?></td>
+                          <td><?php echo encrypt_decrypt('decrypt',$data['nomor_rekening']) ?></td>
                         </tr >
                         <tr>
                           <td>Nama Nasabah</td>
                           <td>:</td>
-                          <td><?php echo $data['nama'] ?></td>
+                          <td><?php echo encrypt_decrypt('decrypt',$data['nama']) ?></td>
                         </tr>
                         <tr>
                           <td>Saldo Nasabah</td>
                           <td>:</td>
-                          <td><?php echo "Rp",$data['saldo'] ?></td>
+                          <td><?php echo "Rp",$data['pinjaman'] ?></td>
                         </tr>
                         
                         <!-- Sampai sini -->
@@ -145,10 +161,10 @@ document.location='../USER/index.php';
                 $tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
                 if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
                 // Buat query untuk menampilkan semua data tabungan
-                $query      = "SELECT p.kode_pinjam, p.jumlah_pinjam AS total, p.tanggal_pinjam AS tgl, '+' AS ket FROM tb_pinjaman p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] UNION SELECT t.kode_angsur, t.total_angsur AS total, t.tanggal_angsur AS tgl, '-' as ket FROM tb_angsuran t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] ORDER BY tgl";
+                $query      = "SELECT p.kode_pinjam, p.jumlah_pinjam AS total, p.tanggal_pinjam AS tgl, '+' AS ket FROM tb_pinjaman p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening LIKE '%$user%' UNION SELECT t.kode_angsur, t.total_angsur AS total, t.tanggal_angsur AS tgl, '-' as ket FROM tb_angsuran t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening LIKE '%$user%' ORDER BY tgl";
                 }else{ // Jika terisi
                 // Buat query untuk menampilkan data tabungan sesuai periode tanggal
-                $query     = "SELECT p.kode_pinjam, p.jumlah_pinjam AS total, p.tanggal_pinjam AS tgl, '+' AS ket FROM tb_pinjaman p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' UNION SELECT t.kode_angsur, t.total_angsur AS total, t.tanggal_angsur AS tgl, '-' as ket FROM tb_angsuran t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening=$_SESSION[username] AND tanggal_angsur BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' ORDER BY tgl";
+                $query     = "SELECT p.kode_pinjam, p.jumlah_pinjam AS total, p.tanggal_pinjam AS tgl, '+' AS ket FROM tb_pinjaman p,tb_nasabah n WHERE p.nasabah_id=n.id_nasabah AND n.nomor_rekening LIKE '%$user%' AND tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' UNION SELECT t.kode_angsur, t.total_angsur AS total, t.tanggal_angsur AS tgl, '-' as ket FROM tb_angsuran t,tb_nasabah n WHERE t.nasabah_id=n.id_nasabah AND n.nomor_rekening LIKE '%$user%' AND tanggal_angsur BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."' ORDER BY tgl";
                 }
                 ?>
                 
