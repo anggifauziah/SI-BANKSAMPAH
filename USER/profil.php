@@ -105,9 +105,9 @@ if(empty($_SESSION)){
                               }
                               return $output;
                             }
-                            $user = encrypt_decrypt('encrypt',$_SESSION['username']);
+                            $user = encrypt_decrypt('decrypt', $_SESSION['username']);
                             
-                            $result = mysqli_query($koneksi,"SELECT n.kode_nasabah, n.nomor_rekening, u.nama, u.jenis_kelamin, u.alamat, u.telp, n.pekerjaan, n.tgl_daftar, u.username FROM tb_nasabah n, tb_users u WHERE n.users_id = u.id AND n.nomor_rekening LIKE '%$user%'");
+                            $result = mysqli_query($koneksi,"SELECT n.kode_nasabah, n.nomor_rekening, u.nama, u.jenis_kelamin, u.alamat, u.telp, n.pekerjaan, n.tgl_daftar, u.username FROM tb_nasabah n, tb_users u WHERE n.users_id = u.id AND n.nomor_rekening ='$user'");
                             $data   = mysqli_fetch_array($result);
                             ?>
                             <tr>

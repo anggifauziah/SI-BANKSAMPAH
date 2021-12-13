@@ -62,7 +62,7 @@ if(empty($_SESSION)){
                   <th>Nama Petugas</th>
                   <th>Jenis Kelamin</th>
                   <th>Alamat</th>
-                  <th>Nomor Telpon</th>
+                  <th>Nomor Telepon</th>
                   <th>Jabatan</th>
                   <th>Action</th>
                 </tr>

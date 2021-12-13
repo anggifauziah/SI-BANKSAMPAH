@@ -87,7 +87,7 @@ document.location='../USER/index.php';
                           }
                           return $output;
                         }
-                        $user = encrypt_decrypt('encrypt', $_SESSION['username']);
+                        $user = encrypt_decrypt('decrypt', $_SESSION['username']);
 
                         $result = mysqli_query($koneksi,"SELECT u.username, n.kode_nasabah, u.nama, n.nomor_rekening, n.saldo FROM tb_users u, tb_nasabah n WHERE n.users_id = u.id AND n.nomor_rekening LIKE '%$user%'");
                         $data   = mysqli_fetch_array($result);

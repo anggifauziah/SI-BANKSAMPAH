@@ -135,7 +135,7 @@ document.location='login.php';
               echo "</tr>";
               }
               }else{ // Jika data tidak ada
-              echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
+              echo "<tr><td colspan='7'>Data tidak ada</td></tr>";
               }
               ?>
             </tbody>
