@@ -73,16 +73,27 @@ if(empty($_SESSION)){
                 include('koneksi_db.php');
                 $result = mysqli_query($koneksi,"SELECT p.*, u.*  FROM tb_petugas p, tb_users u where p.users_id = u.id");
                 $nomor = 1;
+                function decrypt_aes($string) {
+                  $encrypt_method = "AES-256-CBC";
+                  $secret_key = 'sadgjakgdkjafkj';
+                  $secret_iv = 'This is my secret iv';
+
+                  $key = hash('sha256', $secret_key);  
+                  $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+                  $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                  return $output;
+                }
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
                     echo "<tr>";
                     echo "<td>".$nomor++."</td>";
                     echo "<td>".$data['kode_petugas']."</td>";
-                    echo "<td>".$data['nama']."</td>";
+                    echo "<td>".decrypt_aes($data['nama'])."</td>";
                     echo "<td>".$data['jenis_kelamin']."</td>";
-                    echo "<td>".$data['alamat']."</td>";
-                    echo "<td>".$data['telp']."</td>";
+                    echo "<td>".decrypt_aes($data['alamat'])."</td>";
+                    echo "<td>".decrypt_aes($data['telp'])."</td>";
                     echo "<td>".$data['jabatan']."</td>";
                     echo "<td>
                           <a href='form-edit-petugas.php?id=".$data['kode_petugas']."' class = 'btn btn-warning btn-sm'><i class='fa fa-pencil'></i> Edit</a>
