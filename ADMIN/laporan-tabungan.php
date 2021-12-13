@@ -120,6 +120,17 @@ document.location='login.php';
             </thead>
             <tbody>
               <?php
+              function decrypt_aes($string) {
+                $encrypt_method = "AES-256-CBC";
+                $secret_key = 'sadgjakgdkjafkj';
+                $secret_iv = 'This is my secret iv';
+
+                $key = hash('sha256', $secret_key);  
+                $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+                $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                return $output;
+              }
               $sql = mysqli_query($koneksi, $query); // Eksekusi/Jalankan query dari variabel $query
               $row = mysqli_num_rows($sql); // Ambil jumlah data dari hasil eksekusi $sql
               $nomor = 1;
@@ -130,8 +141,8 @@ document.location='login.php';
                 echo "<td>".$nomor++."</td>";
                 echo "<td>".$tgl."</td>";
                 echo "<td>".$data['kode_petugas']."</td>";
-                echo "<td>".$data['kode_nasabah']."</td>";
-                echo "<td>".$data['nama']."</td>";
+                echo "<td>".decrypt_aes($data['kode_nasabah'])."</td>";
+                echo "<td>".decrypt_aes($data['nama'])."</td>";
                 echo "<td>".$data['nama_jenis']."</td>";
                 echo "<td>".$data['berat_tabung']."</td>";
                 echo "<td>Rp".$data['total_tabung']."</td>";
