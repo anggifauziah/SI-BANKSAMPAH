@@ -119,8 +119,8 @@
 				echo "<td style='width: 5%;'>".$nomor++."</td>";
                 echo "<td style='width: 5%;'>".$tgl."</td>";
                 echo "<td style='width: 5%;'>".$data['kode_petugas']."</td>";
-                echo "<td style='width: 18%;'>".$data['kode_nasabah']."</td>";
-                echo "<td style='width: 15%;'>".$data['nomor_rekening']."</td>";
+                echo "<td style='width: 18%;'>".decrypt_aes($data['kode_nasabah'])."</td>";
+                echo "<td style='width: 15%;'>".decrypt_aes($data['nomor_rekening'])."</td>";
                 echo "<td style='width: 18%;'>".decrypt_aes($data['nama'])."</td>";
                 echo "<td>Rp".$data['jumlah_tarik']."</td>";
 				echo "</tr>";
