@@ -84,7 +84,7 @@ if(empty($_SESSION)){
 
                   $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
                   return $output;
-                }
+                };
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
