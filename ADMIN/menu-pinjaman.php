@@ -72,6 +72,17 @@ if(empty($_SESSION)){
                 include('koneksi_db.php');
                 $result = mysqli_query($koneksi,"SELECT p.id_pinjam, p.tanggal_pinjam, pt.kode_petugas, n.kode_nasabah, u.nama, p.jumlah_pinjam FROM tb_pinjaman p, tb_petugas pt, tb_nasabah n, tb_users u where p.petugas_id=pt.id_petugas and p.nasabah_id=n.id_nasabah and n.users_id=u.id ORDER BY p.id_pinjam ASC");
                 $nomor = 1;
+                function decrypt_aes($string) {
+                  $encrypt_method = "AES-256-CBC";
+                  $secret_key = 'sadgjakgdkjafkj';
+                  $secret_iv = 'This is my secret iv';
+
+                  $key = hash('sha256', $secret_key);  
+                  $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+                  $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                  return $output;
+                };
                 ?>
                 <?php
                   while($data = mysqli_fetch_array($result)) {
@@ -79,8 +90,8 @@ if(empty($_SESSION)){
                     echo "<td>".$nomor++."</td>";
                     echo "<td>".$data['tanggal_pinjam']."</td>";
                     echo "<td>".$data['kode_petugas']."</td>";
-                    echo "<td>".$data['kode_nasabah']."</td>";
-                    echo "<td>".$data['nama']."</td>";
+                    echo "<td>".decrypt_aes($data['kode_nasabah'])."</td>";
+                    echo "<td>".decrypt_aes($data['nama'])."</td>";
                     echo "<td>Rp".$data['jumlah_pinjam']."</td>";
                     echo "<td>
                           <a href='print-struk-pinjaman.php?id=".$data['id_pinjam']."' class='btn btn-info btn-sm'><i class='fa fa-print'></i> Print</a>

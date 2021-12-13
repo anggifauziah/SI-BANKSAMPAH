@@ -7,6 +7,22 @@ $alamat			= $_POST['alamat'];
 $telp 			= $_POST['telp'];
 $jabatan		= $_POST['jabatan'];
 
+function encrypt_aes($string) {
+	$encrypt_method = "AES-256-CBC";
+    $secret_key = 'sadgjakgdkjafkj';
+    $secret_iv = 'This is my secret iv';
+
+    $key = hash('sha256', $secret_key);  
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+    $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
+    return $output;
+}
+// encrypt data
+$nama 		= encrypt_aes($nama);
+$alamat 	= encrypt_aes($alamat);
+$telp		= encrypt_aes($telp);
+
 // query SQL untuk update data
 $petugas	= mysqli_query($koneksi, "SELECT users_id FROM tb_petugas WHERE kode_petugas = '$kode_petugas'");
 $hasil 		= mysqli_fetch_array($petugas);

@@ -20,6 +20,17 @@ function formatBulan($tgl){
   $pecah = explode('-', $tgl);
   return $pecah[2]. ' ' . $bln[((int)$pecah[1])-1]. ' ' .$pecah[0];
 }
+function decrypt_aes($string) {
+  $encrypt_method = "AES-256-CBC";
+  $secret_key = 'sadgjakgdkjafkj';
+  $secret_iv = 'This is my secret iv';
+
+  $key = hash('sha256', $secret_key);  
+  $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+  $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+  return $output;
+}
 ?>
 <html>
   <head>
@@ -62,7 +73,7 @@ function formatBulan($tgl){
         <tr>
           <th align="left">Nama</th>
           <td>:</td>
-          <td><?php echo $nama; ?></td>
+          <td><?php echo decrypt_aes($nama); ?></td>
         </tr>
         <tr>
           <th align="left">Jenis Sampah</th>
