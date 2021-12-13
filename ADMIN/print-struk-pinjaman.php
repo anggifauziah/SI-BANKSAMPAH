@@ -9,7 +9,19 @@ $norek        = $data['nomor_rekening'];
 $nama       = $data['nama'];
 $jumlah     = $data['jumlah_pinjam'];
 $tgl        = $data['tanggal_pinjam'];
+function decrypt_aes($string) {
+  $encrypt_method = "AES-256-CBC";
+  $secret_key = 'sadgjakgdkjafkj';
+  $secret_iv = 'This is my secret iv';
 
+  $key = hash('sha256', $secret_key);  
+  $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+  $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+  return $output;
+$dec_kode=decrypt_aes($kodeNasabah);
+$dec_norek=decrypt_aes($norek);
+$dec_nama=decrypt_aes($nama);
 }
 //ubah format bulan
 function formatBulan($tgl){
@@ -54,17 +66,17 @@ function formatBulan($tgl){
         <tr>
           <th align="left">Kode Nasabah</th>
           <td width="20">:</td>
-          <td width="170"><?php echo $kodeNasabah; ?></td>
+          <td width="170"><?php echo $dec_kode; ?></td>
         </tr>
         <tr>
           <th align="left">No. Rekening</th>
           <td>:</td>
-          <td><?php echo $norek; ?></td>
+          <td><?php echo $dec_norek; ?></td>
         </tr>
         <tr>
           <th align="left">Nama</th>
           <td>:</td>
-          <td><?php echo $nama; ?></td>
+          <td><?php echo $dec_nama; ?></td>
         </tr>
         <tr>
           <th align="left">Tanggal Pinjam</th>

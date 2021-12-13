@@ -138,7 +138,7 @@ if(empty($_SESSION)){
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTelepon">Nomor Telepon/HP</label>
-                <input type="number" class="form-control" name="telp" id="telp" placeholder="Nomor Telepon/HP" readonly>
+                <input type="text" class="form-control" name="telp" id="telp" placeholder="Nomor Telepon/HP" readonly>
               </div>
             </div>
           </div>

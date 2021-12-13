@@ -18,7 +18,11 @@ if ($data['level_user']==1) {
 header("location: ../ADMIN/index.php");
 }elseif ($data['level_user']==2) {
 header("location: ../USER/index.php");
-}
+}elseif ($data['level_user']==3) {
+  header("location: ../ADMIN/index.php");
+}elseif ($data['level_user']==4) {
+  header("location: ../ADMIN/index.php");
+  }
 }else{
 $pesan = "<script>alert('Username or Password incorrect !!')</script>";
 }

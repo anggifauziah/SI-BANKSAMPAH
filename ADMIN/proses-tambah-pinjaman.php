@@ -10,13 +10,27 @@ $jumlah				= $_POST['jumlah'];
 $tanggal_pinjam		= $_POST['tanggal_pinjam'];
 $tanggal_pinjam 	= date("Y-m-d");
 
+function encrypt_aes($string) {
+	$encrypt_method = "AES-256-CBC";
+    $secret_key = 'sadgjakgdkjafkj';
+    $secret_iv = 'This is my secret iv';
+
+    $key = hash('sha256', $secret_key);  
+    $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+    $output = base64_encode(openssl_encrypt($string, $encrypt_method, $key, 0, $iv));
+    return $output;
+}
+
+$kode_nasabah = encrypt_aes($kode_nasabah);
+
 //mengambil value kolom id petugas
 $data1      = mysqli_query($koneksi, "SELECT * FROM tb_petugas WHERE kode_petugas LIKE '%$kode_petugas%'");
 $row1      	= mysqli_fetch_array($data1);
 $id_petugas	= $row1['id_petugas'];
 
 //mengambil value kolom pinjaman_nasabah
-$data2     	= mysqli_query($koneksi, "SELECT * FROM tb_nasabah WHERE kode_nasabah=$kode_nasabah");
+$data2     	= mysqli_query($koneksi, "SELECT * FROM tb_nasabah WHERE kode_nasabah='$kode_nasabah'");
 $row2      	= mysqli_fetch_array($data2);
 $id_nasabah = $row2['id_nasabah'];
 $pinjam   	= $row2['pinjaman'];
@@ -26,7 +40,7 @@ $pinjam     = $pinjam + $jumlah;
 // query SQL untuk insert data
 $Pinjaman  = "INSERT INTO tb_pinjaman (kode_pinjam, petugas_id, nasabah_id, jumlah_pinjam, tanggal_pinjam) VALUES ('$kode_pinjam', '$id_petugas', '$id_nasabah', '$jumlah', '$tanggal_pinjam')";
 
-$nasabah = "UPDATE tb_nasabah SET pinjaman=$pinjam WHERE kode_nasabah=$kode_nasabah";
+$nasabah = "UPDATE tb_nasabah SET pinjaman=$pinjam WHERE kode_nasabah='$kode_nasabah'";
 
 $result = mysqli_query($koneksi, $Pinjaman);
 $result = mysqli_query($koneksi, $nasabah);

@@ -89,7 +89,7 @@ function decrypt_aes($string) {
               </div>
               <div class="form-group col-md-6">
                 <label for="InputTelepon">Nomor Telepon/HP</label>
-                <input type="number" class="form-control" name="telp" id="InputTelepon" value="<?php echo decrypt_aes($row['telp']); ?>" required>
+                <input type="text" class="form-control" name="telp" id="InputTelepon" value="<?php echo decrypt_aes($row['telp']); ?>" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="InputPekerjaan">Pekerjaan</label>
