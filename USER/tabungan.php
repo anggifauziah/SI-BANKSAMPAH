@@ -73,6 +73,17 @@ document.location='../USER/index.php';
                         <!-- Menampilkan data dari database ke Tabel -->
                         <?php
                         include('koneksi_db.php');
+                        function decrypt_aes($string) {
+                          $encrypt_method = "AES-256-CBC";
+                          $secret_key = 'sadgjakgdkjafkj';
+                          $secret_iv = 'This is my secret iv';
+
+                          $key = hash('sha256', $secret_key);  
+                          $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+                          $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                          return $output;
+                        }
                         $result = mysqli_query($koneksi,"SELECT u.username, n.kode_nasabah, u.nama, n.nomor_rekening, n.saldo FROM tb_users u, tb_nasabah n WHERE n.users_id = u.id AND n.nomor_rekening=$_SESSION[username]");
                         $data   = mysqli_fetch_array($result);
                         ?>
@@ -80,17 +91,17 @@ document.location='../USER/index.php';
                         <tr>
                           <td>Kode Nasabah (NIK)</td>
                           <td>:</td>
-                          <td><?php echo $data['kode_nasabah'] ?></td>
+                          <td><?php echo decrypt_aes($data['kode_nasabah']) ?></td>
                         </tr>
                         <tr>
                           <td>Nomor Rekening</td>
                           <td>:</td>
-                          <td><?php echo $data['nomor_rekening'] ?></td>
+                          <td><?php echo decrypt_aes($data['nomor_rekening']) ?></td>
                         </tr >
                         <tr>
                           <td>Nama Nasabah</td>
                           <td>:</td>
-                          <td><?php echo $data['nama'] ?></td>
+                          <td><?php echo decrypt_aes($data['nama']) ?></td>
                         </tr>
                         <tr>
                           <td>Saldo Nasabah</td>

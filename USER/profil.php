@@ -91,24 +91,35 @@ if(empty($_SESSION)){
                             <!-- Menampilkan data dari database ke Tabel -->
                             <?php
                             include('koneksi_db.php');
+                            function decrypt_aes($string) {
+                              $encrypt_method = "AES-256-CBC";
+                              $secret_key = 'sadgjakgdkjafkj';
+                              $secret_iv = 'This is my secret iv';
+
+                              $key = hash('sha256', $secret_key);  
+                              $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+                              $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                              return $output;
+                            }
                             $result = mysqli_query($koneksi,"SELECT n.kode_nasabah, n.nomor_rekening, u.nama, u.jenis_kelamin, u.alamat, u.telp, n.pekerjaan, n.tgl_daftar, u.username FROM tb_nasabah n, tb_users u WHERE n.users_id = u.id AND n.nomor_rekening=$_SESSION[username]");
                             $data   = mysqli_fetch_array($result);
                             ?>
                             <tr>
                               <td>Kode Nasabah (NIK)</td>
                               <td>:</td>
-                              <td><?php echo $data['kode_nasabah'] ?></td>
+                              <td><?php echo decrypt_aes($data['kode_nasabah']) ?></td>
                             </tr>
                             <tr>
                               <td>Nomor Rekening</td>
                               <td>:</td>
-                              <td><?php echo $data['nomor_rekening'] ?></td>
+                              <td><?php echo decrypt_aes($data['nomor_rekening']) ?></td>
                             </tr>
                             
                             <tr>
                               <td>Nama Nasabah</td>
                               <td>:</td>
-                              <td><?php echo $data['nama'] ?></td>
+                              <td><?php echo decrypt_aes($data['nama']) ?></td>
                             </tr>
                             <tr>
                               <td>Jenis Kelamin</td>
@@ -118,17 +129,17 @@ if(empty($_SESSION)){
                             <tr>
                               <td>Alamat</td>
                               <td>:</td>
-                              <td><?php echo $data['alamat'] ?></td>
+                              <td><?php echo decrypt_aes($data['alamat']) ?></td>
                             </tr>
                             <tr>
                               <td>Telepon</td>
                               <td>:</td>
-                              <td><?php echo $data['telp'] ?></td>
+                              <td><?php echo decrypt_aes($data['telp']) ?></td>
                             </tr>
                             <tr>
                               <td>Pekerjaan</td>
                               <td>:</td>
-                              <td><?php echo $data['pekerjaan'] ?></td>
+                              <td><?php echo decrypt_aes($data['pekerjaan']) ?></td>
                             </tr>
                             <tr>
                               <td>Tanggal Daftar</td>
