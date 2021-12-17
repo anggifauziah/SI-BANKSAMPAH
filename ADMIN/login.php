@@ -28,9 +28,9 @@ $_SESSION['password']   = encrypt_aes($data['password']);
 $_SESSION['level_user'] = $data['level_user'];
 
 if ($data['level_user']==1) {
-header("location: ../ADMIN/index.php");
+header("location: index.php");
 }elseif ($data['level_user']==2) {
-header("location: ../USER/index.php");
+header("location: ../index.php");
 }
 }else{
 $pesan = "<script>alert('Username or Password incorrect !!')</script>";
