@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2021 at 08:19 AM
+-- Generation Time: Dec 17, 2021 at 06:56 AM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.1.29
 
@@ -158,7 +158,7 @@ CREATE TABLE `tb_petugas` (
 --
 
 INSERT INTO `tb_petugas` (`id_petugas`, `kode_petugas`, `users_id`, `jabatan`) VALUES
-(1, 'PT001', 8, 'Admin');
+(1, 'PT001', 1, 'Admin');
 
 -- --------------------------------------------------------
 

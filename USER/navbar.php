@@ -15,7 +15,7 @@ if (empty($_SESSION)) {
             $div = 0;
             while($data = mysqli_fetch_array($query)) {
               $isi = preg_replace('#</?p.*?>#is', '', $data['isi']);
-              if ($data['judul'] == "Email" || "email"){
+              if ($data['judul'] == "Email"){
                 echo "<li><i class=".$class[$div]."></i><a href='mailto:".$isi."'>".$isi."</a></li>";
                 $div += 1;
               } else {

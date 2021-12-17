@@ -7,7 +7,7 @@ $data     = mysqli_query($koneksi, "SELECT * FROM tb_users WHERE id = $id");
 $row      = mysqli_fetch_array($data);
 $username = $row['username'];
 
-$query   = "UPDATE tb_users SET password=$username WHERE id=$id";
+$query   = "UPDATE tb_users SET password='$username' WHERE id=$id";
 $result  = mysqli_query($koneksi, $query);
 
 if ($result) {
