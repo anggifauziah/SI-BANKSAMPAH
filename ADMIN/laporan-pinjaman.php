@@ -79,7 +79,7 @@ document.location='login.php';
         $label     = "Semua Data Pinjaman";
         }else{ // Jika terisi
         // Buat query untuk menampilkan data Pinjaman sesuai periode tanggal
-        $query     = "SELECT p.id_pinjam, p.id_petugas, p.id_nasabah, n.norek_nasabah, n.nama_nasabah, p.jumlah_pinjam, p.tanggal_pinjam FROM tb_pinjaman p INNER JOIN tb_nasabah n WHERE p.id_nasabah = n.id_nasabah AND (tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+        $query     = "SELECT p.tanggal_pinjam, pt.kode_petugas, n.kode_nasabah, n.nomor_rekening, u.nama, p.jumlah_pinjam FROM tb_pinjaman p, tb_petugas pt, tb_nasabah n, tb_users u WHERE p.petugas_id = pt.id_petugas AND p.nasabah_id = n.id_nasabah AND n.users_id = u.id AND (tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
         $url_cetak = "print-laporan-pinjaman.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
         $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy

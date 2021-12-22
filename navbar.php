@@ -26,10 +26,6 @@ if (empty($_SESSION)) {
           ?>
         </ul>
       </div>
-      <div class="cta">
-        <a href="ADMIN/login.php" class="scrollto" <?php if (!empty($_SESSION)) { echo "style='display:none'"; } ?>>Login</a>
-        <a href="logout-proses.php" class="scrollto" <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>>Logout</a>
-      </div>
     </div>
   </div>
 
@@ -49,6 +45,8 @@ if (empty($_SESSION)) {
           <li <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="tabungan.php">Tabungan</a></li>
           <li <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="pinjaman.php">Pinjaman</a></li>
           <li><a href="contact.php">Contact</a></li>
+          <li <?php if (!empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="ADMIN/login.php">Login</a></li>
+          <li <?php if (empty($_SESSION)) { echo "style='display:none'"; } ?>><a href="logout-proses.php">Logout</a></li>
         </ul>
       </nav><!-- .nav-menu -->
 

@@ -73,13 +73,13 @@ document.location='login.php';
         $tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
 
         if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-        // Buat query untuk menampilkan semua data Pinjaman
+        // Buat query untuk menampilkan semua data Penarikan
         $query     = "SELECT t.tanggal_tarik, pt.kode_petugas, n.kode_nasabah, n.nomor_rekening, u.nama, t.jumlah_tarik FROM tb_tarik_tabungan t, tb_petugas pt, tb_nasabah n, tb_users u WHERE t.petugas_id = pt.id_petugas AND t.nasabah_id = n.id_nasabah AND n.users_id = u.id";
         $url_cetak = "print-laporan-penarikan.php";
         $label     = "Semua Data Penarikan";
         }else{ // Jika terisi
-        // Buat query untuk menampilkan data Pinjaman sesuai periode tanggal
-        $query     = "SELECT t.id_tarik_tabungan, t.id_petugas, t.id_nasabah, n.norek_nasabah, n.nama_nasabah, t.jumlah_tarik, t.tanggal_tarik FROM tb_tarik_tabungan t INNER JOIN tb_nasabah n WHERE t.id_nasabah = n.id_nasabah AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+        // Buat query untuk menampilkan data Penarikan sesuai periode tanggal
+        $query     = "SELECT t.tanggal_tarik, pt.kode_petugas, n.kode_nasabah, n.nomor_rekening, u.nama, t.jumlah_tarik FROM tb_tarik_tabungan t, tb_petugas pt, tb_nasabah n, tb_users u WHERE t.petugas_id = pt.id_petugas AND t.nasabah_id = n.id_nasabah AND n.users_id = u.id AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
         $url_cetak = "print-laporan-penarikan.php?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir."&filter=true";
         $tgl_awal  = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
         $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
