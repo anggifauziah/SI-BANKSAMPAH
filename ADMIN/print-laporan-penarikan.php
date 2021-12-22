@@ -26,13 +26,13 @@
 	$tgl_akhir = @$_GET['tgl_akhir']; // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
 
 	if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-		// Buat query untuk menampilkan semua data Pinjaman
+		// Buat query untuk menampilkan semua data Penarikan
 		$query = "SELECT t.tanggal_tarik, pt.kode_petugas, n.kode_nasabah, n.nomor_rekening, u.nama, t.jumlah_tarik FROM tb_tarik_tabungan t, tb_petugas pt, tb_nasabah n, tb_users u WHERE t.petugas_id = pt.id_petugas AND t.nasabah_id = n.id_nasabah AND n.users_id = u.id";
 
 		$label = "Semua Data Penarikan";
 	}else{ // Jika terisi
-		// Buat query untuk menampilkan data Pinjaman sesuai periode tanggal
-		$query = "SELECT t.tanggal_tarik, pt.kode_petugas, n.kode_nasabah, n.nomor_rekening, u.nama, t.jumlah_tarik FROM tb_tarik_tabungan t, tb_petugas pt, tb_nasabah n, tb_users u WHERE t.petugas_id = pt.id_petugas AND t.nasabah_id = n.id_nasabah AND n.users_id = u.id AND (tanggal_pinjam BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+		// Buat query untuk menampilkan data Penarikan sesuai periode tanggal
+		$query = "SELECT t.tanggal_tarik, pt.kode_petugas, n.kode_nasabah, n.nomor_rekening, u.nama, t.jumlah_tarik FROM tb_tarik_tabungan t, tb_petugas pt, tb_nasabah n, tb_users u WHERE t.petugas_id = pt.id_petugas AND t.nasabah_id = n.id_nasabah AND n.users_id = u.id AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
 
 		//$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
 		//$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -76,7 +76,7 @@
         <td align="center">------------------------------------------------------------------------------------------------------------------------</td>
       </tr>
       <tr>
-      	<td><h4 align="center" style="margin-bottom: 5px;">Data Laporan Tabungan</h4></td>
+      	<td><h4 align="center" style="margin-bottom: 5px;">Data Laporan Penarikan Tabungan</h4></td>
       </tr>
       <tr>
       	<td align="center"><?php echo $label ?></td>

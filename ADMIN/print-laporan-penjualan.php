@@ -32,7 +32,7 @@
 		$label = "Semua Data Penjualan";
 	}else{ // Jika terisi
 		// Buat query untuk menampilkan data Pinjaman sesuai periode tanggal
-		$query     = "SELECT pj.id_jual, pj.kode_jual, pt.kode_petugas, p.kode_pengepul, u.nama, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_petugas pt, tb_pengepul p, tb_users u, tb_jenis_sampah j WHERE p.id_pengepul = pj.pengepul_id and pt.id_petugas = pj.petugas_id and p.users_id = u.id AND j.id_jenis_sampah = pj.jenis_sampah_id AND (tanggal_tarik BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
+		$query     = "SELECT pj.id_jual, pj.kode_jual, pt.kode_petugas, p.kode_pengepul, u.nama, j.nama_jenis, pj.berat_jual, pj.total_jual, pj.tanggal_jual FROM tb_penjualan pj, tb_petugas pt, tb_pengepul p, tb_users u, tb_jenis_sampah j WHERE p.id_pengepul = pj.pengepul_id and pt.id_petugas = pj.petugas_id and p.users_id = u.id AND j.id_jenis_sampah = pj.jenis_sampah_id AND (tanggal_jual BETWEEN '".$tgl_awal."' AND '".$tgl_akhir."')";
 
 		//$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
 		//$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -76,7 +76,7 @@
         <td align="center">------------------------------------------------------------------------------------------------------------------------</td>
       </tr>
       <tr>
-      	<td><h4 align="center" style="margin-bottom: 5px;">Data Laporan Tabungan</h4></td>
+      	<td><h4 align="center" style="margin-bottom: 5px;">Data Laporan Penjualan</h4></td>
       </tr>
       <tr>
       	<td align="center"><?php echo $label ?></td>

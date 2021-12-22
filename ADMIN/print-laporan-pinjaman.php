@@ -76,7 +76,7 @@
         <td align="center">------------------------------------------------------------------------------------------------------------------------</td>
       </tr>
       <tr>
-      	<td><h4 align="center" style="margin-bottom: 5px;">Data Laporan Tabungan</h4></td>
+      	<td><h4 align="center" style="margin-bottom: 5px;">Data Laporan Pinjaman</h4></td>
       </tr>
       <tr>
       	<td align="center"><?php echo $label ?></td>
